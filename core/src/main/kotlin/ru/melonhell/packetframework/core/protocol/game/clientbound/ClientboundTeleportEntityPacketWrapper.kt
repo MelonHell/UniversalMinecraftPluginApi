@@ -1,4 +1,4 @@
-package ru.melonhell.packetframework.core.protocol.game
+package ru.melonhell.packetframework.core.protocol.game.clientbound
 
 import ru.melonhell.packetframework.core.PacketWrapper
 
