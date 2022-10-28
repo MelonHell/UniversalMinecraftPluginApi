@@ -24,5 +24,5 @@ class SetPassengersPacketConverter_v1_9_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.MOUNT)
+    override val wrapTypes = listOf(PacketType.Play.Server.MOUNT)
 }

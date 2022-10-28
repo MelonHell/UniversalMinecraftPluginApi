@@ -28,5 +28,5 @@ class GameEventPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.GAME_STATE_CHANGE)
+    override val wrapTypes = listOf(PacketType.Play.Server.GAME_STATE_CHANGE)
 }

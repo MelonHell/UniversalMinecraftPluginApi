@@ -28,5 +28,5 @@ class PlayerInputPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Client.STEER_VEHICLE)
+    override val wrapTypes = listOf(PacketType.Play.Client.STEER_VEHICLE)
 }

@@ -7,5 +7,5 @@ import ru.melonhell.packetframework.core.PacketWrapper
 interface PacketConverter {
     fun wrap(container: PacketContainer): PacketWrapper
     fun unwrap(wrapper: PacketWrapper): List<PacketContainer>
-    fun getWrapTypes(): Collection<PacketType>
+    val wrapTypes: Collection<PacketType>
 }

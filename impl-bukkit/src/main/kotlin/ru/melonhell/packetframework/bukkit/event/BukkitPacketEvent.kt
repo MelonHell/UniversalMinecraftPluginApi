@@ -7,34 +7,28 @@ import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.event.PfPacketEvent
 
 class BukkitPacketEvent(
-    private val client: BukkitClient,
+    override val client: BukkitClient,
     private val packetContainer: PacketContainer,
-    private val packetType: Class<out PacketWrapper>,
+    private val originalPacketType: Class<out PacketWrapper>,
     private val packetConverter: PacketConverter
 ) : PfPacketEvent {
-
-    private var edited = false
+    private var packetWrapperPrivate: PacketWrapper? = null
+    override var edited = false
+        private set
 
     override var canceled = false
-
-    private var packetWrapper: PacketWrapper? = null
-
-    override fun getPacketWrapper(): PacketWrapper {
-        if (packetWrapper == null) packetWrapper = packetConverter.wrap(packetContainer)
-        return packetWrapper!!.clone()
-    }
-
-    override fun getPacketType(): Class<out PacketWrapper> {
-        if (packetWrapper != null) packetWrapper!!::class.java
-        return packetType
-    }
-
-    override fun setPacketWrapper(packetWrapper: PacketWrapper) {
-        this.packetWrapper = packetWrapper.clone()
-        edited = true
-    }
-
-    override fun getClient() = client
-
-    override fun isEdited() = edited
+    override var packetWrapper: PacketWrapper
+        get() {
+            if (packetWrapperPrivate == null) packetWrapperPrivate = packetConverter.wrap(packetContainer)
+            return packetWrapperPrivate!!.clone()
+        }
+        set(value) {
+            this.packetWrapperPrivate = value.clone()
+            edited = true
+        }
+    override val packetType: Class<out PacketWrapper>
+        get() {
+            if (packetWrapperPrivate != null) packetWrapperPrivate!!::class.java
+            return originalPacketType
+        }
 }

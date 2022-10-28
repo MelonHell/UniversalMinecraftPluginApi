@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.7.20"
+    `java-library`
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
@@ -15,17 +16,20 @@ allprojects {
 
     repositories {
         mavenCentral()
-        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot API
         maven("https://papermc.io/repo/repository/maven-public/") // Paper API
         maven("https://repo.dmulloy2.net/repository/public/") // ProtocolLib
     }
     dependencies {
+        compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20")
         compileOnly("net.kyori:adventure-api:4.11.0")
     }
-}
-
-dependencies {
-    testImplementation(kotlin("test"))
+    tasks {
+        withType<KotlinCompile> {
+            kotlinOptions{
+                jvmTarget = "1.8"
+            }
+        }
+    }
 }
 
 subprojects.forEach {
@@ -40,26 +44,11 @@ tasks {
     shadowJar {
         archiveVersion.set("")
         archiveClassifier.set("")
-
-        relocate("org.reflections", "${basePackage}.libs.reflections")
-        relocate("javassist", "${basePackage}.libs.javassist")
-        relocate("javax", "${basePackage}.libs.javax")
-        relocate("org.slf4j", "${basePackage}.libs.slf4j")
-
-        relocate("kotlin", "${basePackage}.libs.kotlin")
-        relocate("org.intellij", "${basePackage}.libs.intellij")
-        relocate("org.jetbrains", "${basePackage}.libs.jetbrains")
     }
     jar {
-        enabled = false;
+        enabled = false
     }
     assemble {
         dependsOn(shadowJar)
-    }
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    withType<GenerateModuleMetadata> {
-        enabled = false
     }
 }

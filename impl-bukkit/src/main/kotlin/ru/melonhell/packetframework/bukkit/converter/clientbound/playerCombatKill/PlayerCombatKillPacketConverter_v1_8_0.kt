@@ -34,5 +34,5 @@ class PlayerCombatKillPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.PLAYER_COMBAT_KILL)
+    override val wrapTypes = listOf(PacketType.Play.Server.PLAYER_COMBAT_KILL)
 }

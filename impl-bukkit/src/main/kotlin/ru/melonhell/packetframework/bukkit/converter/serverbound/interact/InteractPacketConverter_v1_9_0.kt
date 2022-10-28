@@ -60,5 +60,5 @@ class InteractPacketConverter_v1_9_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Client.USE_ENTITY)
+    override val wrapTypes = listOf(PacketType.Play.Client.USE_ENTITY)
 }

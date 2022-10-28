@@ -22,5 +22,5 @@ class RemoveEntitiesPacketConverter_v1_17_1 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.ENTITY_DESTROY)
+    override val wrapTypes = listOf(PacketType.Play.Server.ENTITY_DESTROY)
 }

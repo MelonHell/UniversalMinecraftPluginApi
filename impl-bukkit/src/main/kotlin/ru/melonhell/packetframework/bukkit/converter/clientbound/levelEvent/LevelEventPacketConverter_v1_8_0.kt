@@ -31,5 +31,5 @@ class LevelEventPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.WORLD_EVENT)
+    override val wrapTypes = listOf(PacketType.Play.Server.WORLD_EVENT)
 }

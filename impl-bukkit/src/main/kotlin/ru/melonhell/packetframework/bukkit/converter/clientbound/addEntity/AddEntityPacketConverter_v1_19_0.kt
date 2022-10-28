@@ -153,11 +153,11 @@ class AddEntityPacketConverter_v1_19_0 : PacketConverter {
     }
 
     @Suppress("DEPRECATION")
-    override fun getWrapTypes() = listOf(
-        PacketType.Play.Server.SPAWN_ENTITY,
-        PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB,
-        PacketType.Play.Server.NAMED_ENTITY_SPAWN,
-        PacketType.Play.Server.SPAWN_ENTITY_LIVING,
-        PacketType.Play.Server.SPAWN_ENTITY_PAINTING
-    )
+    override val wrapTypes = listOf(
+            PacketType.Play.Server.SPAWN_ENTITY,
+            PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB,
+            PacketType.Play.Server.NAMED_ENTITY_SPAWN,
+            PacketType.Play.Server.SPAWN_ENTITY_LIVING,
+            PacketType.Play.Server.SPAWN_ENTITY_PAINTING
+        )
 }

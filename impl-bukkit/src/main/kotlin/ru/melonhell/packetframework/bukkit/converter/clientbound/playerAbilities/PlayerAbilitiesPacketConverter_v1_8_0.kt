@@ -37,5 +37,5 @@ class PlayerAbilitiesPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.ABILITIES)
+    override val wrapTypes = listOf(PacketType.Play.Server.ABILITIES)
 }

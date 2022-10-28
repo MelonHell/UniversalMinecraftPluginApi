@@ -4,11 +4,9 @@ import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.wrappers.Client
 
 interface PfPacketEvent {
+    val client: Client
+    var packetWrapper: PacketWrapper
+    val packetType: Class<out PacketWrapper>
     var canceled: Boolean
-    fun isEdited(): Boolean
-    fun getPacketWrapper(): PacketWrapper
-    fun getPacketType(): Class<out PacketWrapper>
-    fun setPacketWrapper(packetWrapper: PacketWrapper)
-
-    fun getClient() : Client
+    val edited: Boolean
 }

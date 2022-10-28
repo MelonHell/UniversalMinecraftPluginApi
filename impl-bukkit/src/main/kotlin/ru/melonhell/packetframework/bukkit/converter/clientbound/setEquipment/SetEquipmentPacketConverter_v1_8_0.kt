@@ -39,5 +39,5 @@ class SetEquipmentPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.ENTITY_EQUIPMENT)
+    override val wrapTypes = listOf(PacketType.Play.Server.ENTITY_EQUIPMENT)
 }

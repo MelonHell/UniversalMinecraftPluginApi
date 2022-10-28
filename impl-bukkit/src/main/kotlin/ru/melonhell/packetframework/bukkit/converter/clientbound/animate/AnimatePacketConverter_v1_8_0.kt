@@ -28,5 +28,5 @@ class AnimatePacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Server.ANIMATION)
+    override val wrapTypes = listOf(PacketType.Play.Server.ANIMATION)
 }

@@ -41,10 +41,9 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
             if (currentVersion >= MinecraftVersion(annotation.minVersion) &&
                 (annotation.maxVersion == "latest" || currentVersion <= MinecraftVersion(annotation.maxVersion))
             ) {
-                Bukkit.broadcastMessage(clazz.name)
                 val packetConverter = clazz.getConstructor().newInstance() as PacketConverter
                 converterMapByWrapper[annotation.wrapper] = packetConverter
-                packetConverter.getWrapTypes()
+                packetConverter.wrapTypes
                     .forEach {
                         converterMapByProtocolLibType[it] = packetConverter
                         packetTypeMap[it] = annotation.wrapper
@@ -52,7 +51,7 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
             }
         }
 
-        ProtocolLibrary.getProtocolManager().addPacketListener(object : PacketAdapter(javaPlugin, PacketType.values()) {
+        ProtocolLibrary.getProtocolManager().addPacketListener(object : PacketAdapter(javaPlugin, PacketType.values().filter { it.isSupported }) {
             override fun onPacketReceiving(event: PacketEvent) {
                 onPacket(event, false)
             }
@@ -62,12 +61,7 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
             }
         })
 
-        Bukkit.getPluginManager().registerEvents(object : Listener {
-            @EventHandler
-            fun onPluginDisable(event: PluginDisableEvent) {
-                listeners.removeIf { (it.pluginWrapper as BukkitPlugin).javaPlugin == event.plugin }
-            }
-        }, javaPlugin)
+        Bukkit.getPluginManager().registerEvents(this, javaPlugin)
     }
 
     fun wrap(packetContainer: PacketContainer): PacketWrapper {
@@ -112,8 +106,8 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
             event.isCancelled = true
             return
         }
-        if (bukkitPacketReceiveEvent.isEdited()) {
-            val unwrap = unwrap(bukkitPacketReceiveEvent.getPacketWrapper())
+        if (bukkitPacketReceiveEvent.edited) {
+            val unwrap = unwrap(bukkitPacketReceiveEvent.packetWrapper)
             if (unwrap.size == 1) {
                 event.packet = unwrap[0]
             } else {
@@ -122,5 +116,10 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
                 unwrap.forEach { ProtocolLibrary.getProtocolManager().sendServerPacket(event.player, it) }
             }
         }
+    }
+
+    @EventHandler
+    fun onPluginDisable(event: PluginDisableEvent) {
+        listeners.removeIf { (it.pluginWrapper as BukkitPlugin).javaPlugin == event.plugin }
     }
 }

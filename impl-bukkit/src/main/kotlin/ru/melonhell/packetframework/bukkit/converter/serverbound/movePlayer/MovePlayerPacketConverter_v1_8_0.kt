@@ -65,10 +65,10 @@ class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(
-        PacketType.Play.Client.POSITION_LOOK,
-        PacketType.Play.Client.POSITION,
-        PacketType.Play.Client.LOOK,
-        PacketType.Play.Client.GROUND
-    )
+    override val wrapTypes = listOf(
+            PacketType.Play.Client.POSITION_LOOK,
+            PacketType.Play.Client.POSITION,
+            PacketType.Play.Client.LOOK,
+            PacketType.Play.Client.GROUND
+        )
 }

@@ -33,5 +33,5 @@ class PlayerCommandPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(PacketType.Play.Client.ENTITY_ACTION)
+    override val wrapTypes = listOf(PacketType.Play.Client.ENTITY_ACTION)
 }

@@ -99,12 +99,12 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override fun getWrapTypes() = listOf(
-        PacketType.Play.Server.INITIALIZE_BORDER,
-        PacketType.Play.Server.SET_BORDER_CENTER,
-        PacketType.Play.Server.SET_BORDER_LERP_SIZE,
-        PacketType.Play.Server.SET_BORDER_SIZE,
-        PacketType.Play.Server.SET_BORDER_WARNING_DELAY,
-        PacketType.Play.Server.SET_BORDER_WARNING_DISTANCE
-    )
+    override val wrapTypes = listOf(
+            PacketType.Play.Server.INITIALIZE_BORDER,
+            PacketType.Play.Server.SET_BORDER_CENTER,
+            PacketType.Play.Server.SET_BORDER_LERP_SIZE,
+            PacketType.Play.Server.SET_BORDER_SIZE,
+            PacketType.Play.Server.SET_BORDER_WARNING_DELAY,
+            PacketType.Play.Server.SET_BORDER_WARNING_DISTANCE
+        )
 }
