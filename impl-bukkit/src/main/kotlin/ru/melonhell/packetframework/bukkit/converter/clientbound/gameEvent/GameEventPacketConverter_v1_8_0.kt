@@ -11,9 +11,7 @@ import ru.melonhell.packetframework.core.protocol.game.clientbound.CbGameEventPa
 
 @ProtocolVersion("1.8", "latest")
 class GameEventPacketConverter_v1_8_0 : PacketConverter {
-
     private val gameEvents = GameEvent.values()
-
     override fun wrap(container: PacketContainer): CbGameEventPacketWrapper {
         val gameStateId = container.gameStateIDs.read(0)
         val value = container.float.read(0)

@@ -1,20 +1,21 @@
 package ru.melonhell.packetframework.bukkit.event
 
+import org.bukkit.entity.Player
 import ru.melonhell.packetframework.bukkit.wrappers.BukkitClient
 import ru.melonhell.packetframework.core.PacketWrapper
-import ru.melonhell.packetframework.core.event.PfPacketEvent
 import java.util.function.Supplier
 
 class BukkitPacketEvent(
-    override val client: BukkitClient,
+    override val player: Player,
     private val originalPacketType: Class<out PacketWrapper>,
     private val wrapperSupplier: Supplier<PacketWrapper>
-) : PfPacketEvent {
+) : IBukkitPacketEvent {
     private var packetWrapperPrivate: PacketWrapper? = null
     override var edited = false
         private set
 
     override var canceled = false
+    override val client = BukkitClient(player)
     override var packetWrapper: PacketWrapper
         get() {
             if (packetWrapperPrivate == null) packetWrapperPrivate = wrapperSupplier.get()

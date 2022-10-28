@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.7.20"
+    kotlin("kapt") version "1.7.20"
     `java-library`
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
@@ -12,10 +13,12 @@ val basePackage = "${group}.packetframework"
 
 allprojects {
     apply(plugin = "kotlin")
+    apply(plugin = "kotlin-kapt")
     version = "1.0-SNAPSHOT"
 
     repositories {
         mavenCentral()
+        maven("https://jitpack.io")
         maven("https://papermc.io/repo/repository/maven-public/") // Paper API
         maven("https://repo.dmulloy2.net/repository/public/") // ProtocolLib
     }
@@ -44,6 +47,7 @@ tasks {
     shadowJar {
         archiveVersion.set("")
         archiveClassifier.set("")
+        relocate("com.github.matfax.klassindex", "${basePackage}.libs.klassindex")
     }
     jar {
         enabled = false
