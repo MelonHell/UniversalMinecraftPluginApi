@@ -8,7 +8,7 @@ import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbSetCameraPacketWrapper
 
-@ProtocolVersion("1.8", "latest", CbSetCameraPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class SetCameraPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): CbSetCameraPacketWrapper {
         val entityId = container.integers.read(0)
@@ -22,5 +22,6 @@ class SetCameraPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.CAMERA)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.CAMERA)
+    override val wrapperType = CbSetCameraPacketWrapper::class
 }

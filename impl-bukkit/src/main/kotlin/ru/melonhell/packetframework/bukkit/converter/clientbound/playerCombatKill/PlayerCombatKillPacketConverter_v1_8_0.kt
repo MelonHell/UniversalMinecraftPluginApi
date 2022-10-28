@@ -11,7 +11,7 @@ import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbPlayerCombatKillPacketWrapper
 
 @Suppress("UnstableApiUsage")
-@ProtocolVersion("1.8", "latest", CbPlayerCombatKillPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class PlayerCombatKillPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): CbPlayerCombatKillPacketWrapper {
         val playerId = container.integers.read(0)
@@ -34,5 +34,6 @@ class PlayerCombatKillPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.PLAYER_COMBAT_KILL)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.PLAYER_COMBAT_KILL)
+    override val wrapperType = CbPlayerCombatKillPacketWrapper::class
 }

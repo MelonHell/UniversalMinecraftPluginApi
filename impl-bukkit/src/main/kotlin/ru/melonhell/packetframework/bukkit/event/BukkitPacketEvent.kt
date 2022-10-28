@@ -1,16 +1,14 @@
 package ru.melonhell.packetframework.bukkit.event
 
-import com.comphenix.protocol.events.PacketContainer
-import ru.melonhell.packetframework.bukkit.converter.PacketConverter
 import ru.melonhell.packetframework.bukkit.wrappers.BukkitClient
 import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.event.PfPacketEvent
+import java.util.function.Supplier
 
 class BukkitPacketEvent(
     override val client: BukkitClient,
-    private val packetContainer: PacketContainer,
     private val originalPacketType: Class<out PacketWrapper>,
-    private val packetConverter: PacketConverter
+    private val wrapperSupplier: Supplier<PacketWrapper>
 ) : PfPacketEvent {
     private var packetWrapperPrivate: PacketWrapper? = null
     override var edited = false
@@ -19,7 +17,7 @@ class BukkitPacketEvent(
     override var canceled = false
     override var packetWrapper: PacketWrapper
         get() {
-            if (packetWrapperPrivate == null) packetWrapperPrivate = packetConverter.wrap(packetContainer)
+            if (packetWrapperPrivate == null) packetWrapperPrivate = wrapperSupplier.get()
             return packetWrapperPrivate!!.clone()
         }
         set(value) {

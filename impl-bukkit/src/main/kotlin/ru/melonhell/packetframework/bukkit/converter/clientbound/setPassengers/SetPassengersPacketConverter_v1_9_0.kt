@@ -8,7 +8,7 @@ import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbSetPassengersPacketWrapper
 
-@ProtocolVersion("1.9", "latest", CbSetPassengersPacketWrapper::class)
+@ProtocolVersion("1.9", "latest")
 class SetPassengersPacketConverter_v1_9_0 : PacketConverter {
     override fun wrap(container: PacketContainer): CbSetPassengersPacketWrapper {
         val entityId = container.integers.read(0)
@@ -24,5 +24,6 @@ class SetPassengersPacketConverter_v1_9_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.MOUNT)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.MOUNT)
+    override val wrapperType = CbSetPassengersPacketWrapper::class
 }

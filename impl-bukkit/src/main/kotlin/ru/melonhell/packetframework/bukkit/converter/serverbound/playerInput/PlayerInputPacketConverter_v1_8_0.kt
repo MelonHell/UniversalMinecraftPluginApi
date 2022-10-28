@@ -8,7 +8,7 @@ import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.protocol.game.serverbound.SbPlayerInputPacketWrapper
 
-@ProtocolVersion("1.8", "latest", SbPlayerInputPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class PlayerInputPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): SbPlayerInputPacketWrapper {
         val sideways: Float = container.float.read(0)
@@ -28,5 +28,6 @@ class PlayerInputPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Client.STEER_VEHICLE)
+    override val protocolLibTypes = listOf(PacketType.Play.Client.STEER_VEHICLE)
+    override val wrapperType = SbPlayerInputPacketWrapper::class
 }

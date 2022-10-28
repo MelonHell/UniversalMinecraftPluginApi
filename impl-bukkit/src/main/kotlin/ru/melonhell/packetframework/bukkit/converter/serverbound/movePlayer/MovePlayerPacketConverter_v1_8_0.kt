@@ -11,7 +11,7 @@ import ru.melonhell.packetframework.core.utils.Look
 import ru.melonhell.packetframework.core.utils.Vector
 import java.util.*
 
-@ProtocolVersion("1.8", "latest", SbMovePlayerPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): SbMovePlayerPacketWrapper {
         val type = container.type
@@ -65,10 +65,11 @@ class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(
+    override val protocolLibTypes = listOf(
             PacketType.Play.Client.POSITION_LOOK,
             PacketType.Play.Client.POSITION,
             PacketType.Play.Client.LOOK,
             PacketType.Play.Client.GROUND
         )
+    override val wrapperType = SbMovePlayerPacketWrapper::class
 }

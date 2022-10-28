@@ -9,11 +9,11 @@ import ru.melonhell.packetframework.bukkit.converter.PacketConverter
 import ru.melonhell.packetframework.bukkit.converter.ProtocolVersion
 import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
-import ru.melonhell.packetframework.core.protocol.game.serverbound.SbInteractPacketWrapper
-import ru.melonhell.packetframework.core.enums.InteractAction
 import ru.melonhell.packetframework.core.enums.Hand
+import ru.melonhell.packetframework.core.enums.InteractAction
+import ru.melonhell.packetframework.core.protocol.game.serverbound.SbInteractPacketWrapper
 
-@ProtocolVersion("1.9", "latest", SbInteractPacketWrapper::class)
+@ProtocolVersion("1.9", "latest")
 class InteractPacketConverter_v1_9_0 : PacketConverter {
 
     private val interactActions = InteractAction.values()
@@ -60,5 +60,6 @@ class InteractPacketConverter_v1_9_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Client.USE_ENTITY)
+    override val protocolLibTypes = listOf(PacketType.Play.Client.USE_ENTITY)
+    override val wrapperType = SbInteractPacketWrapper::class
 }

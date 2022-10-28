@@ -2,18 +2,13 @@ package ru.melonhell.packetframework.bukkit.converter.clientbound.playerAbilitie
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
-import com.comphenix.protocol.wrappers.BlockPosition
-import com.comphenix.protocol.wrappers.EnumWrappers
 import ru.melonhell.packetframework.bukkit.converter.PacketConverter
 import ru.melonhell.packetframework.bukkit.converter.ProtocolVersion
 import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
-import ru.melonhell.packetframework.core.protocol.game.clientbound.CbLevelEventPacketWrapper
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbPlayerAbilitiesPacketWrapper
-import ru.melonhell.packetframework.core.protocol.game.clientbound.CbSetCameraPacketWrapper
-import ru.melonhell.packetframework.core.utils.BlockPos
 
-@ProtocolVersion("1.8", "latest", CbPlayerAbilitiesPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class PlayerAbilitiesPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): CbPlayerAbilitiesPacketWrapper {
         val invulnerable = container.booleans.read(0)
@@ -37,5 +32,6 @@ class PlayerAbilitiesPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.ABILITIES)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.ABILITIES)
+    override val wrapperType = CbPlayerAbilitiesPacketWrapper::class
 }

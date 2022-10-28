@@ -9,9 +9,8 @@ import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.enums.EntityAnimation
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbAnimatePacketWrapper
 
-@ProtocolVersion("1.8", "latest", CbAnimatePacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class AnimatePacketConverter_v1_8_0 : PacketConverter {
-
     private val entityAnimations = EntityAnimation.values()
 
     override fun wrap(container: PacketContainer): CbAnimatePacketWrapper {
@@ -28,5 +27,6 @@ class AnimatePacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.ANIMATION)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.ANIMATION)
+    override val wrapperType = CbAnimatePacketWrapper::class
 }

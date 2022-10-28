@@ -8,7 +8,7 @@ import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbRemoveEntitiesPacketWrapper
 
-@ProtocolVersion("1.17.1", "latest", CbRemoveEntitiesPacketWrapper::class)
+@ProtocolVersion("1.17.1", "latest")
 class RemoveEntitiesPacketConverter_v1_17_1 : PacketConverter {
     override fun wrap(container: PacketContainer): CbRemoveEntitiesPacketWrapper {
         val entityIds = container.intLists.read(0)
@@ -22,5 +22,6 @@ class RemoveEntitiesPacketConverter_v1_17_1 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.ENTITY_DESTROY)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.ENTITY_DESTROY)
+    override val wrapperType = CbRemoveEntitiesPacketWrapper::class
 }

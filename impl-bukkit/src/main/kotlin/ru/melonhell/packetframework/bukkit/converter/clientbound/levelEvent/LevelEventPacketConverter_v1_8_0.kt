@@ -10,7 +10,7 @@ import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbLevelEventPacketWrapper
 import ru.melonhell.packetframework.core.utils.BlockPos
 
-@ProtocolVersion("1.8", "latest", CbLevelEventPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class LevelEventPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): CbLevelEventPacketWrapper {
         val type = container.integers.read(0)
@@ -31,5 +31,6 @@ class LevelEventPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.WORLD_EVENT)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.WORLD_EVENT)
+    override val wrapperType = CbLevelEventPacketWrapper::class
 }

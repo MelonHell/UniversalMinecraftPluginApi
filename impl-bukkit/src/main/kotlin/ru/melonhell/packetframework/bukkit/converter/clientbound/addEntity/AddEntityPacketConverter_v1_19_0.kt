@@ -11,15 +11,11 @@ import ru.melonhell.packetframework.core.protocol.game.clientbound.CbAddEntityPa
 import ru.melonhell.packetframework.core.utils.Look
 import ru.melonhell.packetframework.core.utils.Vector
 
-@ProtocolVersion("1.19", "latest", CbAddEntityPacketWrapper::class)
+@ProtocolVersion("1.19", "latest")
 class AddEntityPacketConverter_v1_19_0 : PacketConverter {
-    //    private val entityTypes = HashMap<String, EntityType>()
     private val bukkitEntityTypes = HashMap<String, org.bukkit.entity.EntityType>()
 
     init {
-//        EntityType.values().forEach {
-//            entityTypes[it.minecraftName] = it
-//        }
         org.bukkit.entity.EntityType.values().forEach {
             if (it != org.bukkit.entity.EntityType.UNKNOWN)
                 bukkitEntityTypes[it.key.toString()] = it
@@ -153,11 +149,12 @@ class AddEntityPacketConverter_v1_19_0 : PacketConverter {
     }
 
     @Suppress("DEPRECATION")
-    override val wrapTypes = listOf(
+    override val protocolLibTypes = listOf(
             PacketType.Play.Server.SPAWN_ENTITY,
             PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB,
             PacketType.Play.Server.NAMED_ENTITY_SPAWN,
             PacketType.Play.Server.SPAWN_ENTITY_LIVING,
             PacketType.Play.Server.SPAWN_ENTITY_PAINTING
         )
+    override val wrapperType = CbAddEntityPacketWrapper::class
 }

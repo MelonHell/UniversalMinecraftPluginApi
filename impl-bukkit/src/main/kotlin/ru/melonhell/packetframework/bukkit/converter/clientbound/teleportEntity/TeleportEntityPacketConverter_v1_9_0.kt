@@ -10,7 +10,7 @@ import ru.melonhell.packetframework.core.protocol.game.clientbound.CbTeleportEnt
 import ru.melonhell.packetframework.core.utils.Look
 import ru.melonhell.packetframework.core.utils.Vector
 
-@ProtocolVersion("1.9", "latest", CbTeleportEntityPacketWrapper::class)
+@ProtocolVersion("1.9", "latest")
 class TeleportEntityPacketConverter_v1_9_0 : PacketConverter {
     override fun wrap(container: PacketContainer): CbTeleportEntityPacketWrapper {
         val entityId = container.integers.read(0)
@@ -41,5 +41,6 @@ class TeleportEntityPacketConverter_v1_9_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.ENTITY_TELEPORT)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.ENTITY_TELEPORT)
+    override val wrapperType = CbTeleportEntityPacketWrapper::class
 }

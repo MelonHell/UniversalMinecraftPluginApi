@@ -9,9 +9,8 @@ import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.enums.PlayerCommandAction
 import ru.melonhell.packetframework.core.protocol.game.serverbound.SbPlayerCommandPacketWrapper
-import ru.melonhell.packetframework.core.protocol.game.serverbound.SbPlayerInputPacketWrapper
 
-@ProtocolVersion("1.8", "latest", SbPlayerCommandPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class PlayerCommandPacketConverter_v1_8_0 : PacketConverter {
 
     private val playerCommandActions = PlayerCommandAction.values()
@@ -33,5 +32,6 @@ class PlayerCommandPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Client.ENTITY_ACTION)
+    override val protocolLibTypes = listOf(PacketType.Play.Client.ENTITY_ACTION)
+    override val wrapperType = SbPlayerCommandPacketWrapper::class
 }

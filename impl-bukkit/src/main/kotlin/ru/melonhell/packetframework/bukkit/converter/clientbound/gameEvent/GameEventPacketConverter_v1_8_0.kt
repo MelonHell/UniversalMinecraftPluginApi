@@ -9,7 +9,7 @@ import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.enums.GameEvent
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbGameEventPacketWrapper
 
-@ProtocolVersion("1.8", "latest", CbGameEventPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class GameEventPacketConverter_v1_8_0 : PacketConverter {
 
     private val gameEvents = GameEvent.values()
@@ -28,5 +28,6 @@ class GameEventPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.GAME_STATE_CHANGE)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.GAME_STATE_CHANGE)
+    override val wrapperType = CbGameEventPacketWrapper::class
 }

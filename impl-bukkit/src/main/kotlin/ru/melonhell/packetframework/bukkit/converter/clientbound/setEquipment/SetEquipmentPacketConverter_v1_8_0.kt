@@ -11,7 +11,7 @@ import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.enums.EquipmentSlot
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbSetEquipmentPacketWrapper
 
-@ProtocolVersion("1.8", "latest", CbSetEquipmentPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class SetEquipmentPacketConverter_v1_8_0 : PacketConverter {
 
     private val equipmentSlots = EquipmentSlot.values()
@@ -39,5 +39,6 @@ class SetEquipmentPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(PacketType.Play.Server.ENTITY_EQUIPMENT)
+    override val protocolLibTypes = listOf(PacketType.Play.Server.ENTITY_EQUIPMENT)
+    override val wrapperType = CbSetEquipmentPacketWrapper::class
 }

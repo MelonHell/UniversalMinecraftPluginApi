@@ -28,7 +28,6 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
 
     private val converterMapByWrapper: MutableMap<KClass<out PacketWrapper>, PacketConverter> = HashMap()
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
-    private val packetTypeMap: MutableMap<PacketType, KClass<out PacketWrapper>> = HashMap()
 
     private val listeners = HashSet<PacketListener>()
 
@@ -42,24 +41,24 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
                 (annotation.maxVersion == "latest" || currentVersion <= MinecraftVersion(annotation.maxVersion))
             ) {
                 val packetConverter = clazz.getConstructor().newInstance() as PacketConverter
-                converterMapByWrapper[annotation.wrapper] = packetConverter
-                packetConverter.wrapTypes
+                converterMapByWrapper[packetConverter.wrapperType] = packetConverter
+                packetConverter.protocolLibTypes
                     .forEach {
                         converterMapByProtocolLibType[it] = packetConverter
-                        packetTypeMap[it] = annotation.wrapper
                     }
             }
         }
 
-        ProtocolLibrary.getProtocolManager().addPacketListener(object : PacketAdapter(javaPlugin, PacketType.values().filter { it.isSupported }) {
-            override fun onPacketReceiving(event: PacketEvent) {
-                onPacket(event, false)
-            }
+        ProtocolLibrary.getProtocolManager()
+            .addPacketListener(object : PacketAdapter(javaPlugin, PacketType.values().filter { it.isSupported }) {
+                override fun onPacketReceiving(event: PacketEvent) {
+                    onPacket(event, false)
+                }
 
-            override fun onPacketSending(event: PacketEvent) {
-                onPacket(event, true)
-            }
-        })
+                override fun onPacketSending(event: PacketEvent) {
+                    onPacket(event, true)
+                }
+            })
 
         Bukkit.getPluginManager().registerEvents(this, javaPlugin)
     }
@@ -94,9 +93,11 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
 
     private fun onPacket(event: PacketEvent, send: Boolean) {
         val packetConverter = converterMapByProtocolLibType[event.packetType] ?: return
-        val packetType = packetTypeMap[event.packetType] ?: return
-        val bukkitPacketReceiveEvent =
-            BukkitPacketEvent(BukkitClient(event.player), event.packet, packetType.java, packetConverter)
+        val bukkitPacketReceiveEvent = BukkitPacketEvent(
+            BukkitClient(event.player),
+            packetConverter.wrapperType.java,
+            { packetConverter.wrap(event.packet) }
+        )
         listeners.forEach {
             if (send) it.onPacketSending(bukkitPacketReceiveEvent) else it.onPacketReceiving(
                 bukkitPacketReceiveEvent

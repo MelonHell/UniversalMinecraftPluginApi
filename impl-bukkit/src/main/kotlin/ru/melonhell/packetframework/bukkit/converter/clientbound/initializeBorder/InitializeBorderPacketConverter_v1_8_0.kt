@@ -8,9 +8,9 @@ import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
 import ru.melonhell.packetframework.core.enums.WorldBorderAction
 import ru.melonhell.packetframework.core.protocol.game.clientbound.CbWorldBorderPacketWrapper
-import java.util.EnumMap
+import java.util.*
 
-@ProtocolVersion("1.8", "latest", CbWorldBorderPacketWrapper::class)
+@ProtocolVersion("1.8", "latest")
 class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
 
     private val actionTypeMap = EnumMap<WorldBorderAction, PacketType>(WorldBorderAction::class.java)
@@ -99,7 +99,7 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
         return listOf(container)
     }
 
-    override val wrapTypes = listOf(
+    override val protocolLibTypes = listOf(
             PacketType.Play.Server.INITIALIZE_BORDER,
             PacketType.Play.Server.SET_BORDER_CENTER,
             PacketType.Play.Server.SET_BORDER_LERP_SIZE,
@@ -107,4 +107,5 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
             PacketType.Play.Server.SET_BORDER_WARNING_DELAY,
             PacketType.Play.Server.SET_BORDER_WARNING_DISTANCE
         )
+    override val wrapperType = CbWorldBorderPacketWrapper::class
 }
