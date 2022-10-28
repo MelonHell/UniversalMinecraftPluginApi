@@ -4,30 +4,25 @@ import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.packetframework.bukkit.converter.PacketConverter
 import ru.melonhell.packetframework.bukkit.converter.ProtocolVersion
-import ru.melonhell.packetframework.bukkit.converter.WrongConverterException
+import ru.melonhell.packetframework.bukkit.exceptions.WrongConverterException
 import ru.melonhell.packetframework.core.PacketWrapper
-import ru.melonhell.packetframework.core.protocol.game.clientbound.ClientboundSetPassengersPacketWrapper
+import ru.melonhell.packetframework.core.protocol.game.clientbound.CbSetPassengersPacketWrapper
 
-@ProtocolVersion("1.9", "latest", ClientboundSetPassengersPacketWrapper::class)
+@ProtocolVersion("1.9", "latest", CbSetPassengersPacketWrapper::class)
 class SetPassengersPacketConverter_v1_9_0 : PacketConverter {
-    override fun wrap(container: PacketContainer): ClientboundSetPassengersPacketWrapper {
+    override fun wrap(container: PacketContainer): CbSetPassengersPacketWrapper {
         val entityId = container.integers.read(0)
         val passengerIds = container.integerArrays.read(0).toList()
-        return ClientboundSetPassengersPacketWrapper(entityId, passengerIds)
+        return CbSetPassengersPacketWrapper(entityId, passengerIds)
     }
 
     override fun unwrap(wrapper: PacketWrapper): List<PacketContainer> {
-        if (wrapper !is ClientboundSetPassengersPacketWrapper) throw WrongConverterException(
-            wrapper::class,
-            this::class
-        )
+        if (wrapper !is CbSetPassengersPacketWrapper) throw WrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Server.MOUNT)
         container.integers.write(0, wrapper.vehicleId)
         container.integerArrays.write(0, wrapper.passengerIds.toIntArray())
         return listOf(container)
     }
 
-    override fun getWrapTypes(): Collection<PacketType> {
-        return listOf(PacketType.Play.Server.MOUNT)
-    }
+    override fun getWrapTypes() = listOf(PacketType.Play.Server.MOUNT)
 }

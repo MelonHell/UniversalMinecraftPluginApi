@@ -2,7 +2,7 @@ package ru.melonhell.packetframework.core.protocol.game.serverbound
 
 import ru.melonhell.packetframework.core.PacketWrapper
 
-data class ServerboundPlayerInputPacketWrapper(
+data class SbPlayerInputPacketWrapper(
     var sideways: Float,
     var forward: Float,
     var jumping: Boolean,

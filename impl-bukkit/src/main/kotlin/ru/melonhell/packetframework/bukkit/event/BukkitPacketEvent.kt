@@ -1,13 +1,16 @@
 package ru.melonhell.packetframework.bukkit.event
 
 import com.comphenix.protocol.events.PacketContainer
+import ru.melonhell.packetframework.bukkit.converter.PacketConverter
+import ru.melonhell.packetframework.bukkit.wrappers.BukkitClient
 import ru.melonhell.packetframework.core.PacketWrapper
-import ru.melonhell.packetframework.bukkit.BukkitPacketFrameworkService
 import ru.melonhell.packetframework.core.event.PfPacketEvent
 
 class BukkitPacketEvent(
+    private val client: BukkitClient,
     private val packetContainer: PacketContainer,
-    private val bukkitPacketFrameworkService: BukkitPacketFrameworkService
+    private val packetType: Class<out PacketWrapper>,
+    private val packetConverter: PacketConverter
 ) : PfPacketEvent {
 
     private var edited = false
@@ -17,8 +20,13 @@ class BukkitPacketEvent(
     private var packetWrapper: PacketWrapper? = null
 
     override fun getPacketWrapper(): PacketWrapper {
-        if (packetWrapper == null) packetWrapper = bukkitPacketFrameworkService.wrap(packetContainer)
+        if (packetWrapper == null) packetWrapper = packetConverter.wrap(packetContainer)
         return packetWrapper!!.clone()
+    }
+
+    override fun getPacketType(): Class<out PacketWrapper> {
+        if (packetWrapper != null) packetWrapper!!::class.java
+        return packetType
     }
 
     override fun setPacketWrapper(packetWrapper: PacketWrapper) {
@@ -26,7 +34,7 @@ class BukkitPacketEvent(
         edited = true
     }
 
-    override fun isEdited(): Boolean {
-        return edited
-    }
+    override fun getClient() = client
+
+    override fun isEdited() = edited
 }

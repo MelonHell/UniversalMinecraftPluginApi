@@ -15,16 +15,16 @@ allprojects {
 
     repositories {
         mavenCentral()
-        maven("https://papermc.io/repo/repository/maven-public/") // PaperAPI
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot API
+        maven("https://papermc.io/repo/repository/maven-public/") // Paper API
         maven("https://repo.dmulloy2.net/repository/public/") // ProtocolLib
     }
     dependencies {
-        implementation("org.greenrobot:eventbus-java:3.3.1")
+        compileOnly("net.kyori:adventure-api:4.11.0")
     }
 }
 
 dependencies {
-    implementation("org.greenrobot:eventbus-java:3.3.1")
     testImplementation(kotlin("test"))
 }
 
@@ -40,8 +40,6 @@ tasks {
     shadowJar {
         archiveVersion.set("")
         archiveClassifier.set("")
-
-        relocate("org.greenrobot.eventbus", "${basePackage}.libs.eventbus")
 
         relocate("org.reflections", "${basePackage}.libs.reflections")
         relocate("javassist", "${basePackage}.libs.javassist")

@@ -6,19 +6,24 @@ Universal library for convenient work with packets
 ### Clientbound
 | Packet \ Version | 1.8 | 1.9 | 1.10 | 1.11 | 1.12 | 1.13 | 1.14 | 1.15 | 1.16 | 1.17 | 1.18 | 1.19 |
 |------------------|-----|-----|------|------|------|------|------|------|------|------|------|------|
+| AddEntity        | -   | -   | -    | -    | -    | -    | -    | -    | -    | -    | -    | +    |
 | GameEvent        | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
 | RemoveEntities   | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
 | SetCamera        | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
 | SetEquipment     | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
-| SetPassengers    | -   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
+| SetPassengers    | x   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
 | TeleportEntity   | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
 
 ### Serverbound
 | Packet \ Version | 1.8 | 1.9 | 1.10 | 1.11 | 1.12 | 1.13 | 1.14 | 1.15 | 1.16 | 1.17 | 1.18 | 1.19 |
 |------------------|-----|-----|------|------|------|------|------|------|------|------|------|------|
-| Interact         | -   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
+| Interact         | x   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
 | MovePlayer       | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
 | PlayerInput      | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
+
+- x - unsupported 
+- \? - untested
+- \+ - tested
 
 ## Supported server software:
 - [x] Bukkit and forks (using protocolLib)
