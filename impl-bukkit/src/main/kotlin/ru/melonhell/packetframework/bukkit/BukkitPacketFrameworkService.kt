@@ -33,11 +33,11 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
 
     init {
         val converterClasses = KlassIndex.getAnnotated(ProtocolVersion::class)
-        for (clazz in converterClasses) {
+        converterClasses.forEach { clazz ->
             val annotation = clazz.java.getAnnotation(ProtocolVersion::class.java)
             val minVersion = MinecraftVersion(annotation.minVersion)
             val maxVersion = MinecraftVersion(annotation.maxVersion.replace("latest", "1.99"))
-            if (MinecraftVersion.getCurrentVersion() >= minVersion && MinecraftVersion.getCurrentVersion() <= maxVersion) {
+            if (MinecraftVersion.getCurrentVersion() in minVersion..maxVersion) {
                 val packetConverter = clazz.java.getConstructor().newInstance() as PacketConverter
                 converterMapByWrapper[packetConverter.wrapperType] = packetConverter
                 packetConverter.protocolLibTypes.forEach { type ->
@@ -92,8 +92,8 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : PacketFrameworkServ
         val packetConverter = converterMapByProtocolLibType[event.packetType] ?: return
         val bukkitPacketReceiveEvent = BukkitPacketEvent(
             event.player,
-            packetConverter.wrapperType.java,
-            { packetConverter.wrap(event.packet) }
+            { packetConverter.wrap(event.packet) },
+            packetConverter.wrapperType.java
         )
         listeners.forEach {
             if (send) it.onPacketSending(bukkitPacketReceiveEvent)

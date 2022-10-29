@@ -7,27 +7,24 @@ import java.util.function.Supplier
 
 class BukkitPacketEvent(
     override val player: Player,
-    private val originalPacketType: Class<out PacketWrapper>,
-    private val wrapperSupplier: Supplier<PacketWrapper>
+    private val wrapperSupplier: Supplier<PacketWrapper>,
+    private val originalPacketType: Class<out PacketWrapper>
 ) : IBukkitPacketEvent {
-    private var packetWrapperPrivate: PacketWrapper? = null
     override var edited = false
         private set
 
     override var canceled = false
     override val client = BukkitClient(player)
+
+    private var _packetWrapper: PacketWrapper? = null
     override var packetWrapper: PacketWrapper
         get() {
-            if (packetWrapperPrivate == null) packetWrapperPrivate = wrapperSupplier.get()
-            return packetWrapperPrivate!!.clone()
+            _packetWrapper ?: run { _packetWrapper = wrapperSupplier.get() }
+            return _packetWrapper!!.clone()
         }
         set(value) {
-            this.packetWrapperPrivate = value.clone()
+            _packetWrapper = value.clone()
             edited = true
         }
-    override val packetType: Class<out PacketWrapper>
-        get() {
-            if (packetWrapperPrivate != null) packetWrapperPrivate!!::class.java
-            return originalPacketType
-        }
+    override val packetType get() = _packetWrapper?.javaClass ?: originalPacketType
 }
