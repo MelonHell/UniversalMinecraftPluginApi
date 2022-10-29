@@ -1,18 +1,18 @@
-package ru.melonhell.umpa.bukkit.converter.serverbound.movePlayer
+package ru.melonhell.umpa.bukkit.converter.serverbound.playerMove
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerMovePacket
 import ru.melonhell.umpa.core.utils.Look
 import ru.melonhell.umpa.core.utils.Vector
 import java.util.*
 
 @ProtocolVersion("1.8", "latest")
-class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
+class SbPlayerMovePacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaSbPlayerMovePacket {
         val type = container.type
         val hasPosition = type == PacketType.Play.Client.POSITION_LOOK || type == PacketType.Play.Client.POSITION
@@ -38,8 +38,8 @@ class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
         return UmpaSbPlayerMovePacket(position, rotation, onGround)
     }
 
-    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
-        if (wrapper !is UmpaSbPlayerMovePacket) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
+        if (wrapper !is UmpaSbPlayerMovePacket) throw UmpaWrongConverterException(wrapper, this)
 
         val hasPosition = wrapper.position.isPresent
         val hasRotation = wrapper.rotation.isPresent

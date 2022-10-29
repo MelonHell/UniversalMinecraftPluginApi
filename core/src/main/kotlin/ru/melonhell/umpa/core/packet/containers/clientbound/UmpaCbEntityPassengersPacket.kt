@@ -1,12 +1,12 @@
 package ru.melonhell.umpa.core.packet.containers.clientbound
 
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 data class UmpaCbEntityPassengersPacket(
     var vehicleId: Int,
     var passengerIds: List<Int>
-) : UmpaPacketContainer {
-    override fun clone(): UmpaPacketContainer {
+) : UmpaPacket {
+    override fun clone(): UmpaPacket {
         return this.copy()
     }
 }
