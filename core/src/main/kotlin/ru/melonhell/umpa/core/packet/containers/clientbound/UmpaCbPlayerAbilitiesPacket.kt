@@ -1,5 +1,6 @@
 package ru.melonhell.umpa.core.packet.containers.clientbound
 
+import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 data class UmpaCbPlayerAbilitiesPacket(
@@ -9,7 +10,7 @@ data class UmpaCbPlayerAbilitiesPacket(
     var instabuild: Boolean = false,
     var flyingSpeed: Float = 0.5f,
     var fov: Float = 0.1f
-) : UmpaPacket {
+) : UmpaPacket(UmpaPacketType.CB_PLAYER_ABILITIES) {
     override fun clone(): UmpaPacket {
         return this.copy()
     }

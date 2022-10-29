@@ -1,12 +1,13 @@
 package ru.melonhell.umpa.core.packet.containers.serverbound
 
+import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 data class UmpaSbPlayerActionPacket(
     var playerId: Int, // Ignored by server
     var action: PlayerAction,
     var data: Int
-) : UmpaPacket {
+) : UmpaPacket(UmpaPacketType.SB_PLAYER_ACTION) {
     override fun clone(): UmpaPacket {
         return this.copy()
     }

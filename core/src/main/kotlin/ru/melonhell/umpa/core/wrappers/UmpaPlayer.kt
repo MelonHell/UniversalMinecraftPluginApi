@@ -1,3 +1,8 @@
 package ru.melonhell.umpa.core.wrappers
 
-interface UmpaPlayer
+import java.util.UUID
+
+interface UmpaPlayer {
+    val name: String
+    val uuid: UUID
+}

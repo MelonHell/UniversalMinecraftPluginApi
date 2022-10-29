@@ -1,7 +1,9 @@
 package ru.melonhell.umpa.bukkit
 
 import org.bukkit.plugin.java.JavaPlugin
+import ru.melonhell.umpa.bukkit.packet.protocollib.BukkitUmpaPacketManager
 import ru.melonhell.umpa.core.Umpa
+import java.util.function.Consumer
 
 class UmpaJavaPlugin : JavaPlugin() {
     override fun onEnable() {

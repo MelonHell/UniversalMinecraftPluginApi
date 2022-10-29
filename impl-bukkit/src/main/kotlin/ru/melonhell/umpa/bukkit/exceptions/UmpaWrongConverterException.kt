@@ -1,7 +1,7 @@
 package ru.melonhell.umpa.bukkit.exceptions
 
 import com.comphenix.protocol.PacketType
-import ru.melonhell.umpa.bukkit.converter.PacketConverter
+import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 class UmpaWrongConverterException : UmpaRuntimeException {

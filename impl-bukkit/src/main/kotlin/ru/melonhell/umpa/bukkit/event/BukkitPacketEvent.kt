@@ -2,19 +2,20 @@ package ru.melonhell.umpa.bukkit.event
 
 import org.bukkit.entity.Player
 import ru.melonhell.umpa.bukkit.wrappers.BukkitUmpaPlayer
+import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import java.util.function.Supplier
 
 class BukkitPacketEvent(
-    override val player: Player,
+    override val bukkitPlayer: Player,
     private val wrapperSupplier: Supplier<UmpaPacket>,
-    private val originalPacketType: Class<out UmpaPacket>
+    private val originalPacketType: UmpaPacketType
 ) : IBukkitPacketEvent {
     override var edited = false
         private set
 
     override var canceled = false
-    override val umpaPlayer = BukkitUmpaPlayer(player)
+    override val player = BukkitUmpaPlayer(bukkitPlayer)
 
     private var _packetWrapper: UmpaPacket? = null
     override var packetWrapper: UmpaPacket
@@ -26,5 +27,5 @@ class BukkitPacketEvent(
             _packetWrapper = value.clone()
             edited = true
         }
-    override val packetType get() = _packetWrapper?.javaClass ?: originalPacketType
+    override val packetType get() = _packetWrapper?.packetType ?: originalPacketType
 }

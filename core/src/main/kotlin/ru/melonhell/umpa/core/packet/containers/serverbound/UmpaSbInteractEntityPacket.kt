@@ -1,6 +1,6 @@
 package ru.melonhell.umpa.core.packet.containers.serverbound
 
-import ru.melonhell.umpa.core.enums.Hand
+import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 data class UmpaSbInteractEntityPacket(
@@ -9,9 +9,9 @@ data class UmpaSbInteractEntityPacket(
     var targetX: Float = 0f,
     var targetY: Float = 0f,
     var targetZ: Float = 0f,
-    var hand: Hand = Hand.MAIN_HAND,
+    var hand: InteractHand = InteractHand.MAIN_HAND,
     var sneaking: Boolean = false
-) : UmpaPacket {
+) : UmpaPacket(UmpaPacketType.SB_INTERACT_ENTITY) {
     override fun clone(): UmpaPacket {
         return this.copy()
     }
@@ -20,5 +20,10 @@ data class UmpaSbInteractEntityPacket(
         INTERACT,
         ATTACK,
         INTERACT_AT;
+    }
+
+    enum class InteractHand {
+        MAIN_HAND,
+        OFF_HAND;
     }
 }

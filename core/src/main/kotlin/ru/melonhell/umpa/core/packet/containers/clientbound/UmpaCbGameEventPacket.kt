@@ -1,11 +1,12 @@
 package ru.melonhell.umpa.core.packet.containers.clientbound
 
+import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 data class UmpaCbGameEventPacket(
     var gameEvent: GameEvent,
     var value: Float = 0f
-) : UmpaPacket {
+) : UmpaPacket(UmpaPacketType.CB_GAME_EVENT) {
     override fun clone(): UmpaPacket {
         return this.copy()
     }
