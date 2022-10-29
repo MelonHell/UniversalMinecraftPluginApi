@@ -1,4 +1,4 @@
-rootProject.name = "PacketFramework"
+rootProject.name = "UniversalMinecraftPluginApi"
 
 include(
     "core",

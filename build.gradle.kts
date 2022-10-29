@@ -9,7 +9,7 @@ plugins {
 
 group = "ru.melonhell"
 
-val basePackage = "${group}.packetframework"
+val basePackage = "${group}.umpa"
 
 allprojects {
     apply(plugin = "kotlin")
@@ -28,7 +28,7 @@ allprojects {
     }
     tasks {
         withType<KotlinCompile> {
-            kotlinOptions{
+            kotlinOptions {
                 jvmTarget = "1.8"
             }
         }
