@@ -6,22 +6,23 @@ import com.comphenix.protocol.wrappers.BlockPosition
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
 import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.protocol.game.clientbound.CbLevelEventPacketWrapper
+import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbWorldEventPacket
 import ru.melonhell.umpa.core.utils.BlockPos
 
 @ProtocolVersion("1.8", "latest")
 class LevelEventPacketConverter_v1_8_0 : PacketConverter {
-    override fun wrap(container: PacketContainer): CbLevelEventPacketWrapper {
+    override fun wrap(container: PacketContainer): UmpaCbWorldEventPacket {
         val type = container.integers.read(0)
         val blockPosProtocolLib = container.blockPositionModifier.read(0)
         val pos = BlockPos(blockPosProtocolLib.x, blockPosProtocolLib.y, blockPosProtocolLib.z)
         val data = container.integers.read(1)
         val global = container.booleans.read(0)
-        return CbLevelEventPacketWrapper(type, pos, data, global)
+        return UmpaCbWorldEventPacket(type, pos, data, global)
     }
 
-    override fun unwrap(wrapper: ru.melonhell.umpa.core.PacketWrapper): List<PacketContainer> {
-        if (wrapper !is CbLevelEventPacketWrapper) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
+        if (wrapper !is UmpaCbWorldEventPacket) throw WrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Server.WORLD_EVENT)
         container.integers.write(0, wrapper.type)
         container.blockPositionModifier.write(0, BlockPosition(wrapper.pos.x, wrapper.pos.y, wrapper.pos.z))
@@ -31,5 +32,5 @@ class LevelEventPacketConverter_v1_8_0 : PacketConverter {
     }
 
     override val protocolLibTypes = listOf(PacketType.Play.Server.WORLD_EVENT)
-    override val wrapperType = CbLevelEventPacketWrapper::class
+    override val wrapperType = UmpaCbWorldEventPacket::class
 }

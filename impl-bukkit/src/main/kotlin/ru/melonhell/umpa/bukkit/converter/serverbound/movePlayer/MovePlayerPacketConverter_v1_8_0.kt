@@ -5,14 +5,15 @@ import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
 import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.protocol.game.serverbound.SbMovePlayerPacketWrapper
+import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerMovePacket
 import ru.melonhell.umpa.core.utils.Look
 import ru.melonhell.umpa.core.utils.Vector
 import java.util.*
 
 @ProtocolVersion("1.8", "latest")
 class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
-    override fun wrap(container: PacketContainer): SbMovePlayerPacketWrapper {
+    override fun wrap(container: PacketContainer): UmpaSbPlayerMovePacket {
         val type = container.type
         val hasPosition = type == PacketType.Play.Client.POSITION_LOOK || type == PacketType.Play.Client.POSITION
         val position =
@@ -34,11 +35,11 @@ class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
             )
             else Optional.empty()
         val onGround: Boolean = container.booleans.read(0)
-        return SbMovePlayerPacketWrapper(position, rotation, onGround)
+        return UmpaSbPlayerMovePacket(position, rotation, onGround)
     }
 
-    override fun unwrap(wrapper: ru.melonhell.umpa.core.PacketWrapper): List<PacketContainer> {
-        if (wrapper !is SbMovePlayerPacketWrapper) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
+        if (wrapper !is UmpaSbPlayerMovePacket) throw WrongConverterException(wrapper, this)
 
         val hasPosition = wrapper.position.isPresent
         val hasRotation = wrapper.rotation.isPresent
@@ -70,5 +71,5 @@ class MovePlayerPacketConverter_v1_8_0 : PacketConverter {
         PacketType.Play.Client.LOOK,
         PacketType.Play.Client.GROUND
     )
-    override val wrapperType = SbMovePlayerPacketWrapper::class
+    override val wrapperType = UmpaSbPlayerMovePacket::class
 }

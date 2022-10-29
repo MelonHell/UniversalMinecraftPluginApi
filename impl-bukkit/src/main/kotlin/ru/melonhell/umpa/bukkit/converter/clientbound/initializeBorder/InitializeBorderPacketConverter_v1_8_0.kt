@@ -5,8 +5,9 @@ import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
 import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.enums.WorldBorderAction
-import ru.melonhell.umpa.core.protocol.game.clientbound.CbWorldBorderPacketWrapper
+import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbWorldBorderPacket
+import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbWorldBorderPacket.WorldBorderAction
 import java.util.*
 
 @ProtocolVersion("1.8", "latest")
@@ -25,9 +26,9 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
         actionTypeMap.forEach { (t, u) -> typeActionMap[u] = t }
     }
 
-    override fun wrap(container: PacketContainer): CbWorldBorderPacketWrapper {
+    override fun wrap(container: PacketContainer): UmpaCbWorldBorderPacket {
         val action = typeActionMap[container.type] ?: throw WrongConverterException(container.type, this)
-        val wrapper = CbWorldBorderPacketWrapper(action)
+        val wrapper = UmpaCbWorldBorderPacket(action)
         when (action) {
             WorldBorderAction.INITIALIZE -> {
                 wrapper.newCenterX = container.doubles.read(0)
@@ -66,8 +67,8 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
         return wrapper
     }
 
-    override fun unwrap(wrapper: ru.melonhell.umpa.core.PacketWrapper): List<PacketContainer> {
-        if (wrapper !is CbWorldBorderPacketWrapper) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
+        if (wrapper !is UmpaCbWorldBorderPacket) throw WrongConverterException(wrapper, this)
         val packetType = actionTypeMap[wrapper.action] ?: throw WrongConverterException(wrapper, this)
         val container = PacketContainer(packetType)
         when (wrapper.action) {
@@ -116,5 +117,5 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
         PacketType.Play.Server.SET_BORDER_WARNING_DELAY,
         PacketType.Play.Server.SET_BORDER_WARNING_DISTANCE
     )
-    override val wrapperType = CbWorldBorderPacketWrapper::class
+    override val wrapperType = UmpaCbWorldBorderPacket::class
 }

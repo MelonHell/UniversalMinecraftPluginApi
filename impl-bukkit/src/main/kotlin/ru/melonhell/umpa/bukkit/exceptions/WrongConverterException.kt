@@ -2,10 +2,11 @@ package ru.melonhell.umpa.bukkit.exceptions
 
 import com.comphenix.protocol.PacketType
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
+import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
 
 class WrongConverterException : RuntimeException {
     constructor(
-        wrapper: ru.melonhell.umpa.core.PacketWrapper,
+        wrapper: UmpaPacketContainer,
         converter: PacketConverter
     ) : super("wrapperClass: ${wrapper::class.simpleName}, converterClass: ${converter::class.simpleName}")
 

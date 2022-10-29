@@ -5,13 +5,14 @@ import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
 import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.protocol.game.clientbound.CbTeleportEntityPacketWrapper
+import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntityTeleportPacket
 import ru.melonhell.umpa.core.utils.Look
 import ru.melonhell.umpa.core.utils.Vector
 
 @ProtocolVersion("1.8", "1.8.9")
 class TeleportEntityPacketConverter_v1_8_0 : PacketConverter {
-    override fun wrap(container: PacketContainer): CbTeleportEntityPacketWrapper {
+    override fun wrap(container: PacketContainer): UmpaCbEntityTeleportPacket {
         val entityId = container.integers.read(0)
         val position = Vector(
             container.integers.read(1) / 32.0,
@@ -23,11 +24,11 @@ class TeleportEntityPacketConverter_v1_8_0 : PacketConverter {
             container.bytes.read(1) * 360.0f / 256.0f
         )
         val onGround = container.booleans.read(0)
-        return CbTeleportEntityPacketWrapper(entityId, position, rotation, onGround)
+        return UmpaCbEntityTeleportPacket(entityId, position, rotation, onGround)
     }
 
-    override fun unwrap(wrapper: ru.melonhell.umpa.core.PacketWrapper): List<PacketContainer> {
-        if (wrapper !is CbTeleportEntityPacketWrapper) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
+        if (wrapper !is UmpaCbEntityTeleportPacket) throw WrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Server.ENTITY_TELEPORT)
         container.integers.write(0, wrapper.entityId)
         container.integers.write(1, (wrapper.position.x * 32).toInt())
@@ -40,5 +41,5 @@ class TeleportEntityPacketConverter_v1_8_0 : PacketConverter {
     }
 
     override val protocolLibTypes = listOf(PacketType.Play.Server.ENTITY_TELEPORT)
-    override val wrapperType = CbTeleportEntityPacketWrapper::class
+    override val wrapperType = UmpaCbEntityTeleportPacket::class
 }

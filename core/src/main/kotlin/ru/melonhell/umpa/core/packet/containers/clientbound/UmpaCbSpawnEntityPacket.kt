@@ -1,10 +1,11 @@
-package ru.melonhell.umpa.core.protocol.game.clientbound
+package ru.melonhell.umpa.core.packet.containers.clientbound
 
+import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
 import ru.melonhell.umpa.core.utils.Look
 import ru.melonhell.umpa.core.utils.Vector
 import java.util.*
 
-data class CbAddEntityPacketWrapper(
+data class UmpaCbSpawnEntityPacket(
     var entityId: Int,
     var uuid: UUID?, // null only for minecraft:experience_orb
     var entityType: ru.melonhell.umpa.core.enums.EntityType,
@@ -13,8 +14,8 @@ data class CbAddEntityPacketWrapper(
     var headYaw: Float = 0f,
     var data: Int = 0,
     var velocity: Vector = Vector()
-) : ru.melonhell.umpa.core.PacketWrapper {
-    override fun clone(): ru.melonhell.umpa.core.PacketWrapper {
+) : UmpaPacketContainer {
+    override fun clone(): UmpaPacketContainer {
         return this.copy()
     }
 }
