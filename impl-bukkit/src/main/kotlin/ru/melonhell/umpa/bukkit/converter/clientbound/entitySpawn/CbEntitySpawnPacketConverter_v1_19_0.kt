@@ -1,18 +1,18 @@
-package ru.melonhell.umpa.bukkit.converter.clientbound.addEntity
+package ru.melonhell.umpa.bukkit.converter.clientbound.entitySpawn
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.core.enums.EntityType
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
-import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbSpawnEntityPacket
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
+import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntitySpawnPacket
 import ru.melonhell.umpa.core.utils.Look
 import ru.melonhell.umpa.core.utils.Vector
 
 @ProtocolVersion("1.19", "latest")
-class AddEntityPacketConverter_v1_19_0 : PacketConverter {
+class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
     private val bukkitEntityTypes = HashMap<String, org.bukkit.entity.EntityType>()
 
     init {
@@ -22,7 +22,7 @@ class AddEntityPacketConverter_v1_19_0 : PacketConverter {
         }
     }
 
-    override fun wrap(container: PacketContainer): UmpaCbSpawnEntityPacket {
+    override fun wrap(container: PacketContainer): UmpaCbEntitySpawnPacket {
         if (container.type == PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB) {
             val entityId = container.integers.read(0)
             val position = Vector(
@@ -31,7 +31,7 @@ class AddEntityPacketConverter_v1_19_0 : PacketConverter {
                 container.doubles.read(2)
             )
             val data = container.integers.read(1)
-            return UmpaCbSpawnEntityPacket(
+            return UmpaCbEntitySpawnPacket(
                 entityId,
                 null,
                 EntityType.EXPERIENCE_ORB,
@@ -55,7 +55,7 @@ class AddEntityPacketConverter_v1_19_0 : PacketConverter {
                 container.bytes.read(0) * 360.0f / 256.0f,
                 container.bytes.read(1) * 360.0f / 256.0f
             )
-            return UmpaCbSpawnEntityPacket(
+            return UmpaCbEntitySpawnPacket(
                 entityId,
                 uuid,
                 EntityType.PLAYER,
@@ -95,11 +95,11 @@ class AddEntityPacketConverter_v1_19_0 : PacketConverter {
         val velocityY = container.integers.read(2) / 8000.0
         val velocityZ = container.integers.read(3) / 8000.0
         val velocity = Vector(velocityX, velocityY, velocityZ)
-        return UmpaCbSpawnEntityPacket(entityId, uuid, entityType, position, rotation, headYaw, data, velocity)
+        return UmpaCbEntitySpawnPacket(entityId, uuid, entityType, position, rotation, headYaw, data, velocity)
     }
 
-    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
-        if (wrapper !is UmpaCbSpawnEntityPacket) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
+        if (wrapper !is UmpaCbEntitySpawnPacket) throw UmpaWrongConverterException(wrapper, this)
 
         if (wrapper.entityType == ru.melonhell.umpa.core.enums.EntityType.EXPERIENCE_ORB) {
             val container = PacketContainer(PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB)
@@ -157,5 +157,5 @@ class AddEntityPacketConverter_v1_19_0 : PacketConverter {
         PacketType.Play.Server.SPAWN_ENTITY_LIVING,
         PacketType.Play.Server.SPAWN_ENTITY_PAINTING
     )
-    override val wrapperType = UmpaCbSpawnEntityPacket::class
+    override val wrapperType = UmpaCbEntitySpawnPacket::class
 }

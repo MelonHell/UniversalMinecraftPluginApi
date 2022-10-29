@@ -1,15 +1,15 @@
-package ru.melonhell.umpa.bukkit.converter.serverbound.playerInput
+package ru.melonhell.umpa.bukkit.converter.serverbound.vehicleInput
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbVehicleInputPacket
 
 @ProtocolVersion("1.8", "latest")
-class PlayerInputPacketConverter_v1_8_0 : PacketConverter {
+class SbVehicleInputPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaSbVehicleInputPacket {
         val sideways: Float = container.float.read(0)
         val forward: Float = container.float.read(1)
@@ -18,8 +18,8 @@ class PlayerInputPacketConverter_v1_8_0 : PacketConverter {
         return UmpaSbVehicleInputPacket(forward, sideways, jumping, sneaking)
     }
 
-    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
-        if (wrapper !is UmpaSbVehicleInputPacket) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
+        if (wrapper !is UmpaSbVehicleInputPacket) throw UmpaWrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Client.STEER_VEHICLE)
         container.float.write(0, wrapper.sideways)
         container.float.write(1, wrapper.forward)

@@ -1,4 +1,4 @@
-package ru.melonhell.umpa.bukkit.converter.serverbound.interact
+package ru.melonhell.umpa.bukkit.converter.serverbound.interactEntity
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
@@ -7,14 +7,14 @@ import com.comphenix.protocol.wrappers.WrappedEnumEntityUseAction
 import org.bukkit.util.Vector
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.core.enums.Hand
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket.InteractType
 
 @ProtocolVersion("1.9", "latest")
-class InteractPacketConverter_v1_9_0 : PacketConverter {
+class SbInteractEntityPacketConverter_v1_9_0 : PacketConverter {
 
     private val interactActions = InteractType.values()
     private val hands = Hand.values()
@@ -44,8 +44,8 @@ class InteractPacketConverter_v1_9_0 : PacketConverter {
         )
     }
 
-    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
-        if (wrapper !is UmpaSbInteractEntityPacket) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
+        if (wrapper !is UmpaSbInteractEntityPacket) throw UmpaWrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Client.USE_ENTITY)
         container.integers.write(0, wrapper.entityId)
         val wrappedEnumEntityUseAction: WrappedEnumEntityUseAction = when (wrapper.type) {

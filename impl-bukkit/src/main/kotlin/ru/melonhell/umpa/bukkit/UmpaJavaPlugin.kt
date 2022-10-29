@@ -1,21 +1,22 @@
 package ru.melonhell.umpa.bukkit
 
-import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
+import ru.melonhell.umpa.core.Umpa
 
-class PacketFrameworkBukkitPlugin : JavaPlugin(), Listener {
+class UmpaJavaPlugin : JavaPlugin() {
     override fun onEnable() {
-        setService(BukkitPacketFrameworkService(this))
+        setManager("playerManager", BukkitUmpaPlayerManager(this))
+        setManager("packetManager", BukkitUmpaPacketManager(this))
     }
 
     override fun onDisable() {
-        setService(null)
+        setManager("playerManager", null)
+        setManager("packetManager", null)
     }
 
-    private fun setService(packetFrameworkService: ru.melonhell.umpa.core.PacketFrameworkService?) {
-        val declaredField =
-            ru.melonhell.umpa.core.PacketFramework::class.java.getDeclaredField("packetFrameworkService")
+    private fun setManager(name: String, manager: Any?) {
+        val declaredField = Umpa::class.java.getDeclaredField(name)
         declaredField.isAccessible = true
-        declaredField.set(null, packetFrameworkService)
+        declaredField.set(null, manager)
     }
 }

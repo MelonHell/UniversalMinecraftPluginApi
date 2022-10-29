@@ -3,8 +3,8 @@ plugins {
 }
 
 bukkit {
-    name = "PacketFramework"
-    main = "ru.melonhell.packetframework.bukkit.PacketFrameworkBukkitPlugin"
+    name = rootProject.name
+    main = "ru.melonhell.umpa.bukkit.UmpaJavaPlugin"
     apiVersion = "1.13"
     authors = listOf("MelonHell")
     depend = listOf("ProtocolLib")

@@ -1,6 +1,6 @@
 package ru.melonhell.umpa.core.packet.containers.clientbound
 
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 data class UmpaCbWorldBorderPacket(
     var action: WorldBorderAction,
@@ -12,8 +12,8 @@ data class UmpaCbWorldBorderPacket(
     var newAbsoluteMaxSize: Int = 0,
     var warningBlocks: Int = 0,
     var warningTime: Int = 0
-) : UmpaPacketContainer {
-    override fun clone(): UmpaPacketContainer {
+) : UmpaPacket {
+    override fun clone(): UmpaPacket {
         return this.copy()
     }
 

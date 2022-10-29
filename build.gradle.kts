@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    `java-library`
     kotlin("jvm") version "1.7.20"
     kotlin("kapt") version "1.7.20"
-    `java-library`
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
@@ -14,6 +14,7 @@ val basePackage = "${group}.umpa"
 allprojects {
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-kapt")
+    apply(plugin = "java-library")
     version = "1.0-SNAPSHOT"
 
     repositories {
@@ -55,4 +56,9 @@ tasks {
     assemble {
         dependsOn(shadowJar)
     }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }

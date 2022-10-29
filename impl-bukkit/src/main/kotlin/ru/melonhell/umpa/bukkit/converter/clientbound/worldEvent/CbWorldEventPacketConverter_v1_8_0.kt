@@ -1,17 +1,17 @@
-package ru.melonhell.umpa.bukkit.converter.clientbound.levelEvent
+package ru.melonhell.umpa.bukkit.converter.clientbound.worldEvent
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import com.comphenix.protocol.wrappers.BlockPosition
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbWorldEventPacket
 import ru.melonhell.umpa.core.utils.BlockPos
 
 @ProtocolVersion("1.8", "latest")
-class LevelEventPacketConverter_v1_8_0 : PacketConverter {
+class CbWorldEventPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaCbWorldEventPacket {
         val type = container.integers.read(0)
         val blockPosProtocolLib = container.blockPositionModifier.read(0)
@@ -21,8 +21,8 @@ class LevelEventPacketConverter_v1_8_0 : PacketConverter {
         return UmpaCbWorldEventPacket(type, pos, data, global)
     }
 
-    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
-        if (wrapper !is UmpaCbWorldEventPacket) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
+        if (wrapper !is UmpaCbWorldEventPacket) throw UmpaWrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Server.WORLD_EVENT)
         container.integers.write(0, wrapper.type)
         container.blockPositionModifier.write(0, BlockPosition(wrapper.pos.x, wrapper.pos.y, wrapper.pos.z))

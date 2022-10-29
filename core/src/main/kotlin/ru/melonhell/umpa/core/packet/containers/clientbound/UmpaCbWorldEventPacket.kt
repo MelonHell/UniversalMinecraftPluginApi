@@ -1,6 +1,6 @@
 package ru.melonhell.umpa.core.packet.containers.clientbound
 
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.utils.BlockPos
 
 data class UmpaCbWorldEventPacket(
@@ -8,8 +8,8 @@ data class UmpaCbWorldEventPacket(
     var pos: BlockPos = BlockPos(),
     var data: Int = 0,
     var global: Boolean = false
-) : UmpaPacketContainer {
-    override fun clone(): UmpaPacketContainer {
+) : UmpaPacket {
+    override fun clone(): UmpaPacket {
         return this.copy()
     }
 }

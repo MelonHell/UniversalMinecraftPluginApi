@@ -1,17 +1,17 @@
-package ru.melonhell.umpa.bukkit.converter.clientbound.initializeBorder
+package ru.melonhell.umpa.bukkit.converter.clientbound.worldBorder
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbWorldBorderPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbWorldBorderPacket.WorldBorderAction
 import java.util.*
 
 @ProtocolVersion("1.8", "latest")
-class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
+class CbWorldBorderPacketConverter_v1_8_0 : PacketConverter {
 
     private val actionTypeMap = EnumMap<WorldBorderAction, PacketType>(WorldBorderAction::class.java)
     private val typeActionMap = HashMap<PacketType, WorldBorderAction>()
@@ -27,7 +27,7 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
     }
 
     override fun wrap(container: PacketContainer): UmpaCbWorldBorderPacket {
-        val action = typeActionMap[container.type] ?: throw WrongConverterException(container.type, this)
+        val action = typeActionMap[container.type] ?: throw UmpaWrongConverterException(container.type, this)
         val wrapper = UmpaCbWorldBorderPacket(action)
         when (action) {
             WorldBorderAction.INITIALIZE -> {
@@ -67,9 +67,9 @@ class InitializeBorderPacketConverter_v1_8_0 : PacketConverter {
         return wrapper
     }
 
-    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
-        if (wrapper !is UmpaCbWorldBorderPacket) throw WrongConverterException(wrapper, this)
-        val packetType = actionTypeMap[wrapper.action] ?: throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
+        if (wrapper !is UmpaCbWorldBorderPacket) throw UmpaWrongConverterException(wrapper, this)
+        val packetType = actionTypeMap[wrapper.action] ?: throw UmpaWrongConverterException(wrapper, this)
         val container = PacketContainer(packetType)
         when (wrapper.action) {
             WorldBorderAction.INITIALIZE -> {

@@ -15,17 +15,18 @@ import org.bukkit.plugin.java.JavaPlugin
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
 import ru.melonhell.umpa.bukkit.event.BukkitPacketEvent
-import ru.melonhell.umpa.bukkit.exceptions.ConverterNotFoundException
+import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
 import ru.melonhell.umpa.bukkit.wrappers.BukkitPlugin
 import ru.melonhell.umpa.bukkit.wrappers.BukkitUmpaPlayer
 import ru.melonhell.umpa.core.event.PacketListener
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.core.managers.UmpaPacketManager
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.wrappers.UmpaPlayer
 import kotlin.reflect.KClass
 
-class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : ru.melonhell.umpa.core.PacketFrameworkService, Listener {
+class BukkitUmpaPacketManager(javaPlugin: JavaPlugin) : UmpaPacketManager, Listener {
 
-    private val converterMapByWrapper: MutableMap<KClass<out UmpaPacketContainer>, PacketConverter> =
+    private val converterMapByWrapper: MutableMap<KClass<out UmpaPacket>, PacketConverter> =
         HashMap()
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
 
@@ -60,22 +61,22 @@ class BukkitPacketFrameworkService(javaPlugin: JavaPlugin) : ru.melonhell.umpa.c
         Bukkit.getPluginManager().registerEvents(this, javaPlugin)
     }
 
-    fun wrap(packetContainer: PacketContainer): UmpaPacketContainer {
-        val packetConverter = converterMapByProtocolLibType[packetContainer.type] ?: throw ConverterNotFoundException(
+    fun wrap(packetContainer: PacketContainer): UmpaPacket {
+        val packetConverter = converterMapByProtocolLibType[packetContainer.type] ?: throw UmpaConverterNotFoundException(
             packetContainer.type
         )
         return packetConverter.wrap(packetContainer)
     }
 
-    fun unwrap(packetWrapper: UmpaPacketContainer): List<PacketContainer> {
+    fun unwrap(packetWrapper: UmpaPacket): List<PacketContainer> {
         val packetConverter =
-            converterMapByWrapper[packetWrapper::class] ?: throw ConverterNotFoundException(packetWrapper)
+            converterMapByWrapper[packetWrapper::class] ?: throw UmpaConverterNotFoundException(packetWrapper)
         return packetConverter.unwrap(packetWrapper)
     }
 
     override fun send(
         player: UmpaPlayer,
-        packetWrapper: UmpaPacketContainer
+        packetWrapper: UmpaPacket
     ) {
         if (player !is BukkitUmpaPlayer) return
         unwrap(packetWrapper).forEach {

@@ -1,17 +1,17 @@
-package ru.melonhell.umpa.bukkit.converter.clientbound.teleportEntity
+package ru.melonhell.umpa.bukkit.converter.clientbound.entityTeleport
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.WrongConverterException
-import ru.melonhell.umpa.core.packet.containers.UmpaPacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
+import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntityTeleportPacket
 import ru.melonhell.umpa.core.utils.Look
 import ru.melonhell.umpa.core.utils.Vector
 
 @ProtocolVersion("1.8", "1.8.9")
-class TeleportEntityPacketConverter_v1_8_0 : PacketConverter {
+class CbEntityTeleportPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaCbEntityTeleportPacket {
         val entityId = container.integers.read(0)
         val position = Vector(
@@ -27,8 +27,8 @@ class TeleportEntityPacketConverter_v1_8_0 : PacketConverter {
         return UmpaCbEntityTeleportPacket(entityId, position, rotation, onGround)
     }
 
-    override fun unwrap(wrapper: UmpaPacketContainer): List<PacketContainer> {
-        if (wrapper !is UmpaCbEntityTeleportPacket) throw WrongConverterException(wrapper, this)
+    override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
+        if (wrapper !is UmpaCbEntityTeleportPacket) throw UmpaWrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Server.ENTITY_TELEPORT)
         container.integers.write(0, wrapper.entityId)
         container.integers.write(1, (wrapper.position.x * 32).toInt())
