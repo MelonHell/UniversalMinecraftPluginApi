@@ -4,9 +4,9 @@ import org.bukkit.entity.Player
 import ru.melonhell.umpa.core.wrappers.UmpaPlayer
 import java.util.*
 
-class BukkitUmpaPlayer(val player: Player) : UmpaPlayer {
+class BukkitUmpaPlayer(override val handle: Player) : UmpaPlayer {
     override val name: String
-        get() = player.name
+        get() = handle.name
     override val uuid: UUID
-        get() = player.uniqueId
+        get() = handle.uniqueId
 }

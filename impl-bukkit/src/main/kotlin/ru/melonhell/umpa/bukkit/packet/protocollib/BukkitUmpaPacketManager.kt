@@ -19,19 +19,17 @@ import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
 import ru.melonhell.umpa.bukkit.wrappers.BukkitPlugin
 import ru.melonhell.umpa.bukkit.wrappers.BukkitUmpaPlayer
 import ru.melonhell.umpa.core.enums.UmpaPacketType
-import ru.melonhell.umpa.core.event.PacketListener
+import ru.melonhell.umpa.core.event.UmpaEventManager
 import ru.melonhell.umpa.core.managers.UmpaPacketManager
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.wrappers.UmpaPlayer
 import java.lang.RuntimeException
 import java.util.*
 
-class BukkitUmpaPacketManager(javaPlugin: JavaPlugin) : UmpaPacketManager, Listener {
+class BukkitUmpaPacketManager(javaPlugin: JavaPlugin, private val eventManager: UmpaEventManager) : UmpaPacketManager, Listener {
 
     private val converterMapByWrapper: MutableMap<UmpaPacketType, PacketConverter> = EnumMap(UmpaPacketType::class.java)
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
-
-    private val listeners = HashSet<PacketListener>()
 
     init {
         val converterClasses = KlassIndex.getAnnotated(ProtocolVersion::class)
@@ -51,11 +49,10 @@ class BukkitUmpaPacketManager(javaPlugin: JavaPlugin) : UmpaPacketManager, Liste
         ProtocolLibrary.getProtocolManager()
             .addPacketListener(object : PacketAdapter(javaPlugin, PacketType.values().filter { it.isSupported }) {
                 override fun onPacketReceiving(event: PacketEvent) =
-                    onPacket(event, UmpaPacketType.Direction.SERVERBOUND)
+                    onPacket(event)
                 override fun onPacketSending(event: PacketEvent) =
-                    onPacket(event, UmpaPacketType.Direction.CLIENTBOUND)
+                    onPacket(event)
             })
-        Bukkit.getPluginManager().registerEvents(this, javaPlugin)
     }
 
     fun wrap(packetContainer: PacketContainer): UmpaPacket {
@@ -75,50 +72,32 @@ class BukkitUmpaPacketManager(javaPlugin: JavaPlugin) : UmpaPacketManager, Liste
     ) {
         if (player !is BukkitUmpaPlayer) return
         unwrap(packetWrapper).forEach {
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player.player, it)
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player.handle, it)
         }
     }
 
-    override fun addListener(listener: PacketListener) {
-        listeners.add(listener)
-    }
-
-    override fun removeListener(listener: PacketListener) {
-        listeners.remove(listener)
-    }
-
-    private fun onPacket(event: PacketEvent, direction: UmpaPacketType.Direction) {
-        val packetConverter = converterMapByProtocolLibType[event.packetType] ?: return
-        val bukkitPacketReceiveEvent = BukkitPacketEvent(
-            event.player, { packetConverter.wrap(event.packet) }, packetConverter.packetType
+    private fun onPacket(protocolLibEvent: PacketEvent) {
+        val packetConverter = converterMapByProtocolLibType[protocolLibEvent.packetType] ?: return
+        val packetEvent = BukkitPacketEvent(
+            protocolLibEvent.player, { packetConverter.wrap(protocolLibEvent.packet) }, packetConverter.packetType
         )
-        listeners.forEach {
-            when (direction) {
-                UmpaPacketType.Direction.CLIENTBOUND -> it.onPacketSending(bukkitPacketReceiveEvent)
-                UmpaPacketType.Direction.SERVERBOUND -> it.onPacketReceiving(bukkitPacketReceiveEvent)
-            }
-        }
-        if (bukkitPacketReceiveEvent.canceled) {
-            event.isCancelled = true
+        eventManager.call(packetEvent)
+        if (packetEvent.canceled) {
+            protocolLibEvent.isCancelled = true
             return
         }
-        if (bukkitPacketReceiveEvent.edited) {
-            val packetWrapper = bukkitPacketReceiveEvent.packetWrapper
-            if (packetWrapper.packetType.direction != direction)
+        if (packetEvent.edited) {
+            val packetWrapper = packetEvent.packetWrapper
+            if (packetWrapper.packetType.direction != packetConverter.packetType.direction)
                 throw RuntimeException("ты чё долбоёб блять, ты сука клиентский пакет серверу хуяришь или наоборот я хуй знает что ты там задумал, мудоёб ебливый")
             val unwrap = unwrap(packetWrapper)
             if (unwrap.size == 1) {
-                event.packet = unwrap[0]
+                protocolLibEvent.packet = unwrap[0]
             } else {
                 // Костыль для всякой хуйни по типу ремува энтити в 1.17.0
-                event.isCancelled = true
-                unwrap.forEach { ProtocolLibrary.getProtocolManager().sendServerPacket(event.player, it) }
+                protocolLibEvent.isCancelled = true
+                unwrap.forEach { ProtocolLibrary.getProtocolManager().sendServerPacket(protocolLibEvent.player, it) }
             }
         }
-    }
-
-    @EventHandler
-    fun onPluginDisable(event: PluginDisableEvent) {
-        listeners.removeIf { (it.pluginWrapper as BukkitPlugin).javaPlugin == event.plugin }
     }
 }

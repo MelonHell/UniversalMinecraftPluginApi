@@ -26,6 +26,8 @@ allprojects {
     dependencies {
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20")
         compileOnly("net.kyori:adventure-api:4.11.0")
+
+        testImplementation(kotlin("test"))
     }
     tasks {
         withType<KotlinCompile> {
