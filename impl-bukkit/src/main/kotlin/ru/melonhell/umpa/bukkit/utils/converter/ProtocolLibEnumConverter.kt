@@ -1,12 +1,13 @@
-package ru.melonhell.umpa.bukkit.utils
+package ru.melonhell.umpa.bukkit.utils.converter
 
 import com.comphenix.protocol.wrappers.EnumWrappers
 import ru.melonhell.umpa.core.enums.UmpaEquipmentSlot
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerActionPacket
 
 object ProtocolLibEnumConverter {
-    fun toProtocolLib(umpaEquipmentSlot: UmpaEquipmentSlot): EnumWrappers.ItemSlot {
-        return when (umpaEquipmentSlot) {
+    @JvmStatic
+    fun UmpaEquipmentSlot.protocolLib(): EnumWrappers.ItemSlot {
+        return when (this) {
             UmpaEquipmentSlot.HAND -> EnumWrappers.ItemSlot.MAINHAND
             UmpaEquipmentSlot.OFF_HAND -> EnumWrappers.ItemSlot.OFFHAND
             UmpaEquipmentSlot.FEET -> EnumWrappers.ItemSlot.FEET
@@ -16,8 +17,9 @@ object ProtocolLibEnumConverter {
         }
     }
 
-    fun fromProtocolLib(itemSlot: EnumWrappers.ItemSlot): UmpaEquipmentSlot {
-        return when (itemSlot) {
+    @JvmStatic
+    fun EnumWrappers.ItemSlot.umpa(): UmpaEquipmentSlot {
+        return when (this) {
             EnumWrappers.ItemSlot.MAINHAND -> UmpaEquipmentSlot.HAND
             EnumWrappers.ItemSlot.OFFHAND -> UmpaEquipmentSlot.OFF_HAND
             EnumWrappers.ItemSlot.FEET -> UmpaEquipmentSlot.FEET
@@ -27,8 +29,9 @@ object ProtocolLibEnumConverter {
         }
     }
 
-    fun toProtocolLib(playerAction: UmpaSbPlayerActionPacket.PlayerAction): EnumWrappers.PlayerAction {
-        return when (playerAction) {
+    @JvmStatic
+    fun UmpaSbPlayerActionPacket.PlayerAction.protocolLib(): EnumWrappers.PlayerAction {
+        return when (this) {
             UmpaSbPlayerActionPacket.PlayerAction.PRESS_SHIFT_KEY -> EnumWrappers.PlayerAction.START_SNEAKING
             UmpaSbPlayerActionPacket.PlayerAction.RELEASE_SHIFT_KEY -> EnumWrappers.PlayerAction.STOP_SNEAKING
             UmpaSbPlayerActionPacket.PlayerAction.STOP_SLEEPING -> EnumWrappers.PlayerAction.STOP_SLEEPING
@@ -41,8 +44,8 @@ object ProtocolLibEnumConverter {
         }
     }
 
-    fun fromProtocolLib(playerAction: EnumWrappers.PlayerAction): UmpaSbPlayerActionPacket.PlayerAction {
-        return when (playerAction) {
+    fun EnumWrappers.PlayerAction.umpa(): UmpaSbPlayerActionPacket.PlayerAction {
+        return when (this) {
             EnumWrappers.PlayerAction.START_SNEAKING -> UmpaSbPlayerActionPacket.PlayerAction.PRESS_SHIFT_KEY
             EnumWrappers.PlayerAction.STOP_SNEAKING -> UmpaSbPlayerActionPacket.PlayerAction.RELEASE_SHIFT_KEY
             EnumWrappers.PlayerAction.STOP_SLEEPING -> UmpaSbPlayerActionPacket.PlayerAction.STOP_SLEEPING

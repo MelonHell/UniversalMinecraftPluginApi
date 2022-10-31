@@ -5,7 +5,9 @@ import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.utils.BukkitEnumConverter
+import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter
+import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.bukkit
+import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.umpa
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.enums.keyed.UmpaEntityType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
@@ -65,8 +67,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         // UUID
         val uuid = container.uuiDs.read(0)
         // Entity Type
-        val bukkitEntityType = container.entityTypeModifier.read(0)
-        val umpaEntityType = BukkitEnumConverter.fromBukkit(bukkitEntityType)
+        val entityType = container.entityTypeModifier.read(0).umpa()
         // Yaw Pitch HeadYaw
         val rotation = UmpaLook(
             container.bytes.read(1) * 360.0f / 256.0f,
@@ -86,7 +87,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         val velocityY = container.integers.read(2) / 8000.0
         val velocityZ = container.integers.read(3) / 8000.0
         val velocity = UmpaVector(velocityX, velocityY, velocityZ)
-        return UmpaCbEntitySpawnPacket(entityId, uuid, umpaEntityType, position, rotation, headYaw, data, velocity)
+        return UmpaCbEntitySpawnPacket(entityId, uuid, entityType, position, rotation, headYaw, data, velocity)
     }
 
     override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
@@ -120,8 +121,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         // UUID
         container.uuiDs.write(0, wrapper.uuid)
         // Entity Type
-        val bukkitEntityType = BukkitEnumConverter.toBukkit(wrapper.umpaEntityType)
-        container.entityTypeModifier.write(0, bukkitEntityType)
+        container.entityTypeModifier.write(0, wrapper.umpaEntityType.bukkit())
         // Yaw Pitch HeadYaw
         container.bytes.write(0, (wrapper.rotation.pitch * 256.0f / 360.0f).toInt().toByte())
         container.bytes.write(1, (wrapper.rotation.yaw * 256.0f / 360.0f).toInt().toByte())
