@@ -1,37 +1,28 @@
-# UniversalMinecraftPluginApi (PacketFramework) (WIP)
+## UniversalMinecraftPluginApi (WIP)
+**Русский** | [English](https://github.com/MelonHell/UniversalMinecraftPluginApi/blob/master/README_EN.md)
 
-Universal library for convenient work with packets
+## О проекте
+UniversalMinecraftPluginApi - это универсальное API для разработки Minecraft плагинов нацеленное как на разработку мультиплатформенных* плагинов, так и на одну платформу.
 
-## Supported Packets And Versions
+*На данный момент имеется только реализация Bukkit 
 
-### Clientbound
+### Возможности:
+- Удобная работа с пакетами без ебли с NMS или ProtocolLib
+    ```java
+    UmpaCbEntityAnimatePacket umpaPacket = new UmpaCbEntityAnimatePacket(
+        entity.getEntityId(), 
+        UmpaCbEntityAnimatePacket.EntityAnimation.SWING_MAIN_HAND
+    );
+    UmpaPlayer umpaPlayer = Umpa.getPlayerManager().player(player);
+    Umpa.getPacketManager().send(umpaPlayer, umpaPacket);
+    ```
+- Универсальная Event система (которая нихуя не доделана)
+- Бла-бла-бла
 
-| Packet \ Version | 1.8 | 1.9 | 1.10 | 1.11 | 1.12 | 1.13 | 1.14 | 1.15 | 1.16 | 1.17 | 1.18 | 1.19 |
-|------------------|-----|-----|------|------|------|------|------|------|------|------|------|------|
-| AddEntity        | -   | -   | -    | -    | -    | -    | -    | -    | -    | -    | -    | +    |
-| GameEvent        | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
-| RemoveEntities   | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
-| SetCamera        | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
-| SetEquipment     | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
-| SetPassengers    | x   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
-| TeleportEntity   | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    | 
+Крч когда я доделаю эту хуйню, можно будет писать плуги например под Bukkit и Minestom используя универсальное API  
 
-### Serverbound
-
-| Packet \ Version | 1.8 | 1.9 | 1.10 | 1.11 | 1.12 | 1.13 | 1.14 | 1.15 | 1.16 | 1.17 | 1.18 | 1.19 |
-|------------------|-----|-----|------|------|------|------|------|------|------|------|------|------|
-| Interact         | x   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
-| MovePlayer       | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
-| PlayerInput      | ?   | ?   | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | ?    | +    |
-
-- x - unsupported
-- \? - untested
-- \+ - tested
-
-## Supported server software:
-
-- [x] Bukkit and forks (using protocolLib)
-- [ ] Bukkit and forks (without protocolLib)
+## Поддерживаемые сервера:
+- [x] Bukkit
 - [ ] Minestom
 - [ ] Sponge
 - [ ] Glowstone
