@@ -23,7 +23,7 @@ class SbVehicleInputPacketConverter_v1_8_0 : PacketConverter {
         if (wrapper !is UmpaSbVehicleInputPacket) throw UmpaWrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Client.STEER_VEHICLE)
         container.float.write(0, wrapper.sideways)
-        container.float.write(1, wrapper.forward)
+        container.float.write(1, wrapper.straight)
         container.booleans.write(0, wrapper.jumping)
         container.booleans.write(1, wrapper.sneaking)
         return listOf(container)

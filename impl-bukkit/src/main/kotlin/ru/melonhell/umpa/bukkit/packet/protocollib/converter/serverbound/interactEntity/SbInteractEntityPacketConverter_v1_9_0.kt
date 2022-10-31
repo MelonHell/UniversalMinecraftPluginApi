@@ -8,17 +8,19 @@ import org.bukkit.util.Vector
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
+import ru.melonhell.umpa.bukkit.utils.converter.BukkitConverter.bukkit
+import ru.melonhell.umpa.bukkit.utils.converter.BukkitConverter.umpa
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket
-import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket.InteractHand
-import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket.InteractType
+import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket.Action
+import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket.Hand
 
 @ProtocolVersion("1.9", "latest")
 class SbInteractEntityPacketConverter_v1_9_0 : PacketConverter {
 
-    private val interactActions = InteractType.values()
-    private val interactHands = InteractHand.values()
+    private val interactActions = Action.values()
+    private val hands = Hand.values()
     private val protocolLibHands = EnumWrappers.Hand.values()
 
     override fun wrap(container: PacketContainer): UmpaSbInteractEntityPacket {
@@ -26,20 +28,18 @@ class SbInteractEntityPacketConverter_v1_9_0 : PacketConverter {
         val actionContainer = container.enumEntityUseActions.read(0)
         val action = interactActions[actionContainer.action.ordinal]
         val hand = when (action) {
-            InteractType.INTERACT, InteractType.INTERACT_AT -> interactHands[actionContainer.hand.ordinal]
-            else -> InteractHand.MAIN_HAND
+            Action.INTERACT, Action.INTERACT_AT -> hands[actionContainer.hand.ordinal]
+            else -> Hand.MAIN_HAND
         }
         val position = when (action) {
-            InteractType.INTERACT_AT -> actionContainer.position
+            Action.INTERACT_AT -> actionContainer.position
             else -> Vector()
         }
         val sneaking: Boolean = container.booleans.read(0)
         return UmpaSbInteractEntityPacket(
             entityId,
             action,
-            position.x.toFloat(),
-            position.y.toFloat(),
-            position.z.toFloat(),
+            position.umpa(),
             hand,
             sneaking
         )
@@ -49,12 +49,12 @@ class SbInteractEntityPacketConverter_v1_9_0 : PacketConverter {
         if (wrapper !is UmpaSbInteractEntityPacket) throw UmpaWrongConverterException(wrapper, this)
         val container = PacketContainer(PacketType.Play.Client.USE_ENTITY)
         container.integers.write(0, wrapper.entityId)
-        val wrappedEnumEntityUseAction: WrappedEnumEntityUseAction = when (wrapper.type) {
-            InteractType.INTERACT -> WrappedEnumEntityUseAction.interact(protocolLibHands[wrapper.hand.ordinal])
-            InteractType.ATTACK -> WrappedEnumEntityUseAction.attack()
-            InteractType.INTERACT_AT -> WrappedEnumEntityUseAction.interactAt(
+        val wrappedEnumEntityUseAction: WrappedEnumEntityUseAction = when (wrapper.action) {
+            Action.INTERACT -> WrappedEnumEntityUseAction.interact(protocolLibHands[wrapper.hand.ordinal])
+            Action.ATTACK -> WrappedEnumEntityUseAction.attack()
+            Action.INTERACT_AT -> WrappedEnumEntityUseAction.interactAt(
                 protocolLibHands[wrapper.hand.ordinal],
-                Vector(wrapper.targetX, wrapper.targetY, wrapper.targetZ)
+                wrapper.target.bukkit()
             )
         }
         container.enumEntityUseActions.write(0, wrappedEnumEntityUseAction)

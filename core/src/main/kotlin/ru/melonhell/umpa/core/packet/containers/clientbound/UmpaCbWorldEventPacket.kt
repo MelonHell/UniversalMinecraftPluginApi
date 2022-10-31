@@ -4,7 +4,7 @@ import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.utils.UmpaBlockPos
 
-data class UmpaCbWorldEventPacket(
+data class UmpaCbWorldEventPacket @JvmOverloads constructor(
     var type: Int,
     var pos: UmpaBlockPos = UmpaBlockPos(),
     var data: Int = 0,

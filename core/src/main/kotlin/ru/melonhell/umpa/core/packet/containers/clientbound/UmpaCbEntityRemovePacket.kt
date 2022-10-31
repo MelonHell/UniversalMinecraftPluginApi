@@ -6,6 +6,8 @@ import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 data class UmpaCbEntityRemovePacket(
     var entityIds: List<Int>
 ) : UmpaPacket(UmpaPacketType.CB_ENTITY_REMOVE) {
+    constructor(entityId: Int) : this(listOf(entityId))
+
     override fun clone(): UmpaPacket {
         return this.copy()
     }

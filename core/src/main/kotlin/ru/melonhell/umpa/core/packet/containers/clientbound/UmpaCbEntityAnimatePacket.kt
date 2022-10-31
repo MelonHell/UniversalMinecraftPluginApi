@@ -5,13 +5,13 @@ import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 data class UmpaCbEntityAnimatePacket(
     var entityId: Int,
-    var action: EntityAnimation
+    var action: Action
 ) : UmpaPacket(UmpaPacketType.CB_ENTITY_ANIMATE) {
     override fun clone(): UmpaPacket {
         return this.copy()
     }
 
-    enum class EntityAnimation {
+    enum class Action {
         SWING_MAIN_HAND,
         HURT,
         WAKE_UP,

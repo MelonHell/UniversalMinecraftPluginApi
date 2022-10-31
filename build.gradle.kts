@@ -20,7 +20,8 @@ allprojects {
     repositories {
         mavenCentral()
         maven("https://jitpack.io")
-        maven("https://papermc.io/repo/repository/maven-public/") // Paper API
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot API
+//        maven("https://papermc.io/repo/repository/maven-public/") // Paper API
         maven("https://repo.dmulloy2.net/repository/public/") // ProtocolLib
     }
     dependencies {

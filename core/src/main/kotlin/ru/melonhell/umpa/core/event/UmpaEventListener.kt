@@ -2,7 +2,7 @@ package ru.melonhell.umpa.core.event
 
 import ru.melonhell.umpa.core.wrappers.UmpaPluginWrapper
 
-class UmpaEventListener<T : UmpaEvent>(
+class UmpaEventListener<T : UmpaEvent> @JvmOverloads constructor(
     val pluginWrapper: UmpaPluginWrapper,
     val eventType: Class<T>,
     val ignoreCancelled: Boolean = true,

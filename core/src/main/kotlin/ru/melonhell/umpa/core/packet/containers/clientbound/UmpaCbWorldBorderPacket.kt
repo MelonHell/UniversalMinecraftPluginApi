@@ -3,8 +3,8 @@ package ru.melonhell.umpa.core.packet.containers.clientbound
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
-data class UmpaCbWorldBorderPacket(
-    var action: WorldBorderAction,
+data class UmpaCbWorldBorderPacket @JvmOverloads constructor(
+    var action: Action,
     var newCenterX: Double = 0.0,
     var newCenterZ: Double = 0.0,
     var oldSize: Double = 0.0,
@@ -18,7 +18,7 @@ data class UmpaCbWorldBorderPacket(
         return this.copy()
     }
 
-    enum class WorldBorderAction {
+    enum class Action {
         INITIALIZE,
         SET_CENTER,
         SET_LERP_SIZE,

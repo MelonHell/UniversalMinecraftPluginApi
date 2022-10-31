@@ -11,12 +11,12 @@ import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntityAnimateP
 
 @ProtocolVersion("1.8", "latest")
 class CbEntityAnimatePacketConverter_v1_8_0 : PacketConverter {
-    private val entityAnimations = UmpaCbEntityAnimatePacket.EntityAnimation.values()
+    private val actions = UmpaCbEntityAnimatePacket.Action.values()
 
     override fun wrap(container: PacketContainer): UmpaCbEntityAnimatePacket {
         val entityId = container.integers.read(0)
         val action = container.integers.read(1)
-        return UmpaCbEntityAnimatePacket(entityId, entityAnimations[action])
+        return UmpaCbEntityAnimatePacket(entityId, actions[action])
     }
 
     override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {

@@ -30,31 +30,31 @@ object ProtocolLibEnumConverter {
     }
 
     @JvmStatic
-    fun UmpaSbPlayerActionPacket.PlayerAction.protocolLib(): EnumWrappers.PlayerAction {
+    fun UmpaSbPlayerActionPacket.Action.protocolLib(): EnumWrappers.PlayerAction {
         return when (this) {
-            UmpaSbPlayerActionPacket.PlayerAction.PRESS_SHIFT_KEY -> EnumWrappers.PlayerAction.START_SNEAKING
-            UmpaSbPlayerActionPacket.PlayerAction.RELEASE_SHIFT_KEY -> EnumWrappers.PlayerAction.STOP_SNEAKING
-            UmpaSbPlayerActionPacket.PlayerAction.STOP_SLEEPING -> EnumWrappers.PlayerAction.STOP_SLEEPING
-            UmpaSbPlayerActionPacket.PlayerAction.START_SPRINTING -> EnumWrappers.PlayerAction.START_SPRINTING
-            UmpaSbPlayerActionPacket.PlayerAction.STOP_SPRINTING -> EnumWrappers.PlayerAction.STOP_SPRINTING
-            UmpaSbPlayerActionPacket.PlayerAction.START_RIDING_JUMP -> EnumWrappers.PlayerAction.START_RIDING_JUMP
-            UmpaSbPlayerActionPacket.PlayerAction.STOP_RIDING_JUMP -> EnumWrappers.PlayerAction.STOP_RIDING_JUMP
-            UmpaSbPlayerActionPacket.PlayerAction.OPEN_HORSE_INVENTORY -> EnumWrappers.PlayerAction.OPEN_INVENTORY
-            UmpaSbPlayerActionPacket.PlayerAction.START_FALL_FLYING -> EnumWrappers.PlayerAction.START_FALL_FLYING
+            UmpaSbPlayerActionPacket.Action.PRESS_SHIFT_KEY -> EnumWrappers.PlayerAction.START_SNEAKING
+            UmpaSbPlayerActionPacket.Action.RELEASE_SHIFT_KEY -> EnumWrappers.PlayerAction.STOP_SNEAKING
+            UmpaSbPlayerActionPacket.Action.STOP_SLEEPING -> EnumWrappers.PlayerAction.STOP_SLEEPING
+            UmpaSbPlayerActionPacket.Action.START_SPRINTING -> EnumWrappers.PlayerAction.START_SPRINTING
+            UmpaSbPlayerActionPacket.Action.STOP_SPRINTING -> EnumWrappers.PlayerAction.STOP_SPRINTING
+            UmpaSbPlayerActionPacket.Action.START_RIDING_JUMP -> EnumWrappers.PlayerAction.START_RIDING_JUMP
+            UmpaSbPlayerActionPacket.Action.STOP_RIDING_JUMP -> EnumWrappers.PlayerAction.STOP_RIDING_JUMP
+            UmpaSbPlayerActionPacket.Action.OPEN_HORSE_INVENTORY -> EnumWrappers.PlayerAction.OPEN_INVENTORY
+            UmpaSbPlayerActionPacket.Action.START_FALL_FLYING -> EnumWrappers.PlayerAction.START_FALL_FLYING
         }
     }
 
-    fun EnumWrappers.PlayerAction.umpa(): UmpaSbPlayerActionPacket.PlayerAction {
+    fun EnumWrappers.PlayerAction.umpa(): UmpaSbPlayerActionPacket.Action {
         return when (this) {
-            EnumWrappers.PlayerAction.START_SNEAKING -> UmpaSbPlayerActionPacket.PlayerAction.PRESS_SHIFT_KEY
-            EnumWrappers.PlayerAction.STOP_SNEAKING -> UmpaSbPlayerActionPacket.PlayerAction.RELEASE_SHIFT_KEY
-            EnumWrappers.PlayerAction.STOP_SLEEPING -> UmpaSbPlayerActionPacket.PlayerAction.STOP_SLEEPING
-            EnumWrappers.PlayerAction.START_SPRINTING -> UmpaSbPlayerActionPacket.PlayerAction.START_SPRINTING
-            EnumWrappers.PlayerAction.STOP_SPRINTING -> UmpaSbPlayerActionPacket.PlayerAction.STOP_SPRINTING
-            EnumWrappers.PlayerAction.START_RIDING_JUMP -> UmpaSbPlayerActionPacket.PlayerAction.START_RIDING_JUMP
-            EnumWrappers.PlayerAction.STOP_RIDING_JUMP -> UmpaSbPlayerActionPacket.PlayerAction.STOP_RIDING_JUMP
-            EnumWrappers.PlayerAction.OPEN_INVENTORY -> UmpaSbPlayerActionPacket.PlayerAction.OPEN_HORSE_INVENTORY
-            EnumWrappers.PlayerAction.START_FALL_FLYING -> UmpaSbPlayerActionPacket.PlayerAction.START_FALL_FLYING
+            EnumWrappers.PlayerAction.START_SNEAKING -> UmpaSbPlayerActionPacket.Action.PRESS_SHIFT_KEY
+            EnumWrappers.PlayerAction.STOP_SNEAKING -> UmpaSbPlayerActionPacket.Action.RELEASE_SHIFT_KEY
+            EnumWrappers.PlayerAction.STOP_SLEEPING -> UmpaSbPlayerActionPacket.Action.STOP_SLEEPING
+            EnumWrappers.PlayerAction.START_SPRINTING -> UmpaSbPlayerActionPacket.Action.START_SPRINTING
+            EnumWrappers.PlayerAction.STOP_SPRINTING -> UmpaSbPlayerActionPacket.Action.STOP_SPRINTING
+            EnumWrappers.PlayerAction.START_RIDING_JUMP -> UmpaSbPlayerActionPacket.Action.START_RIDING_JUMP
+            EnumWrappers.PlayerAction.STOP_RIDING_JUMP -> UmpaSbPlayerActionPacket.Action.STOP_RIDING_JUMP
+            EnumWrappers.PlayerAction.OPEN_INVENTORY -> UmpaSbPlayerActionPacket.Action.OPEN_HORSE_INVENTORY
+            EnumWrappers.PlayerAction.START_FALL_FLYING -> UmpaSbPlayerActionPacket.Action.START_FALL_FLYING
         }
     }
 }

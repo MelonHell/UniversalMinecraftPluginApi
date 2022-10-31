@@ -7,9 +7,9 @@ import ru.melonhell.umpa.core.utils.UmpaLook
 import ru.melonhell.umpa.core.utils.UmpaVector
 import java.util.*
 
-data class UmpaCbEntitySpawnPacket(
+data class UmpaCbEntitySpawnPacket @JvmOverloads constructor(
     var entityId: Int,
-    var uuid: UUID?, // null only for minecraft:experience_orb
+    var uuid: UUID = UUID(0, 0),
     var umpaEntityType: UmpaEntityType,
     var position: UmpaVector,
     var rotation: UmpaLook = UmpaLook(),

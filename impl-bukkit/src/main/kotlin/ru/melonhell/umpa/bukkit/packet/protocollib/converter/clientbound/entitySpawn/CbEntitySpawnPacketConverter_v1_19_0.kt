@@ -14,6 +14,7 @@ import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntitySpawnPacket
 import ru.melonhell.umpa.core.utils.UmpaLook
 import ru.melonhell.umpa.core.utils.UmpaVector
+import java.util.*
 
 @ProtocolVersion("1.19", "latest")
 class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
@@ -28,7 +29,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
             val data = container.integers.read(1)
             return UmpaCbEntitySpawnPacket(
                 entityId,
-                null,
+                UUID(0, 0),
                 UmpaEntityType.EXPERIENCE_ORB,
                 position,
                 UmpaLook(0f, 0f),

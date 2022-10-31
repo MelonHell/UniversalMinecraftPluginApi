@@ -3,7 +3,7 @@ package ru.melonhell.umpa.core.packet.containers.clientbound
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
-data class UmpaCbGameEventPacket(
+data class UmpaCbGameEventPacket @JvmOverloads constructor(
     var gameEvent: GameEvent,
     var value: Float = 0f
 ) : UmpaPacket(UmpaPacketType.CB_GAME_EVENT) {
