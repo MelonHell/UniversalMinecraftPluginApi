@@ -1,7 +1,7 @@
 package ru.melonhell.umpa.core.event
 
 import ru.melonhell.umpa.core.event.trait.UmpaCancelableEvent
-import ru.melonhell.umpa.core.wrappers.PluginWrapper
+import ru.melonhell.umpa.core.wrappers.UmpaPluginWrapper
 
 class UmpaEventManager {
     private val subscribers = HashSet<UmpaEventListener<*>>()
@@ -30,7 +30,7 @@ class UmpaEventManager {
         subscribers.remove(listener)
     }
 
-    fun unsubscribe(pluginWrapper: PluginWrapper) {
+    fun unsubscribe(pluginWrapper: UmpaPluginWrapper) {
         subscribers.removeIf { it.pluginWrapper == pluginWrapper }
     }
 }

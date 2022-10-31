@@ -2,25 +2,25 @@ package ru.melonhell.umpa.bukkit.packet.protocollib.converter.clientbound.entity
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntityTeleportPacket
-import ru.melonhell.umpa.core.utils.Look
-import ru.melonhell.umpa.core.utils.Vector
+import ru.melonhell.umpa.core.utils.UmpaLook
+import ru.melonhell.umpa.core.utils.UmpaVector
 
 @ProtocolVersion("1.9", "latest")
 class CbEntityTeleportPacketConverter_v1_9_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaCbEntityTeleportPacket {
         val entityId = container.integers.read(0)
-        val position = Vector(
+        val position = UmpaVector(
             container.doubles.read(0),
             container.doubles.read(1),
             container.doubles.read(2)
         )
-        val rotation = Look(
+        val rotation = UmpaLook(
             container.bytes.read(0) * 360.0f / 256.0f,
             container.bytes.read(1) * 360.0f / 256.0f
         )

@@ -10,31 +10,32 @@ class EventTest {
     @Test
     fun mainTest() {
         val umpaEventManager = UmpaEventManager()
-        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaPidorEvent::class.java) { event ->
+        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaPidorEvent::class.java, false) { event ->
             event.pidor = "new pidor"
         })
 
 
-        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaSukaEvent::class.java) { event ->
+        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaSukaEvent::class.java, false) { event ->
             event.suka = "new suka"
         })
 
 
-        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaCancelableEvent::class.java) { event ->
+        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaCancelableEvent::class.java, false) { event ->
             event.canceled = true
         })
 
         val anyCallList = mutableListOf<UmpaEvent>()
-        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaEvent::class.java) { event ->
+        umpaEventManager.subscribe(UmpaEventListener(pluginWrapper, UmpaEvent::class.java, false) { event ->
             anyCallList.add(event)
         })
+
 
         val pidorEvent = UmpaPidorEvent("pidor value")
         umpaEventManager.call(pidorEvent)
         val sukaEvent = UmpaSukaEvent("suka value")
         umpaEventManager.call(sukaEvent)
 
-        assert(anyCallList.size == 2)
+        assertEquals(anyCallList.size, 2)
         assertContains(anyCallList, pidorEvent)
         assertContains(anyCallList, sukaEvent)
         assert(pidorEvent.canceled)

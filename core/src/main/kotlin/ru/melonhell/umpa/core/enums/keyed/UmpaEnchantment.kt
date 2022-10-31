@@ -1,6 +1,10 @@
-package ru.melonhell.umpa.core.enums
+package ru.melonhell.umpa.core.enums.keyed
 
-enum class UmpaEnchantments(name: String) {
+import net.kyori.adventure.key.Key
+import java.util.*
+import java.util.stream.Collectors
+
+enum class UmpaEnchantment(private val stringKey: String) : UmpaKeyed {
     PROTECTION("minecraft:protection"),
     FIRE_PROTECTION("minecraft:fire_protection"),
     FEATHER_FALLING("minecraft:feather_falling"),
@@ -40,4 +44,17 @@ enum class UmpaEnchantments(name: String) {
     PIERCING("minecraft:piercing"),
     MENDING("minecraft:mending"),
     VANISHING_CURSE("minecraft:vanishing_curse");
+
+    override val key: Key = Key.key(stringKey, ':')
+
+    companion object : UmpaKeyed.Companion<UmpaEnchantment> {
+        private val keyMap = Arrays.stream(UmpaEnchantment.values())
+            .collect(Collectors.toMap({ it.stringKey }, { it }))
+
+        @JvmStatic
+        override fun fromKey(key: String) = keyMap[key]
+
+        @JvmStatic
+        override fun fromKey(key: Key) = fromKey(key.asString())
+    }
 }

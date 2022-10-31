@@ -4,7 +4,6 @@ import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.event.trait.UmpaCancelableEvent
 import ru.melonhell.umpa.core.event.trait.UmpaPlayerEvent
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
-import ru.melonhell.umpa.core.wrappers.UmpaPlayer
 
 interface UmpaPacketEvent : UmpaPlayerEvent, UmpaCancelableEvent {
     var packetWrapper: UmpaPacket

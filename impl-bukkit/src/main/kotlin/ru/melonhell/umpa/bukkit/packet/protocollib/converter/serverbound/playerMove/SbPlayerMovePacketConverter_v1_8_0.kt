@@ -2,14 +2,14 @@ package ru.melonhell.umpa.bukkit.packet.protocollib.converter.serverbound.player
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerMovePacket
-import ru.melonhell.umpa.core.utils.Look
-import ru.melonhell.umpa.core.utils.Vector
+import ru.melonhell.umpa.core.utils.UmpaLook
+import ru.melonhell.umpa.core.utils.UmpaVector
 import java.util.*
 
 @ProtocolVersion("1.8", "latest")
@@ -19,7 +19,7 @@ class SbPlayerMovePacketConverter_v1_8_0 : PacketConverter {
         val hasPosition = type == PacketType.Play.Client.POSITION_LOOK || type == PacketType.Play.Client.POSITION
         val position =
             if (hasPosition) Optional.of(
-                Vector(
+                UmpaVector(
                     container.doubles.read(0),
                     container.doubles.read(1),
                     container.doubles.read(2)
@@ -29,7 +29,7 @@ class SbPlayerMovePacketConverter_v1_8_0 : PacketConverter {
         val hasRotation = type == PacketType.Play.Client.POSITION_LOOK || type == PacketType.Play.Client.LOOK
         val rotation =
             if (hasRotation) Optional.of(
-                Look(
+                UmpaLook(
                     container.float.read(0),
                     container.float.read(1)
                 )

@@ -1,9 +1,9 @@
 package ru.melonhell.umpa.core.event
 
-import ru.melonhell.umpa.core.wrappers.PluginWrapper
+import ru.melonhell.umpa.core.wrappers.UmpaPluginWrapper
 
 class UmpaEventListener<T : UmpaEvent>(
-    val pluginWrapper: PluginWrapper,
+    val pluginWrapper: UmpaPluginWrapper,
     val eventType: Class<T>,
     val ignoreCancelled: Boolean = true,
     var filters: List<UmpaEventPredicate<T>> = ArrayList(),

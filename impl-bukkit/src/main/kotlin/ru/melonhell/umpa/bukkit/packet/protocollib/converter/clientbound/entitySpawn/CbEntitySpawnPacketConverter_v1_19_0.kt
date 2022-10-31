@@ -2,31 +2,23 @@ package ru.melonhell.umpa.bukkit.packet.protocollib.converter.clientbound.entity
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
+import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
-import ru.melonhell.umpa.core.enums.UmpaEntityType
+import ru.melonhell.umpa.bukkit.utils.BukkitEnumConverter
 import ru.melonhell.umpa.core.enums.UmpaPacketType
+import ru.melonhell.umpa.core.enums.keyed.UmpaEntityType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntitySpawnPacket
-import ru.melonhell.umpa.core.utils.Look
-import ru.melonhell.umpa.core.utils.Vector
+import ru.melonhell.umpa.core.utils.UmpaLook
+import ru.melonhell.umpa.core.utils.UmpaVector
 
 @ProtocolVersion("1.19", "latest")
 class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
-    private val bukkitEntityTypes = HashMap<String, org.bukkit.entity.EntityType>()
-
-    init {
-        org.bukkit.entity.EntityType.values().forEach {
-            if (it != org.bukkit.entity.EntityType.UNKNOWN)
-                bukkitEntityTypes[it.key.toString()] = it
-        }
-    }
-
     override fun wrap(container: PacketContainer): UmpaCbEntitySpawnPacket {
         if (container.type == PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB) {
             val entityId = container.integers.read(0)
-            val position = Vector(
+            val position = UmpaVector(
                 container.doubles.read(0),
                 container.doubles.read(1),
                 container.doubles.read(2)
@@ -37,22 +29,22 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
                 null,
                 UmpaEntityType.EXPERIENCE_ORB,
                 position,
-                Look(0f, 0f),
+                UmpaLook(0f, 0f),
                 0f,
                 data,
-                Vector(0.0, 0.0, 0.0)
+                UmpaVector(0.0, 0.0, 0.0)
             )
         }
 
         if (container.type == PacketType.Play.Server.NAMED_ENTITY_SPAWN) {
             val entityId = container.integers.read(0)
             val uuid = container.uuiDs.read(0)
-            val position = Vector(
+            val position = UmpaVector(
                 container.doubles.read(0),
                 container.doubles.read(1),
                 container.doubles.read(2)
             )
-            val rotation = Look(
+            val rotation = UmpaLook(
                 container.bytes.read(0) * 360.0f / 256.0f,
                 container.bytes.read(1) * 360.0f / 256.0f
             )
@@ -64,7 +56,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
                 rotation,
                 0f,
                 0,
-                Vector(0.0, 0.0, 0.0)
+                UmpaVector(0.0, 0.0, 0.0)
             )
         }
 
@@ -74,17 +66,15 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         val uuid = container.uuiDs.read(0)
         // Entity Type
         val bukkitEntityType = container.entityTypeModifier.read(0)
-
-        val umpaEntityType = ru.melonhell.umpa.core.enums.UmpaEntityType.fromMinecraftName(bukkitEntityType.key.toString())
-            ?: throw RuntimeException("unknown entity type")
+        val umpaEntityType = BukkitEnumConverter.fromBukkit(bukkitEntityType)
         // Yaw Pitch HeadYaw
-        val rotation = Look(
+        val rotation = UmpaLook(
             container.bytes.read(1) * 360.0f / 256.0f,
             container.bytes.read(0) * 360.0f / 256.0f
         )
         val headYaw = container.bytes.read(2) * 360.0f / 256.0f
         // Location
-        val position = Vector(
+        val position = UmpaVector(
             container.doubles.read(0),
             container.doubles.read(1),
             container.doubles.read(2)
@@ -95,14 +85,14 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         val velocityX = container.integers.read(1) / 8000.0
         val velocityY = container.integers.read(2) / 8000.0
         val velocityZ = container.integers.read(3) / 8000.0
-        val velocity = Vector(velocityX, velocityY, velocityZ)
+        val velocity = UmpaVector(velocityX, velocityY, velocityZ)
         return UmpaCbEntitySpawnPacket(entityId, uuid, umpaEntityType, position, rotation, headYaw, data, velocity)
     }
 
     override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
         if (wrapper !is UmpaCbEntitySpawnPacket) throw UmpaWrongConverterException(wrapper, this)
 
-        if (wrapper.umpaEntityType == ru.melonhell.umpa.core.enums.UmpaEntityType.EXPERIENCE_ORB) {
+        if (wrapper.umpaEntityType == UmpaEntityType.EXPERIENCE_ORB) {
             val container = PacketContainer(PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB)
             container.integers.write(0, wrapper.entityId)
             container.doubles.write(0, wrapper.position.x)
@@ -112,7 +102,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
             return listOf(container)
         }
 
-        if (wrapper.umpaEntityType == ru.melonhell.umpa.core.enums.UmpaEntityType.PLAYER) {
+        if (wrapper.umpaEntityType == UmpaEntityType.PLAYER) {
             val container = PacketContainer(PacketType.Play.Server.NAMED_ENTITY_SPAWN)
             container.integers.write(0, wrapper.entityId)
             container.uuiDs.write(0, wrapper.uuid)
@@ -130,8 +120,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         // UUID
         container.uuiDs.write(0, wrapper.uuid)
         // Entity Type
-        val bukkitEntityType =
-            bukkitEntityTypes[wrapper.umpaEntityType.minecraftName] ?: throw RuntimeException("unknown entity type")
+        val bukkitEntityType = BukkitEnumConverter.toBukkit(wrapper.umpaEntityType)
         container.entityTypeModifier.write(0, bukkitEntityType)
         // Yaw Pitch HeadYaw
         container.bytes.write(0, (wrapper.rotation.pitch * 256.0f / 360.0f).toInt().toByte())

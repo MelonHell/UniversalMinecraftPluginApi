@@ -6,8 +6,8 @@ import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 
 class UmpaConverterNotFoundException : UmpaRuntimeException {
     constructor(wrapper: UmpaPacket) :
-            super("converter not found for wrapper ${wrapper::class.simpleName} for version ${MinecraftVersion.getCurrentVersion().version}")
+            super("Converter for UmpaPacketType.${wrapper.packetType.name} for version ${MinecraftVersion.getCurrentVersion().version} not found")
 
     constructor(type: PacketType) :
-            super("converter not found for ProtocolLib type ${type.name()} for version ${MinecraftVersion.getCurrentVersion().version}")
+            super("Converter for ProtocolLib PacketType.${type.name()} for version ${MinecraftVersion.getCurrentVersion().version} not found")
 }

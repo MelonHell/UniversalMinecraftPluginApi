@@ -1,6 +1,10 @@
-package ru.melonhell.umpa.core.enums
+package ru.melonhell.umpa.core.enums.keyed
 
-enum class UmpaMaterial(val minecraftName: String) {
+import net.kyori.adventure.key.Key
+import java.util.*
+import java.util.stream.Collectors
+
+enum class UmpaMaterial(private val stringKey: String) : UmpaKeyed {
     AIR("minecraft:air"),
     STONE("minecraft:stone"),
     GRANITE("minecraft:granite"),
@@ -1152,5 +1156,18 @@ enum class UmpaMaterial(val minecraftName: String) {
     VERDANT_FROGLIGHT("minecraft:verdant_froglight"),
     PEARLESCENT_FROGLIGHT("minecraft:pearlescent_froglight"),
     FROGSPAWN("minecraft:frogspawn"),
-    ECHO_SHARD("minecraft:echo_shard"),
+    ECHO_SHARD("minecraft:echo_shard");
+
+    override val key: Key = Key.key(stringKey, ':')
+
+    companion object : UmpaKeyed.Companion<UmpaMaterial> {
+        private val keyMap = Arrays.stream(UmpaMaterial.values())
+            .collect(Collectors.toMap({ it.stringKey }, { it }))
+
+        @JvmStatic
+        override fun fromKey(key: String) = keyMap[key]
+
+        @JvmStatic
+        override fun fromKey(key: Key) = fromKey(key.asString())
+    }
 }

@@ -5,8 +5,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.server.PluginDisableEvent
 import org.bukkit.plugin.java.JavaPlugin
-import ru.melonhell.umpa.bukkit.packet.protocollib.BukkitUmpaPacketManager
-import ru.melonhell.umpa.bukkit.wrappers.BukkitPlugin
+import ru.melonhell.umpa.bukkit.managers.UmpaItemStackManagerBukkit
+import ru.melonhell.umpa.bukkit.managers.UmpaPlayerManagerBukkit
+import ru.melonhell.umpa.bukkit.packet.protocollib.UmpaPacketManagerBukkit
+import ru.melonhell.umpa.bukkit.wrappers.UmpaPluginWrapperBukkit
 import ru.melonhell.umpa.core.Umpa
 import ru.melonhell.umpa.core.event.UmpaEventManager
 
@@ -15,12 +17,14 @@ class UmpaJavaPlugin : JavaPlugin(), Listener {
     lateinit var eventManager: UmpaEventManager
     override fun onEnable() {
         eventManager = UmpaEventManager()
-        val packetManager = BukkitUmpaPacketManager(this, eventManager)
-        val playerManager = BukkitUmpaPlayerManager(this)
+        val playerManager = UmpaPlayerManagerBukkit()
+        val itemStackManager = UmpaItemStackManagerBukkit()
+        val packetManager = UmpaPacketManagerBukkit(this, eventManager)
 
         setManager("playerManager", playerManager)
         setManager("packetManager", packetManager)
         setManager("eventManager", eventManager)
+        setManager("itemStackManager", itemStackManager)
 
         Bukkit.getPluginManager().registerEvents(this, this)
     }
@@ -29,6 +33,7 @@ class UmpaJavaPlugin : JavaPlugin(), Listener {
         setManager("playerManager", null)
         setManager("packetManager", null)
         setManager("eventManager", null)
+        setManager("itemStackManager", null)
     }
 
     private fun setManager(name: String, manager: Any?) {
@@ -39,6 +44,6 @@ class UmpaJavaPlugin : JavaPlugin(), Listener {
 
     @EventHandler
     fun onPluginDisable(event: PluginDisableEvent) {
-        eventManager.unsubscribe(BukkitPlugin(event.plugin))
+        eventManager.unsubscribe(UmpaPluginWrapperBukkit(event.plugin))
     }
 }

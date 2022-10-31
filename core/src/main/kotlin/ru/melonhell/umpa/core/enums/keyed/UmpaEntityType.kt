@@ -1,6 +1,10 @@
-package ru.melonhell.umpa.core.enums
+package ru.melonhell.umpa.core.enums.keyed
 
-enum class UmpaEntityType(val minecraftName: String) {
+import net.kyori.adventure.key.Key
+import java.util.*
+import java.util.stream.Collectors
+
+enum class UmpaEntityType(private val stringKey: String) : UmpaKeyed {
     ALLAY("minecraft:allay"),
     AREA_EFFECT_CLOUD("minecraft:area_effect_cloud"),
     ARMOR_STAND("minecraft:armor_stand"),
@@ -120,16 +124,16 @@ enum class UmpaEntityType(val minecraftName: String) {
     PLAYER("minecraft:player"),
     FISHING_BOBBER("minecraft:fishing_bobber");
 
-    companion object {
-        private val umpaEntityTypes = HashMap<String, UmpaEntityType>()
+    override val key: Key = Key.key(stringKey, ':')
 
-        init {
-            UmpaEntityType.values()
-                .forEach { UmpaEntityType.umpaEntityTypes[it.minecraftName] = it }
-        }
+    companion object : UmpaKeyed.Companion<UmpaEntityType> {
+        private val keyMap = Arrays.stream(UmpaEntityType.values())
+            .collect(Collectors.toMap({ it.stringKey }, { it }))
 
-        fun fromMinecraftName(id: String): UmpaEntityType? {
-            return UmpaEntityType.umpaEntityTypes[id]
-        }
+        @JvmStatic
+        override fun fromKey(key: String) = keyMap[key]
+
+        @JvmStatic
+        override fun fromKey(key: Key) = fromKey(key.asString())
     }
 }

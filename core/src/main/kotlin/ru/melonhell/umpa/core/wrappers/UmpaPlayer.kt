@@ -1,9 +1,8 @@
 package ru.melonhell.umpa.core.wrappers
 
-import java.util.UUID
+import java.util.*
 
-interface UmpaPlayer {
-    val handle: Any
-    val name: String
-    val uuid: UUID
+abstract class UmpaPlayer : UmpaWrapper() {
+    abstract val name: String
+    abstract val uuid: UUID
 }

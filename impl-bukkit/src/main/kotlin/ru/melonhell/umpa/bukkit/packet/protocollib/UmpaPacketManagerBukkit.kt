@@ -7,26 +7,21 @@ import com.comphenix.protocol.events.PacketContainer
 import com.comphenix.protocol.events.PacketEvent
 import com.comphenix.protocol.utility.MinecraftVersion
 import com.github.matfax.klassindex.KlassIndex
-import org.bukkit.Bukkit
-import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.server.PluginDisableEvent
 import org.bukkit.plugin.java.JavaPlugin
+import ru.melonhell.umpa.bukkit.event.UmpaPacketEventBukkit
+import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.event.BukkitPacketEvent
-import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
-import ru.melonhell.umpa.bukkit.wrappers.BukkitPlugin
-import ru.melonhell.umpa.bukkit.wrappers.BukkitUmpaPlayer
+import ru.melonhell.umpa.bukkit.wrappers.UmpaPlayerBukkit
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.event.UmpaEventManager
 import ru.melonhell.umpa.core.managers.UmpaPacketManager
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.wrappers.UmpaPlayer
-import java.lang.RuntimeException
 import java.util.*
 
-class BukkitUmpaPacketManager(javaPlugin: JavaPlugin, private val eventManager: UmpaEventManager) : UmpaPacketManager, Listener {
+class UmpaPacketManagerBukkit(javaPlugin: JavaPlugin, private val eventManager: UmpaEventManager) : UmpaPacketManager, Listener {
 
     private val converterMapByWrapper: MutableMap<UmpaPacketType, PacketConverter> = EnumMap(UmpaPacketType::class.java)
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
@@ -70,7 +65,7 @@ class BukkitUmpaPacketManager(javaPlugin: JavaPlugin, private val eventManager: 
     override fun send(
         player: UmpaPlayer, packetWrapper: UmpaPacket
     ) {
-        if (player !is BukkitUmpaPlayer) return
+        if (player !is UmpaPlayerBukkit) return
         unwrap(packetWrapper).forEach {
             ProtocolLibrary.getProtocolManager().sendServerPacket(player.handle, it)
         }
@@ -78,7 +73,7 @@ class BukkitUmpaPacketManager(javaPlugin: JavaPlugin, private val eventManager: 
 
     private fun onPacket(protocolLibEvent: PacketEvent) {
         val packetConverter = converterMapByProtocolLibType[protocolLibEvent.packetType] ?: return
-        val packetEvent = BukkitPacketEvent(
+        val packetEvent = UmpaPacketEventBukkit(
             protocolLibEvent.player, { packetConverter.wrap(protocolLibEvent.packet) }, packetConverter.packetType
         )
         eventManager.call(packetEvent)
