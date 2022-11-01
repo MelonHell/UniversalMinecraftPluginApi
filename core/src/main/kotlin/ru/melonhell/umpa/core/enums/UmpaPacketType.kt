@@ -12,6 +12,7 @@ enum class UmpaPacketType(private val packetClass: KClass<out UmpaPacket>, val d
     // CLIENTBOUND
     CB_ENTITY_ANIMATE(UmpaCbEntityAnimatePacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_EQUIPMENT(UmpaCbEntityEquipmentPacket::class, Direction.CLIENTBOUND),
+    CB_ENTITY_HEAD_ROTATION(UmpaCbEntityHeadRotationPacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_METADATA(UmpaCbEntityMetadataPacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_PASSENGERS(UmpaCbEntityPassengersPacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_REMOVE(UmpaCbEntityRemovePacket::class, Direction.CLIENTBOUND),
