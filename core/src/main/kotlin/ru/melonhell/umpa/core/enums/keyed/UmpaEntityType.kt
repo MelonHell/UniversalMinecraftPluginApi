@@ -1,13 +1,20 @@
 package ru.melonhell.umpa.core.enums.keyed
 
 import net.kyori.adventure.key.Key
+import ru.melonhell.umpa.core.data.entitymeta.UmpaArmorStandMetadata
+import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.UmpaSlimeMetadata
 import java.util.*
 import java.util.stream.Collectors
+import kotlin.reflect.KClass
 
-enum class UmpaEntityType(private val stringKey: String) : UmpaKeyed {
+enum class UmpaEntityType(
+    private val stringKey: String,
+    private val metaClass: KClass<out UmpaEntityMetadata> = UmpaEntityMetadata::class
+    ) : UmpaKeyed {
     ALLAY("minecraft:allay"),
     AREA_EFFECT_CLOUD("minecraft:area_effect_cloud"),
-    ARMOR_STAND("minecraft:armor_stand"),
+    ARMOR_STAND("minecraft:armor_stand", UmpaArmorStandMetadata::class),
     ARROW("minecraft:arrow"),
     AXOLOTL("minecraft:axolotl"),
     BAT("minecraft:bat"),
@@ -34,7 +41,7 @@ enum class UmpaEntityType(private val stringKey: String) : UmpaKeyed {
     EVOKER_FANGS("minecraft:evoker_fangs"),
     EXPERIENCE_ORB("minecraft:experience_orb"),
     EYE_OF_ENDER("minecraft:eye_of_ender"),
-    FALLING_BLOCK("minecraft:falling_block"),
+    FALLING_BLOCK("minecraft:falling_block", UmpaArmorStandMetadata::class),
     FIREWORK_ROCKET("minecraft:firework_rocket"),
     FOX("minecraft:fox"),
     FROG("minecraft:frog"),
@@ -88,7 +95,7 @@ enum class UmpaEntityType(private val stringKey: String) : UmpaKeyed {
     SILVERFISH("minecraft:silverfish"),
     SKELETON("minecraft:skeleton"),
     SKELETON_HORSE("minecraft:skeleton_horse"),
-    SLIME("minecraft:slime"),
+    SLIME("minecraft:slime", UmpaSlimeMetadata::class),
     SMALL_FIREBALL("minecraft:small_fireball"),
     SNOW_GOLEM("minecraft:snow_golem"),
     SNOWBALL("minecraft:snowball"),

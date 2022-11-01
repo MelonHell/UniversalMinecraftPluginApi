@@ -12,7 +12,7 @@ import ru.melonhell.umpa.bukkit.wrappers.UmpaPluginWrapperBukkit
 import ru.melonhell.umpa.core.Umpa
 import ru.melonhell.umpa.core.event.UmpaEventManager
 
-class UmpaJavaPlugin : JavaPlugin(), Listener {
+class UmpaBukkitPlugin : JavaPlugin(), Listener {
 
     lateinit var eventManager: UmpaEventManager
     override fun onEnable() {

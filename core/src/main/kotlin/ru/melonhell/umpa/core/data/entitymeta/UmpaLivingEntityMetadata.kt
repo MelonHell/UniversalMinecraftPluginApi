@@ -1,27 +1,29 @@
 package ru.melonhell.umpa.core.data.entitymeta
 
+import ru.melonhell.umpa.core.enums.UmpaHand
 import ru.melonhell.umpa.core.utils.UmpaBlockPos
+import java.util.*
 
-open class LivingEntityMetadataWrapper(
+open class UmpaLivingEntityMetadata(
     var handActive: Boolean = false,
-    var activeHand: Int = 0,
+    var activeHand: UmpaHand = UmpaHand.MAIN_HAND,
     var isInRiptideSpinAttack: Boolean = false,
     var health: Float = 1.0f,
     var potionEffectColor: Int = 0,
     var isPotionEffectAmbient: Boolean = false,
     var numberOfArrowsInEntity: Int = 0,
     var numberOfBeeStingersInEntity: Int = 0,
-    var sleepingLocation: UmpaBlockPos? = null,
-) : EntityMetadataWrapper() {
+    var sleepingLocation: Optional<UmpaBlockPos> = Optional.empty()
+) : UmpaEntityMetadata() {
 
     override val isEmpty: Boolean
         get() = this == empty
 
-    override fun clone(): LivingEntityMetadataWrapper {
-        return super.clone() as LivingEntityMetadataWrapper
+    override fun clone(): UmpaLivingEntityMetadata {
+        return super.clone() as UmpaLivingEntityMetadata
     }
 
     companion object {
-        private val empty = LivingEntityMetadataWrapper()
+        private val empty = UmpaLivingEntityMetadata()
     }
 }

@@ -8,6 +8,9 @@ import net.kyori.adventure.platform.bukkit.MinecraftComponentSerializer
 import net.kyori.adventure.text.Component
 import org.bukkit.entity.Pose
 import org.bukkit.util.EulerAngle
+import ru.melonhell.umpa.core.enums.UmpaEntityPose
+import ru.melonhell.umpa.core.utils.UmpaBlockPos
+import ru.melonhell.umpa.core.utils.UmpaEulerAngle
 import java.util.*
 
 object ProtocolLibUtils {
@@ -22,60 +25,78 @@ object ProtocolLibUtils {
     @Suppress("UnstableApiUsage")
     private fun wrapMetaObject(
         index: Int,
-        value1: Any?,
+        originalValue: Any?,
         isOptional: Boolean,
         valueClass: Class<*>
     ): WrappedWatchableObject {
-        var value = value1
-        if (Component::class.java == valueClass) {
-            if (value != null) value = MinecraftComponentSerializer.get().serialize((value as Component))
-            return wrapMetaObject(index, value, isOptional, MinecraftReflection.getIChatBaseComponentClass())
-        }
-        if (String::class.java == valueClass) {
-            if (value != null) value = WrappedChatComponent.fromText(value as String).handle
-            return wrapMetaObject(index, value, isOptional, MinecraftReflection.getIChatBaseComponentClass())
-        }
-        if (EulerAngle::class.java == valueClass) {
-            if (value != null) {
-                val eulerAngle = value as EulerAngle
-                val vector3F = Vector3F(
-                    Math.toDegrees(eulerAngle.x).toFloat(),
-                    Math.toDegrees(eulerAngle.y).toFloat(),
-                    Math.toDegrees(eulerAngle.z).toFloat()
-                )
-                value = Vector3F.getConverter().getGeneric(vector3F)
+        var value = originalValue
+        return when (valueClass) {
+            Component::class.java -> {
+                if (value != null) value = MinecraftComponentSerializer.get().serialize((value as Component))
+                wrapMetaObject(index, value, isOptional, MinecraftReflection.getIChatBaseComponentClass())
             }
-            return wrapMetaObject(index, value, isOptional, Vector3F.getMinecraftClass())
-        }
-        if (BlockPosition::class.java == valueClass) {
-            if (value != null) value = BlockPosition.getConverter().getGeneric(value as BlockPosition?)
-            return wrapMetaObject(index, value, isOptional, MinecraftReflection.getBlockPositionClass())
-        }
-        if (Pose::class.java == valueClass) {
-            if (value != null) {
-                val pose = value as Pose
-                val entityPose = EntityPose.values()[pose.ordinal]
-                value = entityPose.toNms()
+
+            String::class.java -> {
+                if (value != null) value = WrappedChatComponent.fromText(value as String).handle
+                wrapMetaObject(index, value, isOptional, MinecraftReflection.getIChatBaseComponentClass())
             }
-            return wrapMetaObject(index, value, isOptional, EnumWrappers.getEntityPoseClass())
-        }
-        val registry = WrappedDataWatcher.Registry.get(valueClass, isOptional)
-        val wrappedDataWatcherObject = WrappedDataWatcherObject(index, registry)
-        return if (isOptional) WrappedWatchableObject(
-            wrappedDataWatcherObject,
-            Optional.ofNullable(value)
-        ) else WrappedWatchableObject(wrappedDataWatcherObject, value)
-    }
 
-    fun getSharedFlag(byte: Byte, index: Int): Boolean {
-        return byte.toInt() and (1 shl index) != 0
-    }
+            EulerAngle::class.java -> {
+                if (value != null) {
+                    value as EulerAngle
+                    val vector3F = Vector3F(
+                        Math.toDegrees(value.x).toFloat(),
+                        Math.toDegrees(value.y).toFloat(),
+                        Math.toDegrees(value.z).toFloat()
+                    )
+                    value = Vector3F.getConverter().getGeneric(vector3F)
+                }
+                wrapMetaObject(index, value, isOptional, Vector3F.getMinecraftClass())
+            }
 
-    fun setSharedFlag(byte: Byte, index: Int, value: Boolean): Byte {
-        return if (value) {
-            (byte.toInt() or (1 shl index)).toByte()
-        } else {
-            (byte.toInt() and (1 shl index).inv()).toByte()
+            UmpaEulerAngle::class.java -> {
+                if (value != null) {
+                    value as UmpaEulerAngle
+                    value = Vector3F.getConverter().getGeneric(Vector3F(value.x, value.y, value.z))
+                }
+                wrapMetaObject(index, value, isOptional, Vector3F.getMinecraftClass())
+            }
+
+            BlockPosition::class.java -> {
+                if (value != null) value = BlockPosition.getConverter().getGeneric(value as BlockPosition?)
+                wrapMetaObject(index, value, isOptional, MinecraftReflection.getBlockPositionClass())
+            }
+
+            UmpaBlockPos::class.java -> {
+                if (value != null) {
+                    value as UmpaBlockPos
+                    value = BlockPosition.getConverter().getGeneric(BlockPosition(value.x, value.y, value.z))
+                }
+                wrapMetaObject(index, value, isOptional, MinecraftReflection.getBlockPositionClass())
+            }
+
+            Pose::class.java -> {
+                if (value != null) {
+                    val pose = value as Pose
+                    value = EntityPose.values()[pose.ordinal].toNms()
+                }
+                wrapMetaObject(index, value, isOptional, EnumWrappers.getEntityPoseClass())
+            }
+
+            UmpaEntityPose::class.java -> {
+                if (value != null) {
+                    value as UmpaEntityPose
+                    value = EntityPose.values()[value.ordinal].toNms()
+                }
+                wrapMetaObject(index, value, isOptional, EnumWrappers.getEntityPoseClass())
+            }
+
+            else -> {
+                val registry = WrappedDataWatcher.Registry.get(valueClass, isOptional)
+                val wrappedDataWatcherObject = WrappedDataWatcherObject(index, registry)
+                if (isOptional) WrappedWatchableObject(wrappedDataWatcherObject, Optional.ofNullable(value))
+                else WrappedWatchableObject(wrappedDataWatcherObject, value)
+            }
         }
     }
 }

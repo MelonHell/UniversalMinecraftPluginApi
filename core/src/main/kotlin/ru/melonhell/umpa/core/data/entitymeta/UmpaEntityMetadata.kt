@@ -2,8 +2,9 @@ package ru.melonhell.umpa.core.data.entitymeta
 
 import net.kyori.adventure.text.Component
 import ru.melonhell.umpa.core.enums.UmpaEntityPose
+import java.util.*
 
-open class EntityMetadataWrapper(
+open class UmpaEntityMetadata(
     var onFire: Boolean = false,
     var crouching: Boolean = false,
     var riding: Boolean = false,
@@ -13,23 +14,21 @@ open class EntityMetadataWrapper(
     var glowing: Boolean = false,
     var gliding: Boolean = false,
     var airTicks: Int = 300,
-    var customName: Component? = null,
+    var customName: Optional<Component> = Optional.empty(),
     var customNameVisible: Boolean = false,
     var silent: Boolean = false,
     var noGravity: Boolean = false,
     var entityPose: UmpaEntityPose = UmpaEntityPose.STANDING,
     var frozenTicks: Int = 0
 ) : Cloneable {
-
-
     open val isEmpty: Boolean
         get() = this == empty
 
-    override fun clone(): EntityMetadataWrapper {
-        return super.clone() as EntityMetadataWrapper
+    override fun clone(): UmpaEntityMetadata {
+        return super.clone() as UmpaEntityMetadata
     }
 
     companion object {
-        private val empty = EntityMetadataWrapper()
+        private val empty = UmpaEntityMetadata()
     }
 }

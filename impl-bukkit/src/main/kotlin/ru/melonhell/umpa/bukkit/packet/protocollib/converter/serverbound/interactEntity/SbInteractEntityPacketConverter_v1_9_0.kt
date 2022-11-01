@@ -7,20 +7,20 @@ import com.comphenix.protocol.wrappers.WrappedEnumEntityUseAction
 import org.bukkit.util.Vector
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
+import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitConverter.bukkit
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitConverter.umpa
+import ru.melonhell.umpa.core.enums.UmpaHand
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket.Action
-import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket.Hand
 
-@ProtocolVersion("1.9", "latest")
+@MinMaxMinecraftVersion("1.9", "latest")
 class SbInteractEntityPacketConverter_v1_9_0 : PacketConverter {
 
     private val interactActions = Action.values()
-    private val hands = Hand.values()
+    private val hands = UmpaHand.values()
     private val protocolLibHands = EnumWrappers.Hand.values()
 
     override fun wrap(container: PacketContainer): UmpaSbInteractEntityPacket {
@@ -29,7 +29,7 @@ class SbInteractEntityPacketConverter_v1_9_0 : PacketConverter {
         val action = interactActions[actionContainer.action.ordinal]
         val hand = when (action) {
             Action.INTERACT, Action.INTERACT_AT -> hands[actionContainer.hand.ordinal]
-            else -> Hand.MAIN_HAND
+            else -> UmpaHand.MAIN_HAND
         }
         val position = when (action) {
             Action.INTERACT_AT -> actionContainer.position

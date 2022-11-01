@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
+import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.bukkit
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.umpa
 import ru.melonhell.umpa.core.enums.UmpaPacketType
@@ -15,7 +15,7 @@ import ru.melonhell.umpa.core.utils.UmpaLook
 import ru.melonhell.umpa.core.utils.UmpaVector
 import java.util.*
 
-@ProtocolVersion("1.19", "latest")
+@MinMaxMinecraftVersion("1.19", "latest")
 class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaCbEntitySpawnPacket {
         if (container.type == PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB) {

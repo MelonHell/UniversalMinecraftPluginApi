@@ -4,14 +4,14 @@ import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
+import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntityTeleportPacket
 import ru.melonhell.umpa.core.utils.UmpaLook
 import ru.melonhell.umpa.core.utils.UmpaVector
 
-@ProtocolVersion("1.8", "1.8.9")
+@MinMaxMinecraftVersion("1.8", "1.8.9")
 class CbEntityTeleportPacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaCbEntityTeleportPacket {
         val entityId = container.integers.read(0)

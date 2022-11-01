@@ -2,17 +2,17 @@ package ru.melonhell.umpa.core.data.entitymeta
 
 import ru.melonhell.umpa.core.utils.UmpaBlockPos
 
-class FallingBlockMetadataWrapper(
+class UmpaFallingBlockMetadata(
     var spawnPosition: UmpaBlockPos = UmpaBlockPos()
-) : EntityMetadataWrapper() {
+) : UmpaEntityMetadata() {
     override val isEmpty: Boolean
         get() = this == empty
 
-    override fun clone(): FallingBlockMetadataWrapper {
-        return super.clone() as FallingBlockMetadataWrapper
+    override fun clone(): UmpaFallingBlockMetadata {
+        return super.clone() as UmpaFallingBlockMetadata
     }
 
     companion object {
-        private val empty = FallingBlockMetadataWrapper()
+        private val empty = UmpaFallingBlockMetadata()
     }
 }

@@ -5,12 +5,14 @@ import org.bukkit.World
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.Plugin
+import org.bukkit.util.EulerAngle
 import org.bukkit.util.Vector
 import ru.melonhell.umpa.bukkit.wrappers.UmpaItemStackBukkit
 import ru.melonhell.umpa.bukkit.wrappers.UmpaPlayerBukkit
 import ru.melonhell.umpa.bukkit.wrappers.UmpaPluginWrapperBukkit
 import ru.melonhell.umpa.bukkit.wrappers.UmpaWorldWrapperBukkit
 import ru.melonhell.umpa.core.utils.UmpaEntityLocation
+import ru.melonhell.umpa.core.utils.UmpaEulerAngle
 import ru.melonhell.umpa.core.utils.UmpaLook
 import ru.melonhell.umpa.core.utils.UmpaVector
 import ru.melonhell.umpa.core.wrappers.UmpaItemStack
@@ -36,6 +38,19 @@ object BukkitConverter {
 
     @JvmStatic
     fun Location.umpa() = UmpaEntityLocation(this.umpaWorld()!!, this.umpaVector(), this.umpaLook())
+
+    @JvmStatic
+    fun UmpaEulerAngle.bukkit() = EulerAngle(
+        Math.toRadians(this.x.toDouble()),
+        Math.toRadians(this.y.toDouble()),
+        Math.toRadians(this.z.toDouble())
+    )
+    @JvmStatic
+    fun EulerAngle.umpa() = UmpaEulerAngle(
+        Math.toDegrees(this.x).toFloat(),
+        Math.toDegrees(this.y).toFloat(),
+        Math.toDegrees(this.z).toFloat()
+    )
 
     // Wrappers
     @JvmStatic

@@ -12,7 +12,7 @@ import org.bukkit.plugin.Plugin
 import ru.melonhell.umpa.bukkit.event.UmpaPacketEventBukkit
 import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
+import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.wrappers.UmpaPlayerBukkit
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.event.UmpaEventManager
@@ -27,16 +27,18 @@ class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: Ump
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
 
     init {
-        val converterClasses = KlassIndex.getAnnotated(ProtocolVersion::class)
+        val converterClasses = KlassIndex.getAnnotated(MinMaxMinecraftVersion::class)
         converterClasses.forEach { clazz ->
-            val annotation = clazz.java.getAnnotation(ProtocolVersion::class.java)
-            val minVersion = MinecraftVersion(annotation.minVersion)
-            val maxVersion = MinecraftVersion(annotation.maxVersion.replace("latest", "1.99"))
-            if (MinecraftVersion.getCurrentVersion() in minVersion..maxVersion) {
-                val packetConverter = clazz.java.getConstructor().newInstance() as PacketConverter
-                converterMapByWrapper[packetConverter.packetType] = packetConverter
-                packetConverter.protocolLibTypes.forEach { type ->
-                    converterMapByProtocolLibType[type] = packetConverter
+            if (PacketConverter::class.java.isAssignableFrom(clazz.java)) {
+                val annotation = clazz.java.getAnnotation(MinMaxMinecraftVersion::class.java)
+                val minVersion = MinecraftVersion(annotation.minVersion)
+                val maxVersion = MinecraftVersion(annotation.maxVersion.replace("latest", "1.99"))
+                if (MinecraftVersion.getCurrentVersion() in minVersion..maxVersion) {
+                    val packetConverter = clazz.java.getConstructor().newInstance() as PacketConverter
+                    converterMapByWrapper[packetConverter.packetType] = packetConverter
+                    packetConverter.protocolLibTypes.forEach { type ->
+                        converterMapByProtocolLibType[type] = packetConverter
+                    }
                 }
             }
         }

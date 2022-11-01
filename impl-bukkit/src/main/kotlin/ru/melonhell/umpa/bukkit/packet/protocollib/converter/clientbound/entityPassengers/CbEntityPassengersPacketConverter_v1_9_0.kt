@@ -4,12 +4,12 @@ import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
+import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.UmpaCbEntityPassengersPacket
 
-@ProtocolVersion("1.9", "latest")
+@MinMaxMinecraftVersion("1.9", "latest")
 class CbEntityPassengersPacketConverter_v1_9_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaCbEntityPassengersPacket {
         val entityId = container.integers.read(0)

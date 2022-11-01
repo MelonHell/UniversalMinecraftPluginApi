@@ -1,5 +1,8 @@
 package ru.melonhell.umpa.core.utils
 
+/**
+ * All values are in degrees
+ */
 data class UmpaLook(
     val yaw: Float,
     val pitch: Float

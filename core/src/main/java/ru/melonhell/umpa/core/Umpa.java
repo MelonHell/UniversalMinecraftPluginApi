@@ -5,6 +5,7 @@ import ru.melonhell.umpa.core.managers.UmpaItemStackManager;
 import ru.melonhell.umpa.core.managers.UmpaPacketManager;
 import ru.melonhell.umpa.core.managers.UmpaPlayerManager;
 
+// TODO Сделать это по нормальному без жабы и рефлексии
 public class Umpa {
     private static UmpaPlayerManager playerManager;
     private static UmpaPacketManager packetManager;

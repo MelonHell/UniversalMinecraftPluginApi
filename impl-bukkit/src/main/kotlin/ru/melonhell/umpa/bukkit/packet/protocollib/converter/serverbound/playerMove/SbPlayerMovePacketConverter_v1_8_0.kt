@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
+import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerMovePacket
@@ -12,7 +12,7 @@ import ru.melonhell.umpa.core.utils.UmpaLook
 import ru.melonhell.umpa.core.utils.UmpaVector
 import java.util.*
 
-@ProtocolVersion("1.8", "latest")
+@MinMaxMinecraftVersion("1.8", "latest")
 class SbPlayerMovePacketConverter_v1_8_0 : PacketConverter {
     override fun wrap(container: PacketContainer): UmpaSbPlayerMovePacket {
         val type = container.type

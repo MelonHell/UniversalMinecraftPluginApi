@@ -4,7 +4,7 @@ plugins {
 
 bukkit {
     name = rootProject.name
-    main = "ru.melonhell.umpa.bukkit.UmpaJavaPlugin"
+    main = "ru.melonhell.umpa.bukkit.UmpaBukkitPlugin"
     apiVersion = "1.13"
     authors = listOf("MelonHell")
     depend = listOf("ProtocolLib")
