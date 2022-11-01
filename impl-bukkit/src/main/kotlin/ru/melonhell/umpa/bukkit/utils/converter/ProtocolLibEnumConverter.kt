@@ -1,6 +1,7 @@
 package ru.melonhell.umpa.bukkit.utils.converter
 
 import com.comphenix.protocol.wrappers.EnumWrappers
+import ru.melonhell.umpa.core.enums.UmpaEntityPose
 import ru.melonhell.umpa.core.enums.UmpaEquipmentSlot
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerActionPacket
 
@@ -44,6 +45,7 @@ object ProtocolLibEnumConverter {
         }
     }
 
+    @JvmStatic
     fun EnumWrappers.PlayerAction.umpa(): UmpaSbPlayerActionPacket.Action {
         return when (this) {
             EnumWrappers.PlayerAction.START_SNEAKING -> UmpaSbPlayerActionPacket.Action.PRESS_SHIFT_KEY
@@ -55,6 +57,46 @@ object ProtocolLibEnumConverter {
             EnumWrappers.PlayerAction.STOP_RIDING_JUMP -> UmpaSbPlayerActionPacket.Action.STOP_RIDING_JUMP
             EnumWrappers.PlayerAction.OPEN_INVENTORY -> UmpaSbPlayerActionPacket.Action.OPEN_HORSE_INVENTORY
             EnumWrappers.PlayerAction.START_FALL_FLYING -> UmpaSbPlayerActionPacket.Action.START_FALL_FLYING
+        }
+    }
+
+    @JvmStatic
+    fun UmpaEntityPose.protocolLib(): EnumWrappers.EntityPose {
+        return when (this) {
+            UmpaEntityPose.STANDING -> EnumWrappers.EntityPose.STANDING
+            UmpaEntityPose.FALL_FLYING -> EnumWrappers.EntityPose.FALL_FLYING
+            UmpaEntityPose.SLEEPING -> EnumWrappers.EntityPose.SLEEPING
+            UmpaEntityPose.SWIMMING -> EnumWrappers.EntityPose.SWIMMING
+            UmpaEntityPose.SPIN_ATTACK -> EnumWrappers.EntityPose.SPIN_ATTACK
+            UmpaEntityPose.SNEAKING -> EnumWrappers.EntityPose.CROUCHING
+            UmpaEntityPose.LONG_JUMPING -> EnumWrappers.EntityPose.LONG_JUMPING
+            UmpaEntityPose.DYING -> EnumWrappers.EntityPose.DYING
+            UmpaEntityPose.CROAKING -> EnumWrappers.EntityPose.CROAKING
+            UmpaEntityPose.USING_TONGUE -> EnumWrappers.EntityPose.USING_TONGUE
+            UmpaEntityPose.ROARING -> EnumWrappers.EntityPose.ROARING
+            UmpaEntityPose.SNIFFING -> EnumWrappers.EntityPose.SNIFFING
+            UmpaEntityPose.EMERGING -> EnumWrappers.EntityPose.EMERGING
+            UmpaEntityPose.DIGGING -> EnumWrappers.EntityPose.DIGGING
+        }
+    }
+
+    @JvmStatic
+    fun EnumWrappers.EntityPose.umpa(): UmpaEntityPose {
+        return when (this) {
+            EnumWrappers.EntityPose.STANDING -> UmpaEntityPose.STANDING
+            EnumWrappers.EntityPose.FALL_FLYING -> UmpaEntityPose.FALL_FLYING
+            EnumWrappers.EntityPose.SLEEPING -> UmpaEntityPose.SLEEPING
+            EnumWrappers.EntityPose.SWIMMING -> UmpaEntityPose.SWIMMING
+            EnumWrappers.EntityPose.SPIN_ATTACK -> UmpaEntityPose.SPIN_ATTACK
+            EnumWrappers.EntityPose.CROUCHING -> UmpaEntityPose.SNEAKING
+            EnumWrappers.EntityPose.LONG_JUMPING -> UmpaEntityPose.LONG_JUMPING
+            EnumWrappers.EntityPose.DYING -> UmpaEntityPose.DYING
+            EnumWrappers.EntityPose.CROAKING -> UmpaEntityPose.CROAKING
+            EnumWrappers.EntityPose.USING_TONGUE -> UmpaEntityPose.USING_TONGUE
+            EnumWrappers.EntityPose.ROARING -> UmpaEntityPose.ROARING
+            EnumWrappers.EntityPose.SNIFFING -> UmpaEntityPose.SNIFFING
+            EnumWrappers.EntityPose.EMERGING -> UmpaEntityPose.EMERGING
+            EnumWrappers.EntityPose.DIGGING -> UmpaEntityPose.DIGGING
         }
     }
 }

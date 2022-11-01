@@ -3,7 +3,9 @@ package ru.melonhell.umpa.bukkit.utils.converter
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.EntityType
+import org.bukkit.entity.Pose
 import org.bukkit.inventory.EquipmentSlot
+import ru.melonhell.umpa.core.enums.UmpaEntityPose
 import ru.melonhell.umpa.core.enums.UmpaEquipmentSlot
 import ru.melonhell.umpa.core.enums.keyed.UmpaEnchantment
 import ru.melonhell.umpa.core.enums.keyed.UmpaEntityType
@@ -81,5 +83,15 @@ object BukkitEnumConverter {
             EquipmentSlot.CHEST -> UmpaEquipmentSlot.CHEST
             EquipmentSlot.HEAD -> UmpaEquipmentSlot.HEAD
         }
+    }
+
+    @JvmStatic
+    fun UmpaEntityPose.bukkit(): Pose {
+        return Pose.valueOf(this.name)
+    }
+
+    @JvmStatic
+    fun Pose.umpa(): UmpaEntityPose {
+        return UmpaEntityPose.valueOf(this.name)
     }
 }

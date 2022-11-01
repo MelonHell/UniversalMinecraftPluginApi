@@ -5,7 +5,6 @@ import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.ProtocolVersion
-import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.bukkit
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.umpa
 import ru.melonhell.umpa.core.enums.UmpaPacketType
@@ -94,7 +93,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
     override fun unwrap(wrapper: UmpaPacket): List<PacketContainer> {
         if (wrapper !is UmpaCbEntitySpawnPacket) throw UmpaWrongConverterException(wrapper, this)
 
-        if (wrapper.umpaEntityType == UmpaEntityType.EXPERIENCE_ORB) {
+        if (wrapper.entityType == UmpaEntityType.EXPERIENCE_ORB) {
             val container = PacketContainer(PacketType.Play.Server.SPAWN_ENTITY_EXPERIENCE_ORB)
             container.integers.write(0, wrapper.entityId)
             container.doubles.write(0, wrapper.position.x)
@@ -104,7 +103,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
             return listOf(container)
         }
 
-        if (wrapper.umpaEntityType == UmpaEntityType.PLAYER) {
+        if (wrapper.entityType == UmpaEntityType.PLAYER) {
             val container = PacketContainer(PacketType.Play.Server.NAMED_ENTITY_SPAWN)
             container.integers.write(0, wrapper.entityId)
             container.uuiDs.write(0, wrapper.uuid)
@@ -122,7 +121,7 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         // UUID
         container.uuiDs.write(0, wrapper.uuid)
         // Entity Type
-        container.entityTypeModifier.write(0, wrapper.umpaEntityType.bukkit())
+        container.entityTypeModifier.write(0, wrapper.entityType.bukkit())
         // Yaw Pitch HeadYaw
         container.bytes.write(0, (wrapper.rotation.pitch * 256.0f / 360.0f).toInt().toByte())
         container.bytes.write(1, (wrapper.rotation.yaw * 256.0f / 360.0f).toInt().toByte())

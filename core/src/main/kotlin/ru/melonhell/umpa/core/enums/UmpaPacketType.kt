@@ -8,10 +8,11 @@ import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerMovePack
 import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbVehicleInputPacket
 import kotlin.reflect.KClass
 
-enum class UmpaPacketType(val packetClass: KClass<out UmpaPacket>, val direction: Direction) {
+enum class UmpaPacketType(private val packetClass: KClass<out UmpaPacket>, val direction: Direction) {
     // CLIENTBOUND
     CB_ENTITY_ANIMATE(UmpaCbEntityAnimatePacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_EQUIPMENT(UmpaCbEntityEquipmentPacket::class, Direction.CLIENTBOUND),
+    CB_ENTITY_METADATA(UmpaCbEntityMetadataPacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_PASSENGERS(UmpaCbEntityPassengersPacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_REMOVE(UmpaCbEntityRemovePacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_SPAWN(UmpaCbEntitySpawnPacket::class, Direction.CLIENTBOUND),

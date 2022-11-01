@@ -18,6 +18,7 @@ allprojects {
     version = "1.0-SNAPSHOT"
 
     repositories {
+        mavenLocal()
         mavenCentral()
         maven("https://jitpack.io")
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") // Spigot API

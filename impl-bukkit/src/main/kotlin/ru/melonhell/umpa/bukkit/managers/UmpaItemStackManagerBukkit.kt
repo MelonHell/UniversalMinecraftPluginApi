@@ -1,7 +1,6 @@
 package ru.melonhell.umpa.bukkit.managers
 
 import org.bukkit.inventory.ItemStack
-import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.bukkit
 import ru.melonhell.umpa.bukkit.wrappers.UmpaItemStackBukkit
 import ru.melonhell.umpa.core.enums.keyed.UmpaMaterial

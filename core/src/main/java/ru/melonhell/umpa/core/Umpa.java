@@ -11,19 +11,19 @@ public class Umpa {
     private static UmpaEventManager eventManager;
     private static UmpaItemStackManager itemStackManager;
 
-    public static UmpaPlayerManager getPlayerManager() {
+    public static UmpaPlayerManager playerManager() {
         return playerManager;
     }
 
-    public static UmpaPacketManager getPacketManager() {
+    public static UmpaPacketManager packetManager() {
         return packetManager;
     }
 
-    public static UmpaEventManager getEventManager() {
+    public static UmpaEventManager eventManager() {
         return eventManager;
     }
 
-    public static UmpaItemStackManager getItemStackManager() {
+    public static UmpaItemStackManager itemStackManager() {
         return itemStackManager;
     }
 }

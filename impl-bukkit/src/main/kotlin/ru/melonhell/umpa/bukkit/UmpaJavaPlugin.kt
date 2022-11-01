@@ -7,7 +7,7 @@ import org.bukkit.event.server.PluginDisableEvent
 import org.bukkit.plugin.java.JavaPlugin
 import ru.melonhell.umpa.bukkit.managers.UmpaItemStackManagerBukkit
 import ru.melonhell.umpa.bukkit.managers.UmpaPlayerManagerBukkit
-import ru.melonhell.umpa.bukkit.packet.protocollib.UmpaPacketManagerBukkit
+import ru.melonhell.umpa.bukkit.packet.protocollib.UmpaPacketManagerProtocolLib
 import ru.melonhell.umpa.bukkit.wrappers.UmpaPluginWrapperBukkit
 import ru.melonhell.umpa.core.Umpa
 import ru.melonhell.umpa.core.event.UmpaEventManager
@@ -19,7 +19,7 @@ class UmpaJavaPlugin : JavaPlugin(), Listener {
         eventManager = UmpaEventManager()
         val playerManager = UmpaPlayerManagerBukkit()
         val itemStackManager = UmpaItemStackManagerBukkit()
-        val packetManager = UmpaPacketManagerBukkit(this, eventManager)
+        val packetManager = UmpaPacketManagerProtocolLib(this, eventManager)
 
         setManager("playerManager", playerManager)
         setManager("packetManager", packetManager)

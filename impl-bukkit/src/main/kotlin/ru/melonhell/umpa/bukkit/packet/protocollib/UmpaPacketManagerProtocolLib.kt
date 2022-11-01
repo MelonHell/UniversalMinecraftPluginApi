@@ -8,7 +8,7 @@ import com.comphenix.protocol.events.PacketEvent
 import com.comphenix.protocol.utility.MinecraftVersion
 import com.github.matfax.klassindex.KlassIndex
 import org.bukkit.event.Listener
-import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.plugin.Plugin
 import ru.melonhell.umpa.bukkit.event.UmpaPacketEventBukkit
 import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
@@ -21,7 +21,7 @@ import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.wrappers.UmpaPlayer
 import java.util.*
 
-class UmpaPacketManagerBukkit(javaPlugin: JavaPlugin, private val eventManager: UmpaEventManager) : UmpaPacketManager, Listener {
+class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: UmpaEventManager) : UmpaPacketManager, Listener {
 
     private val converterMapByWrapper: MutableMap<UmpaPacketType, PacketConverter> = EnumMap(UmpaPacketType::class.java)
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
@@ -42,7 +42,7 @@ class UmpaPacketManagerBukkit(javaPlugin: JavaPlugin, private val eventManager: 
         }
 
         ProtocolLibrary.getProtocolManager()
-            .addPacketListener(object : PacketAdapter(javaPlugin, PacketType.values().filter { it.isSupported }) {
+            .addPacketListener(object : PacketAdapter(plugin, PacketType.values().filter { it.isSupported }) {
                 override fun onPacketReceiving(event: PacketEvent) =
                     onPacket(event)
                 override fun onPacketSending(event: PacketEvent) =

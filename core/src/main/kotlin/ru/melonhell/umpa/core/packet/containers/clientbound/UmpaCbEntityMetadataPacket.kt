@@ -1,14 +1,13 @@
 package ru.melonhell.umpa.core.packet.containers.clientbound
 
-import ru.melonhell.umpa.core.enums.UmpaEquipmentSlot
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
-import ru.melonhell.umpa.core.wrappers.UmpaItemStack
+import ru.melonhell.umpa.core.wrappers.UmpaEntityMetaWrapper
 
-data class UmpaCbEntityEquipmentPacket(
+data class UmpaCbEntityMetadataPacket(
     var entityId: Int,
-    var equipment: Map<UmpaEquipmentSlot, UmpaItemStack?>
-) : UmpaPacket(UmpaPacketType.CB_ENTITY_EQUIPMENT) {
+    var metadata: UmpaEntityMetaWrapper
+) : UmpaPacket(UmpaPacketType.CB_ENTITY_METADATA) {
     override fun clone(): UmpaPacket {
         return this.copy()
     }
