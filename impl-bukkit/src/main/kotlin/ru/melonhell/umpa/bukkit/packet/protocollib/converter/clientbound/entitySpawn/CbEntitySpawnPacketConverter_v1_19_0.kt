@@ -83,10 +83,11 @@ class CbEntitySpawnPacketConverter_v1_19_0 : PacketConverter {
         // Data
         val data = container.integers.read(4)
         // Velocity
-        val velocityX = container.integers.read(1) / 8000.0
-        val velocityY = container.integers.read(2) / 8000.0
-        val velocityZ = container.integers.read(3) / 8000.0
-        val velocity = UmpaVector(velocityX, velocityY, velocityZ)
+        val velocity = UmpaVector(
+            container.integers.read(1) / 8000.0,
+            container.integers.read(2) / 8000.0,
+            container.integers.read(3) / 8000.0
+        )
         return UmpaCbEntitySpawnPacket(entityId, uuid, entityType, position, rotation, headYaw, data, velocity)
     }
 

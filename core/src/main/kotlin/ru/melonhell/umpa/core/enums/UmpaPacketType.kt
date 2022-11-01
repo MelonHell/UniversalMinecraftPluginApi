@@ -18,6 +18,7 @@ enum class UmpaPacketType(private val packetClass: KClass<out UmpaPacket>, val d
     CB_ENTITY_REMOVE(UmpaCbEntityRemovePacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_SPAWN(UmpaCbEntitySpawnPacket::class, Direction.CLIENTBOUND),
     CB_ENTITY_TELEPORT(UmpaCbEntityTeleportPacket::class, Direction.CLIENTBOUND),
+    CB_ENTITY_VELOCITY(UmpaCbEntityVelocityPacket::class, Direction.CLIENTBOUND),
     CB_GAME_EVENT(UmpaCbGameEventPacket::class, Direction.CLIENTBOUND),
     CB_PLAYER_ABILITIES(UmpaCbPlayerAbilitiesPacket::class, Direction.CLIENTBOUND),
     CB_PLAYER_COMBAT_KILL(UmpaCbPlayerCombatKillPacket::class, Direction.CLIENTBOUND),
