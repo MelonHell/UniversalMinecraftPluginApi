@@ -3,7 +3,7 @@ package ru.melonhell.umpa.bukkit.entitymeta.reader
 import com.github.matfax.klassindex.KlassIndex
 import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion.Companion.isCurrentVersionInRange
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.data.entitymeta.reader.UmpaEntityMetadataReaderFactory
 import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 

@@ -1,7 +1,7 @@
 package ru.melonhell.umpa.core.data.entitymeta.reader.readers
 
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
-import ru.melonhell.umpa.core.data.entitymeta.UmpaLivingEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaLivingEntityMetadata
 import ru.melonhell.umpa.core.enums.UmpaHand
 import ru.melonhell.umpa.core.utils.UmpaBlockPos
 import java.util.*
@@ -24,10 +24,10 @@ interface UmpaLivingEntityMetadataReader : UmpaEntityMetadataReader {
         if (meta !is UmpaLivingEntityMetadata) return
         handActive?.let { meta.handActive = it }
         activeHand?.let { meta.activeHand = it }
-        isInRiptideSpinAttack?.let { meta.isInRiptideSpinAttack = it }
+        isInRiptideSpinAttack?.let { meta.inRiptideSpinAttack = it }
         health?.let { meta.health = it }
         potionEffectColor?.let { meta.potionEffectColor = it }
-        isPotionEffectAmbient?.let { meta.isPotionEffectAmbient = it }
+        isPotionEffectAmbient?.let { meta.potionEffectAmbient = it }
         numberOfArrowsInEntity?.let { meta.numberOfArrowsInEntity = it }
         numberOfBeeStingersInEntity?.let { meta.numberOfBeeStingersInEntity = it }
         sleepingLocation?.let { meta.sleepingLocation = it }
@@ -38,10 +38,10 @@ interface UmpaLivingEntityMetadataReader : UmpaEntityMetadataReader {
         if (meta !is UmpaLivingEntityMetadata) return
         handActive = meta.handActive
         activeHand = meta.activeHand
-        isInRiptideSpinAttack = meta.isInRiptideSpinAttack
+        isInRiptideSpinAttack = meta.inRiptideSpinAttack
         health = meta.health
         potionEffectColor = meta.potionEffectColor
-        isPotionEffectAmbient = meta.isPotionEffectAmbient
+        isPotionEffectAmbient = meta.potionEffectAmbient
         numberOfArrowsInEntity = meta.numberOfArrowsInEntity
         numberOfBeeStingersInEntity = meta.numberOfBeeStingersInEntity
         sleepingLocation = meta.sleepingLocation

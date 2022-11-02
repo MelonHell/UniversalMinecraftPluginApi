@@ -1,7 +1,7 @@
 package ru.melonhell.umpa.core.data.entitymeta.reader.readers
 
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
-import ru.melonhell.umpa.core.data.entitymeta.UmpaMobMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaMobMetadata
 
 interface UmpaMobMetadataReader : UmpaLivingEntityMetadataReader {
     var noAi: Boolean?
@@ -14,15 +14,15 @@ interface UmpaMobMetadataReader : UmpaLivingEntityMetadataReader {
         super.read(meta)
         if (meta !is UmpaMobMetadata) return
         noAi?.let { meta.noAi = it }
-        isLeftHanded?.let { meta.isLeftHanded = it }
-        isAggressive?.let { meta.isAggressive = it }
+        isLeftHanded?.let { meta.leftHanded = it }
+        isAggressive?.let { meta.aggressive = it }
     }
 
     override fun apply(meta: UmpaEntityMetadata) {
         super.apply(meta)
         if (meta !is UmpaMobMetadata) return
         noAi = meta.noAi
-        isLeftHanded = meta.isLeftHanded
-        isAggressive = meta.isAggressive
+        isLeftHanded = meta.leftHanded
+        isAggressive = meta.aggressive
     }
 }

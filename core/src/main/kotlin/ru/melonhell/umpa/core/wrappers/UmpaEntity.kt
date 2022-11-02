@@ -1,6 +1,6 @@
 package ru.melonhell.umpa.core.wrappers
 
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.enums.keyed.UmpaEntityType
 import java.util.*
 

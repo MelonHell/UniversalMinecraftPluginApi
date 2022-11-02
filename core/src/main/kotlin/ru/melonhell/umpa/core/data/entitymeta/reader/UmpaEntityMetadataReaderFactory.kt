@@ -1,6 +1,6 @@
 package ru.melonhell.umpa.core.data.entitymeta.reader
 
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.data.entitymeta.reader.readers.UmpaEntityMetadataReader
 import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 

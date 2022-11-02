@@ -2,8 +2,8 @@ package ru.melonhell.umpa.bukkit.entitymeta.reader.livingEntity
 
 import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.wrappers.UmpaRawEntityMetadataProtocolLib
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
-import ru.melonhell.umpa.core.data.entitymeta.UmpaLivingEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaLivingEntityMetadata
 import ru.melonhell.umpa.core.data.entitymeta.reader.UmpaEntityMetadataReaderFactory
 import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 

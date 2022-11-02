@@ -1,7 +1,7 @@
 package ru.melonhell.umpa.core.data.entitymeta.reader.readers
 
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
-import ru.melonhell.umpa.core.data.entitymeta.UmpaSlimeMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.mob.UmpaSlimeMetadata
 
 interface UmpaSlimeMetadataReader : UmpaMobMetadataReader {
     var size: Int?

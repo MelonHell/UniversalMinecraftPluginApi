@@ -1,7 +1,7 @@
 package ru.melonhell.umpa.core.data.entitymeta.reader.readers
 
-import ru.melonhell.umpa.core.data.entitymeta.UmpaArmorStandMetadata
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.other.UmpaArmorStandMetadata
 import ru.melonhell.umpa.core.utils.UmpaEulerAngle
 
 interface UmpaArmorStandMetadataReader : UmpaLivingEntityMetadataReader {

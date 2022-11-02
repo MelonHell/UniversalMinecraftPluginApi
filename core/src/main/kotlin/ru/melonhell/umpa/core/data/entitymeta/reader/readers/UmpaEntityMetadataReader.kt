@@ -1,7 +1,7 @@
 package ru.melonhell.umpa.core.data.entitymeta.reader.readers
 
 import net.kyori.adventure.text.Component
-import ru.melonhell.umpa.core.data.entitymeta.UmpaEntityMetadata
+import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.enums.UmpaEntityPose
 import java.util.*
 
