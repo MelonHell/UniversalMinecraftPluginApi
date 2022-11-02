@@ -14,7 +14,12 @@ data class UmpaCbEntityTeleportPacket @JvmOverloads constructor(
 ) : UmpaPacket(UmpaPacketType.CB_ENTITY_TELEPORT) {
 
     @JvmOverloads
-    constructor(entityId: Int, location: UmpaEntityLocation, onGround: Boolean = false) : this(entityId, location.position, location.look, onGround)
+    constructor(entityId: Int, location: UmpaEntityLocation, onGround: Boolean = false) : this(
+        entityId,
+        location.position,
+        location.look,
+        onGround
+    )
 
     override fun clone(): UmpaPacket {
         return this.copy()

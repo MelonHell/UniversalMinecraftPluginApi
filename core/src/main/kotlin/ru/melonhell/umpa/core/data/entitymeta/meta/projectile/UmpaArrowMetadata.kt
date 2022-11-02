@@ -5,17 +5,17 @@ import ru.melonhell.umpa.core.utils.UmpaColor
 import java.util.*
 
 open class UmpaArrowMetadata(
-	var effectColor: Optional<UmpaColor> = Optional.empty()
+    var effectColor: Optional<UmpaColor> = Optional.empty()
 ) : UmpaAbstractArrowMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaArrowMetadata {
-		return super.clone() as UmpaArrowMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaArrowMetadata()
-	}
+    override fun clone(): UmpaArrowMetadata {
+        return super.clone() as UmpaArrowMetadata
+    }
+
+    companion object {
+        private val empty = UmpaArrowMetadata()
+    }
 }

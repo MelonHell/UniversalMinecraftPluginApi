@@ -14,7 +14,7 @@ import java.util.*
 
 class UmpaRawEntityMetadataProtocolLib @JvmOverloads constructor(
     override val handle: MutableMap<Int, WrappedWatchableObject> = HashMap()
-    ) : UmpaRawEntityMetadata() {
+) : UmpaRawEntityMetadata() {
 
 
     private fun getFlags(id: Int): Byte? = handle[id]?.value as Byte?

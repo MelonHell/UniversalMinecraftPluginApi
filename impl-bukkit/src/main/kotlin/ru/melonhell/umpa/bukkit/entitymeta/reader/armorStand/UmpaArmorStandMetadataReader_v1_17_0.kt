@@ -2,7 +2,7 @@ package ru.melonhell.umpa.bukkit.entitymeta.reader.armorStand
 
 import ru.melonhell.umpa.bukkit.entitymeta.reader.livingEntity.UmpaLivingEntityMetadataReader_v1_17_0
 import ru.melonhell.umpa.bukkit.wrappers.UmpaRawEntityMetadataProtocolLib
-import ru.melonhell.umpa.core.data.entitymeta.reader.readers.UmpaArmorStandMetadataReader
+import ru.melonhell.umpa.core.data.entitymeta.editor.readers.UmpaArmorStandMetadataReader
 import ru.melonhell.umpa.core.utils.UmpaEulerAngle
 
 class UmpaArmorStandMetadataReader_v1_17_0(private val meta: UmpaRawEntityMetadataProtocolLib) :

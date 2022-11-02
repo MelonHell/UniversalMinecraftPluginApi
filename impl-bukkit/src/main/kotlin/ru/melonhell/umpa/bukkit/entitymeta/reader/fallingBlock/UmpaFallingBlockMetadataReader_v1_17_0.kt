@@ -3,7 +3,7 @@ package ru.melonhell.umpa.bukkit.entitymeta.reader.fallingBlock
 import com.comphenix.protocol.wrappers.BlockPosition
 import ru.melonhell.umpa.bukkit.entitymeta.reader.entity.UmpaEntityMetadataReader_v1_17_0
 import ru.melonhell.umpa.bukkit.wrappers.UmpaRawEntityMetadataProtocolLib
-import ru.melonhell.umpa.core.data.entitymeta.reader.readers.UmpaFallingBlockMetadataReader
+import ru.melonhell.umpa.core.data.entitymeta.editor.readers.UmpaFallingBlockMetadataReader
 import ru.melonhell.umpa.core.utils.UmpaBlockPos
 
 class UmpaFallingBlockMetadataReader_v1_17_0(private val meta: UmpaRawEntityMetadataProtocolLib) :

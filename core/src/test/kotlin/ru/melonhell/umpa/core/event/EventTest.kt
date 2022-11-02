@@ -7,6 +7,7 @@ import kotlin.test.assertEquals
 
 class EventTest {
     private val pluginWrapper = TestPluginWrapper()
+
     @Test
     fun mainTest() {
         val umpaEventManager = UmpaEventManager()

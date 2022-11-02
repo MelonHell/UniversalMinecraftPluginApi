@@ -4,7 +4,7 @@ import com.comphenix.protocol.wrappers.EnumWrappers.EntityPose
 import net.kyori.adventure.text.Component
 import ru.melonhell.umpa.bukkit.utils.converter.ProtocolLibEnumConverter.umpa
 import ru.melonhell.umpa.bukkit.wrappers.UmpaRawEntityMetadataProtocolLib
-import ru.melonhell.umpa.core.data.entitymeta.reader.readers.UmpaEntityMetadataReader
+import ru.melonhell.umpa.core.data.entitymeta.editor.readers.UmpaEntityMetadataReader
 import ru.melonhell.umpa.core.enums.UmpaEntityPose
 import java.util.*
 

@@ -21,7 +21,8 @@ import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.wrappers.UmpaPlayer
 import java.util.*
 
-class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: UmpaEventManager) : UmpaPacketManager, Listener {
+class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: UmpaEventManager) : UmpaPacketManager,
+    Listener {
 
     private val converterMapByWrapper: MutableMap<UmpaPacketType, PacketConverter> = EnumMap(UmpaPacketType::class.java)
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
@@ -47,6 +48,7 @@ class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: Ump
             .addPacketListener(object : PacketAdapter(plugin, PacketType.values().filter { it.isSupported }) {
                 override fun onPacketReceiving(event: PacketEvent) =
                     onPacket(event)
+
                 override fun onPacketSending(event: PacketEvent) =
                     onPacket(event)
             })

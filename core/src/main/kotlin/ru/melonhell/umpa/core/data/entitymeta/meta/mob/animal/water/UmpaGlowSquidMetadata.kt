@@ -1,17 +1,17 @@
 package ru.melonhell.umpa.core.data.entitymeta.meta.mob.animal.water
 
 open class UmpaGlowSquidMetadata(
-	var darkTicksRemaining: Int = 0
+    var darkTicksRemaining: Int = 0
 ) : UmpaSquidMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaGlowSquidMetadata {
-		return super.clone() as UmpaGlowSquidMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaGlowSquidMetadata()
-	}
+    override fun clone(): UmpaGlowSquidMetadata {
+        return super.clone() as UmpaGlowSquidMetadata
+    }
+
+    companion object {
+        private val empty = UmpaGlowSquidMetadata()
+    }
 }

@@ -45,6 +45,7 @@ object BukkitConverter {
         Math.toRadians(this.y.toDouble()),
         Math.toRadians(this.z.toDouble())
     )
+
     @JvmStatic
     fun EulerAngle.umpa() = UmpaEulerAngle(
         Math.toDegrees(this.x).toFloat(),

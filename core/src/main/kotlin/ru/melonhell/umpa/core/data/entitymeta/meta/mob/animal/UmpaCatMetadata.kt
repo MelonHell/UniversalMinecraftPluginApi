@@ -4,34 +4,34 @@ import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaTamableAnimalMetada
 import ru.melonhell.umpa.core.enums.UmpaDyeColor
 
 open class UmpaCatMetadata(
-	var type: Type = Type.BLACK,
-	var isLying: Boolean = false,
-	var relaxStateOne: Boolean = false,
-	var collarColor: UmpaDyeColor = UmpaDyeColor.RED
+    var type: Type = Type.BLACK,
+    var isLying: Boolean = false,
+    var relaxStateOne: Boolean = false,
+    var collarColor: UmpaDyeColor = UmpaDyeColor.RED
 ) : UmpaTamableAnimalMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaCatMetadata {
-		return super.clone() as UmpaCatMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaCatMetadata()
-	}
+    override fun clone(): UmpaCatMetadata {
+        return super.clone() as UmpaCatMetadata
+    }
 
-	enum class Type {
-		TABBY,
-		BLACK,
-		RED,
-		SIAMESE,
-		BRITISH_SHORTHAIR,
-		CALICO,
-		PERSIAN,
-		RAGDOLL,
-		WHITE,
-		JELLIE,
-		ALL_BLACK
-	}
+    companion object {
+        private val empty = UmpaCatMetadata()
+    }
+
+    enum class Type {
+        TABBY,
+        BLACK,
+        RED,
+        SIAMESE,
+        BRITISH_SHORTHAIR,
+        CALICO,
+        PERSIAN,
+        RAGDOLL,
+        WHITE,
+        JELLIE,
+        ALL_BLACK
+    }
 }

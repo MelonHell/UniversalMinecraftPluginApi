@@ -3,15 +3,15 @@ package ru.melonhell.umpa.core.data.entitymeta.meta.abstr
 import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 
 open class UmpaHangingEntityMetadata : UmpaEntityMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaHangingEntityMetadata {
-		return super.clone() as UmpaHangingEntityMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaHangingEntityMetadata()
-	}
+    override fun clone(): UmpaHangingEntityMetadata {
+        return super.clone() as UmpaHangingEntityMetadata
+    }
+
+    companion object {
+        private val empty = UmpaHangingEntityMetadata()
+    }
 }

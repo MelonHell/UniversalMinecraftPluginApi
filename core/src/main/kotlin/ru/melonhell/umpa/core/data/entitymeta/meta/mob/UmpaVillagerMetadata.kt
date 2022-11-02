@@ -4,17 +4,17 @@ import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaAbstractVillagerMet
 import ru.melonhell.umpa.core.utils.UmpaVillagerData
 
 open class UmpaVillagerMetadata(
-	var villagerData: UmpaVillagerData = UmpaVillagerData()
+    var villagerData: UmpaVillagerData = UmpaVillagerData()
 ) : UmpaAbstractVillagerMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaVillagerMetadata {
-		return super.clone() as UmpaVillagerMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaVillagerMetadata()
-	}
+    override fun clone(): UmpaVillagerMetadata {
+        return super.clone() as UmpaVillagerMetadata
+    }
+
+    companion object {
+        private val empty = UmpaVillagerMetadata()
+    }
 }

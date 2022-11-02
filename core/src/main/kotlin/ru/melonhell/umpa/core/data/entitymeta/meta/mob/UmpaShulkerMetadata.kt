@@ -7,20 +7,20 @@ import ru.melonhell.umpa.core.utils.UmpaDirection
 import java.util.*
 
 open class UmpaShulkerMetadata(
-	var attachFace: UmpaDirection = UmpaDirection.DOWN,
-	var attachPos: UmpaBlockPos = UmpaBlockPos(),
-	var peek: Byte = 0,
-	var customColor: Optional<UmpaDyeColor> = Optional.empty() // 16
+    var attachFace: UmpaDirection = UmpaDirection.DOWN,
+    var attachPos: UmpaBlockPos = UmpaBlockPos(),
+    var peek: Int = 0,
+    var customColor: Optional<UmpaDyeColor> = Optional.empty() // 16
 ) : UmpaAbstractGolemMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaShulkerMetadata {
-		return super.clone() as UmpaShulkerMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaShulkerMetadata()
-	}
+    override fun clone(): UmpaShulkerMetadata {
+        return super.clone() as UmpaShulkerMetadata
+    }
+
+    companion object {
+        private val empty = UmpaShulkerMetadata()
+    }
 }

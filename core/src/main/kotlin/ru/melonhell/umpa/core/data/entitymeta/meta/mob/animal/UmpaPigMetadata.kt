@@ -3,18 +3,18 @@ package ru.melonhell.umpa.core.data.entitymeta.meta.mob.animal
 import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaAnimalMetadata
 
 open class UmpaPigMetadata(
-	var saddle: Boolean = false,
-	var boostTime: Int = 0
+    var hasSaddle: Boolean = false,
+    var boostTime: Int = 0
 ) : UmpaAnimalMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaPigMetadata {
-		return super.clone() as UmpaPigMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaPigMetadata()
-	}
+    override fun clone(): UmpaPigMetadata {
+        return super.clone() as UmpaPigMetadata
+    }
+
+    companion object {
+        private val empty = UmpaPigMetadata()
+    }
 }

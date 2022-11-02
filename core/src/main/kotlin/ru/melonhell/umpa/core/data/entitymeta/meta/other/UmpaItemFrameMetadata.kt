@@ -5,18 +5,18 @@ import ru.melonhell.umpa.core.wrappers.UmpaItemStack
 import java.util.*
 
 open class UmpaItemFrameMetadata(
-	var item: Optional<UmpaItemStack> = Optional.empty(),
-	var itemRotation: Int = 0
+    var item: Optional<UmpaItemStack> = Optional.empty(),
+    var itemRotation: Int = 0
 ) : UmpaHangingEntityMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaItemFrameMetadata {
-		return super.clone() as UmpaItemFrameMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaItemFrameMetadata()
-	}
+    override fun clone(): UmpaItemFrameMetadata {
+        return super.clone() as UmpaItemFrameMetadata
+    }
+
+    companion object {
+        private val empty = UmpaItemFrameMetadata()
+    }
 }

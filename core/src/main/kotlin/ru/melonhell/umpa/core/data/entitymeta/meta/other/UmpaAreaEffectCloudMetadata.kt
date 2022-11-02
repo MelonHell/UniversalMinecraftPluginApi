@@ -5,20 +5,20 @@ import ru.melonhell.umpa.core.enums.keyed.UmpaParticleType
 import ru.melonhell.umpa.core.utils.UmpaColor
 
 open class UmpaAreaEffectCloudMetadata(
-	var color: UmpaColor = UmpaColor(),
-	var radius: Float = 0.5F,
-	var waiting: Boolean = false,
-	var particle: UmpaParticleType = UmpaParticleType.ENTITY_EFFECT
+    var color: UmpaColor = UmpaColor(),
+    var radius: Float = 0.5F,
+    var waiting: Boolean = false,
+    var particle: UmpaParticleType = UmpaParticleType.ENTITY_EFFECT
 ) : UmpaEntityMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaAreaEffectCloudMetadata {
-		return super.clone() as UmpaAreaEffectCloudMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaAreaEffectCloudMetadata()
-	}
+    override fun clone(): UmpaAreaEffectCloudMetadata {
+        return super.clone() as UmpaAreaEffectCloudMetadata
+    }
+
+    companion object {
+        private val empty = UmpaAreaEffectCloudMetadata()
+    }
 }

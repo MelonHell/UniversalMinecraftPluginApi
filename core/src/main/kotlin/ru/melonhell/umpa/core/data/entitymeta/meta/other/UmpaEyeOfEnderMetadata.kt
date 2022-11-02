@@ -5,17 +5,17 @@ import ru.melonhell.umpa.core.wrappers.UmpaItemStack
 import java.util.*
 
 open class UmpaEyeOfEnderMetadata(
-	var itemStack: Optional<UmpaItemStack> = Optional.empty()
+    var itemStack: Optional<UmpaItemStack> = Optional.empty()
 ) : UmpaEntityMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaEyeOfEnderMetadata {
-		return super.clone() as UmpaEyeOfEnderMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaEyeOfEnderMetadata()
-	}
+    override fun clone(): UmpaEyeOfEnderMetadata {
+        return super.clone() as UmpaEyeOfEnderMetadata
+    }
+
+    companion object {
+        private val empty = UmpaEyeOfEnderMetadata()
+    }
 }

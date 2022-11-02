@@ -16,7 +16,8 @@ import kotlin.reflect.KClass
 
 enum class UmpaEntityType(
     private val stringKey: String,
-    private val metaClass: KClass<out UmpaEntityMetadata>) : UmpaKeyed {
+    private val metaClass: KClass<out UmpaEntityMetadata>
+) : UmpaKeyed {
     ALLAY("minecraft:allay", UmpaAllayMetadata::class),
     AREA_EFFECT_CLOUD("minecraft:area_effect_cloud", UmpaAreaEffectCloudMetadata::class),
     ARMOR_STAND("minecraft:armor_stand", UmpaArmorStandMetadata::class),

@@ -2,7 +2,7 @@ package ru.melonhell.umpa.bukkit.entitymeta.reader.mob
 
 import ru.melonhell.umpa.bukkit.entitymeta.reader.livingEntity.UmpaLivingEntityMetadataReader_v1_17_0
 import ru.melonhell.umpa.bukkit.wrappers.UmpaRawEntityMetadataProtocolLib
-import ru.melonhell.umpa.core.data.entitymeta.reader.readers.UmpaMobMetadataReader
+import ru.melonhell.umpa.core.data.entitymeta.editor.readers.UmpaMobMetadataReader
 
 open class UmpaMobMetadataReader_v1_17_0(private val meta: UmpaRawEntityMetadataProtocolLib) :
     UmpaLivingEntityMetadataReader_v1_17_0(meta), UmpaMobMetadataReader {

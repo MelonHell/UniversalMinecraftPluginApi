@@ -4,24 +4,24 @@ import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaAnimalMetadata
 import java.util.*
 
 open class UmpaFrogMetadata(
-	var type: Type = Type.TEMPERATE,
-	var tongueTargetId: OptionalInt = OptionalInt.empty()
+    var type: Type = Type.TEMPERATE,
+    var tongueTargetId: OptionalInt = OptionalInt.empty()
 ) : UmpaAnimalMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaFrogMetadata {
-		return super.clone() as UmpaFrogMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaFrogMetadata()
-	}
+    override fun clone(): UmpaFrogMetadata {
+        return super.clone() as UmpaFrogMetadata
+    }
 
-	enum class Type {
-		TEMPERATE,
-		WARM,
-		COLD
-	}
+    companion object {
+        private val empty = UmpaFrogMetadata()
+    }
+
+    enum class Type {
+        TEMPERATE,
+        WARM,
+        COLD
+    }
 }

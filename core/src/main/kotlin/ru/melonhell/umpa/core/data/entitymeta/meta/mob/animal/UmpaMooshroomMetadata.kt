@@ -1,22 +1,22 @@
 package ru.melonhell.umpa.core.data.entitymeta.meta.mob.animal
 
 open class UmpaMooshroomMetadata(
-	var type: Type = Type.RED
+    var type: Type = Type.RED
 ) : UmpaCowMetadata() {
-		
-	override val isEmpty: Boolean
-		get() = this == empty
 
-	override fun clone(): UmpaMooshroomMetadata {
-		return super.clone() as UmpaMooshroomMetadata
-	}
+    override val isEmpty: Boolean
+        get() = this == empty
 
-	companion object {
-		private val empty = UmpaMooshroomMetadata()
-	}
+    override fun clone(): UmpaMooshroomMetadata {
+        return super.clone() as UmpaMooshroomMetadata
+    }
 
-	enum class Type {
-		RED,
-		BROWN
-	}
+    companion object {
+        private val empty = UmpaMooshroomMetadata()
+    }
+
+    enum class Type {
+        RED,
+        BROWN
+    }
 }

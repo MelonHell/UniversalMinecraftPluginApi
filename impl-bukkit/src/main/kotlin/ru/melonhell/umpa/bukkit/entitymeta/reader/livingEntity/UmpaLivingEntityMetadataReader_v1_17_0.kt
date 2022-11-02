@@ -2,7 +2,7 @@ package ru.melonhell.umpa.bukkit.entitymeta.reader.livingEntity
 
 import ru.melonhell.umpa.bukkit.entitymeta.reader.entity.UmpaEntityMetadataReader_v1_17_0
 import ru.melonhell.umpa.bukkit.wrappers.UmpaRawEntityMetadataProtocolLib
-import ru.melonhell.umpa.core.data.entitymeta.reader.readers.UmpaLivingEntityMetadataReader
+import ru.melonhell.umpa.core.data.entitymeta.editor.readers.UmpaLivingEntityMetadataReader
 import ru.melonhell.umpa.core.enums.UmpaHand
 import ru.melonhell.umpa.core.utils.UmpaBlockPos
 import java.util.*
