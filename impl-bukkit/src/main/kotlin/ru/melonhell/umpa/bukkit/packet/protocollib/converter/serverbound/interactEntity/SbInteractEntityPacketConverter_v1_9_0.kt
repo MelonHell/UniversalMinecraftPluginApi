@@ -7,7 +7,7 @@ import com.comphenix.protocol.wrappers.WrappedEnumEntityUseAction
 import org.bukkit.util.Vector
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
+import ru.melonhell.umpa.core.annotations.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitConverter.bukkit
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitConverter.umpa
 import ru.melonhell.umpa.core.enums.UmpaHand

@@ -2,7 +2,7 @@ package ru.melonhell.umpa.bukkit.wrappers
 
 import com.comphenix.protocol.wrappers.WrappedDataWatcher
 import org.bukkit.entity.Entity
-import ru.melonhell.umpa.bukkit.entitymeta.reader.UmpaEntityMetadataReaderManagerBukkit
+import ru.melonhell.umpa.bukkit.entitymeta.editor.UmpaEntityMetadataReaderManagerBukkit
 import ru.melonhell.umpa.bukkit.utils.converter.BukkitEnumConverter.umpa
 import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.enums.keyed.UmpaEntityType

@@ -12,7 +12,7 @@ import org.bukkit.plugin.Plugin
 import ru.melonhell.umpa.bukkit.event.UmpaPacketEventBukkit
 import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
+import ru.melonhell.umpa.core.annotations.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.wrappers.UmpaPlayerBukkit
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.event.UmpaEventManager

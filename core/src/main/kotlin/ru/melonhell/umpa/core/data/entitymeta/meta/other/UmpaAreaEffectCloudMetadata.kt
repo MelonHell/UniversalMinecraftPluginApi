@@ -5,8 +5,8 @@ import ru.melonhell.umpa.core.enums.keyed.UmpaParticleType
 import ru.melonhell.umpa.core.utils.UmpaColor
 
 open class UmpaAreaEffectCloudMetadata(
-    var color: UmpaColor = UmpaColor(),
     var radius: Float = 0.5F,
+    var color: UmpaColor = UmpaColor(),
     var waiting: Boolean = false,
     var particle: UmpaParticleType = UmpaParticleType.ENTITY_EFFECT
 ) : UmpaEntityMetadata() {

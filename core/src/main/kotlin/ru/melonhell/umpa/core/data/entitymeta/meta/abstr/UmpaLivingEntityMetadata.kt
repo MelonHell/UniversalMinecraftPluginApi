@@ -3,6 +3,7 @@ package ru.melonhell.umpa.core.data.entitymeta.meta.abstr
 import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.enums.UmpaHand
 import ru.melonhell.umpa.core.utils.UmpaBlockPos
+import ru.melonhell.umpa.core.utils.UmpaColor
 import java.util.*
 
 open class UmpaLivingEntityMetadata(
@@ -10,7 +11,7 @@ open class UmpaLivingEntityMetadata(
     var activeHand: UmpaHand = UmpaHand.MAIN_HAND,
     var inRiptideSpinAttack: Boolean = false,
     var health: Float = 1.0f,
-    var potionEffectColor: Int = 0,
+    var potionEffectColor: Optional<UmpaColor> = Optional.empty(),
     var potionEffectAmbient: Boolean = false,
     var numberOfArrowsInEntity: Int = 0,
     var numberOfBeeStingersInEntity: Int = 0,

@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.events.PacketContainer
 import ru.melonhell.umpa.bukkit.exceptions.UmpaWrongConverterException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.bukkit.utils.MinMaxMinecraftVersion
+import ru.melonhell.umpa.core.annotations.MinMaxMinecraftVersion
 import ru.melonhell.umpa.bukkit.utils.converter.ProtocolLibEnumConverter.protocolLib
 import ru.melonhell.umpa.bukkit.utils.converter.ProtocolLibEnumConverter.umpa
 import ru.melonhell.umpa.core.enums.UmpaPacketType

@@ -10,6 +10,7 @@ import ru.melonhell.umpa.core.data.entitymeta.meta.mob.monster.*
 import ru.melonhell.umpa.core.data.entitymeta.meta.mob.monster.raider.*
 import ru.melonhell.umpa.core.data.entitymeta.meta.other.*
 import ru.melonhell.umpa.core.data.entitymeta.meta.projectile.*
+import ru.melonhell.umpa.core.data.entitymeta.meta.vehicle.*
 import java.util.*
 import java.util.stream.Collectors
 import kotlin.reflect.KClass

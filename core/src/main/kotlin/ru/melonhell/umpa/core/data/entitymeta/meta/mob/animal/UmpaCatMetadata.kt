@@ -5,8 +5,8 @@ import ru.melonhell.umpa.core.enums.UmpaDyeColor
 
 open class UmpaCatMetadata(
     var type: Type = Type.BLACK,
-    var isLying: Boolean = false,
-    var relaxStateOne: Boolean = false,
+    var lying: Boolean = false,
+    var relaxed: Boolean = false,
     var collarColor: UmpaDyeColor = UmpaDyeColor.RED
 ) : UmpaTamableAnimalMetadata() {
 
