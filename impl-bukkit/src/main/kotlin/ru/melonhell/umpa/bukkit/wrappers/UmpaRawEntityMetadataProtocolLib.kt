@@ -20,28 +20,28 @@ class UmpaRawEntityMetadataProtocolLib @JvmOverloads constructor(
         }
     }
 
-    override fun setFlag(id: Int, flagId: Int, value: Boolean?) {
-        if (value != null) setValue(id, setSharedFlag(getValue(id, Byte::class.java) ?: 0, flagId, value))
+    override fun writeFlag(id: Int, flagId: Int, value: Boolean?) {
+        if (value != null) writeValue(id, setSharedFlag(readValue(id, Byte::class.java) ?: 0, flagId, value), Byte::class.java)
     }
 
-    override fun getFlag(id: Int, flagId: Int): Boolean? {
-        return getValue(id, Byte::class.java)?.let { getSharedFlag(it, flagId) }
+    override fun readFlag(id: Int, flagId: Int): Boolean? {
+        return readValue(id, Byte::class.java)?.let { getSharedFlag(it, flagId) }
     }
 
-    override fun <T> getValue(id: Int, clazz: Class<T>): T? {
+    override fun <T> readValue(id: Int, clazz: Class<T>): T? {
         return handle[id]?.let { ProtocolLibMetaWrapper.unwrap(it, clazz) }
     }
 
-    override fun setValue(id: Int, value: Any?) {
+    override fun <T> writeValue(id: Int, value: T?, clazz: Class<T>) {
         if (value == null) handle.remove(id)
-        else handle[id] = ProtocolLibMetaWrapper.wrap(id, value)
+        else handle[id] = ProtocolLibMetaWrapper.wrap(id, value, clazz)
     }
 
-    override fun <T> getOptional(id: Int, clazz: Class<T>): Optional<T>? {
+    override fun <T> readOptional(id: Int, clazz: Class<T>): Optional<T>? {
         return handle[id]?.let { ProtocolLibMetaWrapper.unwrapOptional(it, clazz) }
     }
 
-    override fun <T> setOptional(id: Int, value: Optional<T>?, clazz: Class<T>) {
+    override fun <T> writeOptional(id: Int, value: Optional<T>?, clazz: Class<T>) {
         if (value == null) handle.remove(id)
         else handle[id] = ProtocolLibMetaWrapper.wrapOptional(id, value, clazz)
     }

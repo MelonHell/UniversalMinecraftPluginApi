@@ -7,6 +7,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaZoglinMetadataEditorImpl_v1_17_0 : UmpaZoglinMetadataEditor, UmpaMonsterMetadataEditorImpl_v1_17_0() {
-    override fun readBaby(raw: UmpaRawEntityMetadata) = raw.getValue(16, Boolean::class.java)
-    override fun writeBaby(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(16, value)
+    override fun readBaby(raw: UmpaRawEntityMetadata) = raw.readValue(16, Boolean::class.java)
+    override fun writeBaby(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(16, value, Boolean::class.java)
 }

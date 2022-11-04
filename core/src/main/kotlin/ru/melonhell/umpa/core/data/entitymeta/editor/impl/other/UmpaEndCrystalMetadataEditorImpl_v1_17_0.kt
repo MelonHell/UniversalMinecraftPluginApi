@@ -10,10 +10,10 @@ import java.util.*
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaEndCrystalMetadataEditorImpl_v1_17_0 : UmpaEndCrystalMetadataEditor,
     UmpaEntityMetadataEditorImpl_v1_17_0() {
-    override fun readBeamTarget(raw: UmpaRawEntityMetadata) = raw.getOptional(8, UmpaBlockPos::class.java)
+    override fun readBeamTarget(raw: UmpaRawEntityMetadata) = raw.readOptional(8, UmpaBlockPos::class.java)
     override fun writeBeamTarget(raw: UmpaRawEntityMetadata, value: Optional<UmpaBlockPos>?) =
-        raw.setOptional(8, value, UmpaBlockPos::class.java)
+        raw.writeOptional(8, value, UmpaBlockPos::class.java)
 
-    override fun readShowBottom(raw: UmpaRawEntityMetadata) = raw.getValue(9, Boolean::class.java)
-    override fun writeShowBottom(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(9, value)
+    override fun readShowBottom(raw: UmpaRawEntityMetadata) = raw.readValue(9, Boolean::class.java)
+    override fun writeShowBottom(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(9, value, Boolean::class.java)
 }

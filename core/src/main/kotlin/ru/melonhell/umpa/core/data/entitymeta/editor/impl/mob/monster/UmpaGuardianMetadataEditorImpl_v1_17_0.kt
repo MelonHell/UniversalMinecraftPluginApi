@@ -8,9 +8,9 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaGuardianMetadataEditorImpl_v1_17_0 : UmpaGuardianMetadataEditor,
     UmpaMonsterMetadataEditorImpl_v1_17_0() {
-    override fun readMoving(raw: UmpaRawEntityMetadata) = raw.getValue(16, Boolean::class.java)
-    override fun writeMoving(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(16, value)
+    override fun readMoving(raw: UmpaRawEntityMetadata) = raw.readValue(16, Boolean::class.java)
+    override fun writeMoving(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(16, value, Boolean::class.java)
 
-    override fun readAttackTargetId(raw: UmpaRawEntityMetadata) = raw.getValue(17, Int::class.java)
-    override fun writeAttackTargetId(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(17, value)
+    override fun readAttackTargetId(raw: UmpaRawEntityMetadata) = raw.readValue(17, Int::class.java)
+    override fun writeAttackTargetId(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(17, value, Int::class.java)
 }

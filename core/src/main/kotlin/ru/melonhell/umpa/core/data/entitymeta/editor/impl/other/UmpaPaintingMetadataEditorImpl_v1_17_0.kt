@@ -9,6 +9,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPaintingMetadataEditorImpl_v1_17_0 : UmpaPaintingMetadataEditor,
     UmpaHangingEntityMetadataEditorImpl_v1_17_0() {
-    override fun readType(raw: UmpaRawEntityMetadata) = raw.getValue(8, UmpaPaintingMetadata.Type::class.java)
-    override fun writeType(raw: UmpaRawEntityMetadata, value: UmpaPaintingMetadata.Type?) = raw.setValue(8, value)
+    override fun readType(raw: UmpaRawEntityMetadata) = raw.readValue(8, UmpaPaintingMetadata.Type::class.java)
+    override fun writeType(raw: UmpaRawEntityMetadata, value: UmpaPaintingMetadata.Type?) = raw.writeValue(8, value, UmpaPaintingMetadata.Type::class.java)
 }

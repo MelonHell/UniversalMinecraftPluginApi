@@ -8,13 +8,13 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 open class UmpaAbstractArrowMetadataEditorImpl_v1_17_0 : UmpaAbstractArrowMetadataEditor,
     UmpaProjectileMetadataEditorImpl_v1_17_0() {
 
-    override fun readCritical(raw: UmpaRawEntityMetadata) = raw.getFlag(8, 0)
-    override fun writeCritical(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(8, 0, value)
+    override fun readCritical(raw: UmpaRawEntityMetadata) = raw.readFlag(8, 0)
+    override fun writeCritical(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(8, 0, value)
 
-    override fun readNoclip(raw: UmpaRawEntityMetadata) = raw.getFlag(8, 1)
-    override fun writeNoclip(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(8, 1, value)
+    override fun readNoclip(raw: UmpaRawEntityMetadata) = raw.readFlag(8, 1)
+    override fun writeNoclip(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(8, 1, value)
 
-    override fun readPierceLevel(raw: UmpaRawEntityMetadata) = raw.getValue(9, Int::class.java)
-    override fun writePierceLevel(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(9, value)
+    override fun readPierceLevel(raw: UmpaRawEntityMetadata) = raw.readValue(9, Int::class.java)
+    override fun writePierceLevel(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(9, value, Int::class.java)
 
 }

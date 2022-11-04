@@ -3,7 +3,7 @@ package ru.melonhell.umpa.core.data.entitymeta.editor.base
 import ru.melonhell.umpa.core.data.entitymeta.editor.base.abstr.UmpaLivingEntityMetadataEditor
 import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaPlayerMetadata
-import ru.melonhell.umpa.core.utils.UmpaCompoundTag
+import ru.melonhell.umpa.core.wrappers.UmpaNbt
 import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 
 interface UmpaPlayerMetadataEditor : UmpaLivingEntityMetadataEditor {
@@ -38,11 +38,11 @@ interface UmpaPlayerMetadataEditor : UmpaLivingEntityMetadataEditor {
     fun readLeftHanded(raw: UmpaRawEntityMetadata): Boolean?
     fun writeLeftHanded(raw: UmpaRawEntityMetadata, value: Boolean?)
 
-    fun readShoulderLeft(raw: UmpaRawEntityMetadata): UmpaCompoundTag?
-    fun writeShoulderLeft(raw: UmpaRawEntityMetadata, value: UmpaCompoundTag?)
+    fun readShoulderLeft(raw: UmpaRawEntityMetadata): UmpaNbt?
+    fun writeShoulderLeft(raw: UmpaRawEntityMetadata, value: UmpaNbt?)
 
-    fun readShoulderRight(raw: UmpaRawEntityMetadata): UmpaCompoundTag?
-    fun writeShoulderRight(raw: UmpaRawEntityMetadata, value: UmpaCompoundTag?)
+    fun readShoulderRight(raw: UmpaRawEntityMetadata): UmpaNbt?
+    fun writeShoulderRight(raw: UmpaRawEntityMetadata, value: UmpaNbt?)
 
     override fun readAll(raw: UmpaRawEntityMetadata): UmpaPlayerMetadata =
         UmpaPlayerMetadata().apply { readAll(raw, this) }

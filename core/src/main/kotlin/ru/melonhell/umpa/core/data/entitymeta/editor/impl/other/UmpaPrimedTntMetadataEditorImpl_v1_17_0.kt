@@ -8,6 +8,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPrimedTntMetadataEditorImpl_v1_17_0 : UmpaPrimedTntMetadataEditor,
     UmpaEntityMetadataEditorImpl_v1_17_0() {
-    override fun readFuse(raw: UmpaRawEntityMetadata) = raw.getValue(8, Int::class.java)
-    override fun writeFuse(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(8, value)
+    override fun readFuse(raw: UmpaRawEntityMetadata) = raw.readValue(8, Int::class.java)
+    override fun writeFuse(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(8, value, Int::class.java)
 }

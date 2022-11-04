@@ -9,8 +9,8 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 open class UmpaSnowGolemMetadataEditorImpl_v1_17_0 : UmpaSnowGolemMetadataEditor,
     UmpaAbstractGolemMetadataEditorImpl_v1_17_0() {
     override fun readPumpkin(raw: UmpaRawEntityMetadata) =
-        raw.getValue(16, Byte::class.java)?.let { it == 0x10.toByte() }
+        raw.readValue(16, Byte::class.java)?.let { it == 0x10.toByte() }
 
     override fun writePumpkin(raw: UmpaRawEntityMetadata, value: Boolean?) =
-        raw.setValue(16, value?.let { if (it) 0x10.toByte() else 0x00.toByte() })
+        raw.writeValue(16, value?.let { if (it) 0x10.toByte() else 0x00.toByte() }, Byte::class.java)
 }

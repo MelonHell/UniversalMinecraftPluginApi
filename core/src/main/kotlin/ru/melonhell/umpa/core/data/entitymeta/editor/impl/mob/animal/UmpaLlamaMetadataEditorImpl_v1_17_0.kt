@@ -14,16 +14,16 @@ open class UmpaLlamaMetadataEditorImpl_v1_17_0 : UmpaLlamaMetadataEditor,
     private val types = UmpaLlamaMetadata.Type.values()
     private val dyeColors = UmpaDyeColor.values()
 
-    override fun readStrength(raw: UmpaRawEntityMetadata) = raw.getValue(20, Int::class.java)
-    override fun writeStrength(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(20, value)
+    override fun readStrength(raw: UmpaRawEntityMetadata) = raw.readValue(20, Int::class.java)
+    override fun writeStrength(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(20, value, Int::class.java)
 
     override fun readCarpetColor(raw: UmpaRawEntityMetadata) =
-        raw.getValue(21, Int::class.java)?.let { if (it == -1) Optional.empty() else Optional.of(dyeColors[it]) }
+        raw.readValue(21, Int::class.java)?.let { if (it == -1) Optional.empty() else Optional.of(dyeColors[it]) }
 
     override fun writeCarpetColor(raw: UmpaRawEntityMetadata, value: Optional<UmpaDyeColor>?) =
-        raw.setValue(21, value?.map { it.ordinal }?.orElse(-1))
+        raw.writeValue(21, value?.map { it.ordinal }?.orElse(-1), Int::class.java)
 
-    override fun readType(raw: UmpaRawEntityMetadata) = raw.getValue(22, Int::class.java)?.let { types[it] }
+    override fun readType(raw: UmpaRawEntityMetadata) = raw.readValue(22, Int::class.java)?.let { types[it] }
     override fun writeType(raw: UmpaRawEntityMetadata, value: UmpaLlamaMetadata.Type?) =
-        raw.setValue(22, value?.ordinal)
+        raw.writeValue(22, value?.ordinal, Int::class.java)
 }

@@ -1,7 +1,8 @@
 package ru.melonhell.umpa.core.data.entitymeta.meta
 
 import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaLivingEntityMetadata
-import ru.melonhell.umpa.core.utils.UmpaCompoundTag
+import ru.melonhell.umpa.core.wrappers.UmpaNbt
+import ru.melonhell.umpa.core.wrappers.UmpaNbtEmpty
 
 open class UmpaPlayerMetadata(
     var playerAbsorption: Float = 0.0F,
@@ -16,8 +17,8 @@ open class UmpaPlayerMetadata(
     var showHat: Boolean = false,
 
     var leftHanded: Boolean = false,
-    var shoulderLeft: UmpaCompoundTag = UmpaCompoundTag(),
-    var shoulderRight: UmpaCompoundTag = UmpaCompoundTag()
+    var shoulderLeft: UmpaNbt = UmpaNbtEmpty(),
+    var shoulderRight: UmpaNbt = UmpaNbtEmpty()
 ) : UmpaLivingEntityMetadata() {
 
     override val isEmpty: Boolean

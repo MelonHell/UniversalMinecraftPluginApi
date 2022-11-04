@@ -7,6 +7,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaWardenMetadataEditorImpl_v1_17_0 : UmpaWardenMetadataEditor, UmpaMonsterMetadataEditorImpl_v1_17_0() {
-    override fun readAngerLevel(raw: UmpaRawEntityMetadata) = raw.getValue(16, Int::class.java)
-    override fun writeAngerLevel(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(16, value)
+    override fun readAngerLevel(raw: UmpaRawEntityMetadata) = raw.readValue(16, Int::class.java)
+    override fun writeAngerLevel(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(16, value, Int::class.java)
 }

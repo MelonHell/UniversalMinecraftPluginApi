@@ -10,13 +10,13 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 open class UmpaAxolotlMetadataEditorImpl_v1_17_0 : UmpaAxolotlMetadataEditor, UmpaAnimalMetadataEditorImpl_v1_17_0() {
     private val types = UmpaAxolotlMetadata.Type.values()
 
-    override fun readType(raw: UmpaRawEntityMetadata) = raw.getValue(1, Int::class.java)?.let { types[it] }
+    override fun readType(raw: UmpaRawEntityMetadata) = raw.readValue(1, Int::class.java)?.let { types[it] }
     override fun writeType(raw: UmpaRawEntityMetadata, value: UmpaAxolotlMetadata.Type?) =
-        raw.setValue(1, value?.ordinal)
+        raw.writeValue(1, value?.ordinal, Int::class.java)
 
-    override fun readPlayingDead(raw: UmpaRawEntityMetadata) = raw.getValue(18, Boolean::class.java)
-    override fun writePlayingDead(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(18, value)
+    override fun readPlayingDead(raw: UmpaRawEntityMetadata) = raw.readValue(18, Boolean::class.java)
+    override fun writePlayingDead(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(18, value, Boolean::class.java)
 
-    override fun readFromBucket(raw: UmpaRawEntityMetadata) = raw.getValue(19, Boolean::class.java)
-    override fun writeFromBucket(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(19, value)
+    override fun readFromBucket(raw: UmpaRawEntityMetadata) = raw.readValue(19, Boolean::class.java)
+    override fun writeFromBucket(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(19, value, Boolean::class.java)
 }

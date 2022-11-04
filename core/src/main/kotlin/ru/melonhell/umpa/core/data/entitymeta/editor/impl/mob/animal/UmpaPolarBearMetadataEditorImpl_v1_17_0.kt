@@ -8,6 +8,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPolarBearMetadataEditorImpl_v1_17_0 : UmpaPolarBearMetadataEditor,
     UmpaAnimalMetadataEditorImpl_v1_17_0() {
-    override fun readStanding(raw: UmpaRawEntityMetadata) = raw.getValue(17, Boolean::class.java)
-    override fun writeStanding(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(17, value)
+    override fun readStanding(raw: UmpaRawEntityMetadata) = raw.readValue(17, Boolean::class.java)
+    override fun writeStanding(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(17, value, Boolean::class.java)
 }

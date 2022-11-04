@@ -11,8 +11,8 @@ import java.util.*
 open class UmpaHorseMetadataEditorImpl_v1_17_0 : UmpaHorseMetadataEditor,
     UmpaAbstractHorseMetadataEditorImpl_v1_17_0() {
     override fun readBaseColor(raw: UmpaRawEntityMetadata) = null // = raw.getValue(1, Color::class.java)
-    override fun writeBaseColor(raw: UmpaRawEntityMetadata, value: UmpaHorseMetadata.Color?) = Unit // = raw.setValue(1, value)
+    override fun writeBaseColor(raw: UmpaRawEntityMetadata, value: UmpaHorseMetadata.Color?) = Unit // = raw.setValue(1, value, Color::class.java)
 
     override fun readMarkings(raw: UmpaRawEntityMetadata) = null // = raw.getValue(1, Marking::class.java)
-    override fun writeMarkings(raw: UmpaRawEntityMetadata, value: UmpaHorseMetadata.Marking?) = Unit // = raw.setValue(1, value)
+    override fun writeMarkings(raw: UmpaRawEntityMetadata, value: UmpaHorseMetadata.Marking?) = Unit // = raw.setValue(1, value, Marking::class.java)
 }

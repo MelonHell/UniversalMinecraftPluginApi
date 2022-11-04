@@ -8,6 +8,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaIronGolemMetadataEditorImpl_v1_17_0 : UmpaIronGolemMetadataEditor,
     UmpaAbstractGolemMetadataEditorImpl_v1_17_0() {
-    override fun readPlayerCreated(raw: UmpaRawEntityMetadata) = raw.getFlag(16, 0)
-    override fun writePlayerCreated(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(16, 0, value)
+    override fun readPlayerCreated(raw: UmpaRawEntityMetadata) = raw.readFlag(16, 0)
+    override fun writePlayerCreated(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(16, 0, value)
 }

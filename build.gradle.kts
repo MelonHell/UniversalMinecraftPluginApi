@@ -28,9 +28,7 @@ allprojects {
     dependencies {
         compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20")
         compileOnly("net.kyori:adventure-api:4.11.0")
-
-        implementation("com.github.matfax.klassindex:library:4.1.0-rc.1")
-        kapt("com.github.matfax.klassindex:processor:4.1.0-rc.1")
+        implementation("io.github.classgraph:classgraph:4.8.149")
 
         testImplementation(kotlin("test"))
     }
@@ -56,7 +54,8 @@ tasks {
     shadowJar {
         archiveVersion.set("")
         archiveClassifier.set("")
-        relocate("com.github.matfax.klassindex", "${basePackage}.libs.klassindex")
+        relocate("io.github.classgraph", "${basePackage}.libs.classgraph")
+        relocate("nonapi.io.github.classgraph", "${basePackage}.libs.classgraph.nonapi")
     }
     jar {
         enabled = false

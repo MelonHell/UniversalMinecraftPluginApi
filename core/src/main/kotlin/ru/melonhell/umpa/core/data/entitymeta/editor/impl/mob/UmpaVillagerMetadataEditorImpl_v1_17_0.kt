@@ -9,6 +9,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaVillagerMetadataEditorImpl_v1_17_0 : UmpaVillagerMetadataEditor,
     UmpaAbstractVillagerMetadataEditorImpl_v1_17_0() {
-    override fun readVillagerData(raw: UmpaRawEntityMetadata) = raw.getValue(18, UmpaVillagerData::class.java)
-    override fun writeVillagerData(raw: UmpaRawEntityMetadata, value: UmpaVillagerData?) = raw.setValue(18, value)
+    override fun readVillagerData(raw: UmpaRawEntityMetadata) = raw.readValue(18, UmpaVillagerData::class.java)
+    override fun writeVillagerData(raw: UmpaRawEntityMetadata, value: UmpaVillagerData?) = raw.writeValue(18, value, UmpaVillagerData::class.java)
 }

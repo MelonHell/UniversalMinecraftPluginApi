@@ -8,6 +8,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPillagerMetadataEditorImpl_v1_17_0 : UmpaPillagerMetadataEditor,
     UmpaAbstractIllagerMetadataEditorImpl_v1_17_0() {
-    override fun readChargingCrossbow(raw: UmpaRawEntityMetadata) = raw.getValue(17, Boolean::class.java)
-    override fun writeChargingCrossbow(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(17, value)
+    override fun readChargingCrossbow(raw: UmpaRawEntityMetadata) = raw.readValue(17, Boolean::class.java)
+    override fun writeChargingCrossbow(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(17, value, Boolean::class.java)
 }

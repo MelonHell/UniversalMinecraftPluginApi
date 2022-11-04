@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
 
 enum class UmpaEntityType(
     private val stringKey: String,
-    private val metaClass: KClass<out UmpaEntityMetadata>
+    private val metaKClass: KClass<out UmpaEntityMetadata>
 ) : UmpaKeyed {
     ALLAY("minecraft:allay", UmpaAllayMetadata::class),
     AREA_EFFECT_CLOUD("minecraft:area_effect_cloud", UmpaAreaEffectCloudMetadata::class),
@@ -139,6 +139,7 @@ enum class UmpaEntityType(
     FISHING_BOBBER("minecraft:fishing_bobber", UmpaFishingBobberMetadata::class);
 
     override val key: Key = Key.key(stringKey, ':')
+    val metaClass get() = metaKClass.java
 
     companion object : UmpaKeyed.Companion<UmpaEntityType> {
         private val keyMap = Arrays.stream(UmpaEntityType.values())

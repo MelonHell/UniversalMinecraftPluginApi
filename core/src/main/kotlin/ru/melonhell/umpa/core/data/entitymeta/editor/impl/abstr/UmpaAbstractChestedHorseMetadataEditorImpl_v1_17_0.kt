@@ -8,7 +8,7 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 open class UmpaAbstractChestedHorseMetadataEditorImpl_v1_17_0 : UmpaAbstractChestedHorseMetadataEditor,
     UmpaAbstractHorseMetadataEditorImpl_v1_17_0() {
 
-    override fun readHasChest(raw: UmpaRawEntityMetadata) = raw.getValue(19, Boolean::class.java)
-    override fun writeHasChest(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(19, value)
+    override fun readHasChest(raw: UmpaRawEntityMetadata) = raw.readValue(19, Boolean::class.java)
+    override fun writeHasChest(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(19, value, Boolean::class.java)
 
 }

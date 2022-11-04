@@ -11,7 +11,7 @@ open class UmpaEnderDragonMetadataEditorImpl_v1_17_0 : UmpaEnderDragonMetadataEd
     UmpaMobMetadataEditorImpl_v1_17_0() {
     private val phases = UmpaEnderDragonMetadata.Phase.values()
 
-    override fun readPhase(raw: UmpaRawEntityMetadata) = raw.getValue(16, Int::class.java)?.let { phases[it] }
+    override fun readPhase(raw: UmpaRawEntityMetadata) = raw.readValue(16, Int::class.java)?.let { phases[it] }
     override fun writePhase(raw: UmpaRawEntityMetadata, value: UmpaEnderDragonMetadata.Phase?) =
-        raw.setValue(16, value?.ordinal)
+        raw.writeValue(16, value?.ordinal, Int::class.java)
 }

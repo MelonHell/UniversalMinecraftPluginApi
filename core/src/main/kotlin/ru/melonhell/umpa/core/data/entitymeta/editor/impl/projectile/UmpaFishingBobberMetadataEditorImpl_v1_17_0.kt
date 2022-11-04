@@ -8,9 +8,9 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaFishingBobberMetadataEditorImpl_v1_17_0 : UmpaFishingBobberMetadataEditor,
     UmpaProjectileMetadataEditorImpl_v1_17_0() {
-    override fun readHookedEntityId(raw: UmpaRawEntityMetadata) = raw.getValue(8, Int::class.java)
-    override fun writeHookedEntityId(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(8, value)
+    override fun readHookedEntityId(raw: UmpaRawEntityMetadata) = raw.readValue(8, Int::class.java)
+    override fun writeHookedEntityId(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(8, value, Int::class.java)
 
-    override fun readBiting(raw: UmpaRawEntityMetadata) = raw.getValue(9, Boolean::class.java)
-    override fun writeBiting(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(9, value)
+    override fun readBiting(raw: UmpaRawEntityMetadata) = raw.readValue(9, Boolean::class.java)
+    override fun writeBiting(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(9, value, Boolean::class.java)
 }

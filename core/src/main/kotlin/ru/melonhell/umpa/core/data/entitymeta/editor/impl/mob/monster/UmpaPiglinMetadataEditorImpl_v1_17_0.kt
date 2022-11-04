@@ -8,12 +8,12 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPiglinMetadataEditorImpl_v1_17_0 : UmpaPiglinMetadataEditor,
     UmpaAbstractPiglinMetadataEditorImpl_v1_17_0() {
-    override fun readBaby(raw: UmpaRawEntityMetadata) = raw.getValue(17, Boolean::class.java)
-    override fun writeBaby(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(17, value)
+    override fun readBaby(raw: UmpaRawEntityMetadata) = raw.readValue(17, Boolean::class.java)
+    override fun writeBaby(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(17, value, Boolean::class.java)
 
-    override fun readChargingCrossbow(raw: UmpaRawEntityMetadata) = raw.getValue(18, Boolean::class.java)
-    override fun writeChargingCrossbow(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(18, value)
+    override fun readChargingCrossbow(raw: UmpaRawEntityMetadata) = raw.readValue(18, Boolean::class.java)
+    override fun writeChargingCrossbow(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(18, value, Boolean::class.java)
 
-    override fun readDancing(raw: UmpaRawEntityMetadata) = raw.getValue(19, Boolean::class.java)
-    override fun writeDancing(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(19, value)
+    override fun readDancing(raw: UmpaRawEntityMetadata) = raw.readValue(19, Boolean::class.java)
+    override fun writeDancing(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(19, value, Boolean::class.java)
 }

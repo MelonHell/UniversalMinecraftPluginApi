@@ -7,30 +7,30 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPandaMetadataEditorImpl_v1_17_0 : UmpaPandaMetadataEditor, UmpaAnimalMetadataEditorImpl_v1_17_0() {
-    override fun readUnhappyCounter(raw: UmpaRawEntityMetadata) = raw.getValue(17, Int::class.java)
-    override fun writeUnhappyCounter(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(17, value)
+    override fun readUnhappyCounter(raw: UmpaRawEntityMetadata) = raw.readValue(17, Int::class.java)
+    override fun writeUnhappyCounter(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(17, value, Int::class.java)
 
-    override fun readSneezeCounter(raw: UmpaRawEntityMetadata) = raw.getValue(18, Int::class.java)
-    override fun writeSneezeCounter(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(18, value)
+    override fun readSneezeCounter(raw: UmpaRawEntityMetadata) = raw.readValue(18, Int::class.java)
+    override fun writeSneezeCounter(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(18, value, Int::class.java)
 
-    override fun readEatCounter(raw: UmpaRawEntityMetadata) = raw.getValue(19, Int::class.java)
-    override fun writeEatCounter(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(19, value)
+    override fun readEatCounter(raw: UmpaRawEntityMetadata) = raw.readValue(19, Int::class.java)
+    override fun writeEatCounter(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(19, value, Int::class.java)
 
-    override fun readMainGene(raw: UmpaRawEntityMetadata) = raw.getValue(20, Byte::class.java)?.toInt()
-    override fun writeMainGene(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(20, value?.toByte())
+    override fun readMainGene(raw: UmpaRawEntityMetadata) = raw.readValue(20, Byte::class.java)?.toInt()
+    override fun writeMainGene(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(20, value?.toByte(), Byte::class.java)
 
-    override fun readHiddenGene(raw: UmpaRawEntityMetadata) = raw.getValue(21, Byte::class.java)?.toInt()
-    override fun writeHiddenGene(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(21, value?.toByte())
+    override fun readHiddenGene(raw: UmpaRawEntityMetadata) = raw.readValue(21, Byte::class.java)?.toInt()
+    override fun writeHiddenGene(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(21, value?.toByte(), Byte::class.java)
 
-    override fun readSneezing(raw: UmpaRawEntityMetadata) = raw.getFlag(22, 0)
-    override fun writeSneezing(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(22, 0, value)
+    override fun readSneezing(raw: UmpaRawEntityMetadata) = raw.readFlag(22, 0)
+    override fun writeSneezing(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(22, 0, value)
 
-    override fun readRolling(raw: UmpaRawEntityMetadata) = raw.getFlag(22, 1)
-    override fun writeRolling(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(22, 1, value)
+    override fun readRolling(raw: UmpaRawEntityMetadata) = raw.readFlag(22, 1)
+    override fun writeRolling(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(22, 1, value)
 
-    override fun readSitting(raw: UmpaRawEntityMetadata) = raw.getFlag(22, 2)
-    override fun writeSitting(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(22, 2, value)
+    override fun readSitting(raw: UmpaRawEntityMetadata) = raw.readFlag(22, 2)
+    override fun writeSitting(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(22, 2, value)
 
-    override fun readOnBack(raw: UmpaRawEntityMetadata) = raw.getFlag(22, 3)
-    override fun writeOnBack(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(22, 3, value)
+    override fun readOnBack(raw: UmpaRawEntityMetadata) = raw.readFlag(22, 3)
+    override fun writeOnBack(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(22, 3, value)
 }

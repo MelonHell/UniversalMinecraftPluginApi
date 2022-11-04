@@ -11,7 +11,7 @@ open class UmpaParrotMetadataEditorImpl_v1_17_0 : UmpaParrotMetadataEditor,
     UmpaShoulderRidingEntityMetadataEditorImpl_v1_17_0() {
     private val types = UmpaParrotMetadata.Type.values()
 
-    override fun readType(raw: UmpaRawEntityMetadata) = raw.getValue(1, Int::class.java)?.let { types[it] }
+    override fun readType(raw: UmpaRawEntityMetadata) = raw.readValue(1, Int::class.java)?.let { types[it] }
     override fun writeType(raw: UmpaRawEntityMetadata, value: UmpaParrotMetadata.Type?) =
-        raw.setValue(1, value?.ordinal)
+        raw.writeValue(1, value?.ordinal, Int::class.java)
 }

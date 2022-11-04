@@ -10,12 +10,12 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 open class UmpaWolfMetadataEditorImpl_v1_17_0 : UmpaWolfMetadataEditor, UmpaTamableAnimalMetadataEditorImpl_v1_17_0() {
     private val dyeColors = UmpaDyeColor.values()
 
-    override fun readInterested(raw: UmpaRawEntityMetadata) = raw.getValue(19, Boolean::class.java)
-    override fun writeInterested(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(19, value)
+    override fun readInterested(raw: UmpaRawEntityMetadata) = raw.readValue(19, Boolean::class.java)
+    override fun writeInterested(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(19, value, Boolean::class.java)
 
-    override fun readCollarColor(raw: UmpaRawEntityMetadata) = raw.getValue(20, Int::class.java)?.let { dyeColors[it] }
-    override fun writeCollarColor(raw: UmpaRawEntityMetadata, value: UmpaDyeColor?) = raw.setValue(20, value?.ordinal)
+    override fun readCollarColor(raw: UmpaRawEntityMetadata) = raw.readValue(20, Int::class.java)?.let { dyeColors[it] }
+    override fun writeCollarColor(raw: UmpaRawEntityMetadata, value: UmpaDyeColor?) = raw.writeValue(20, value?.ordinal, Int::class.java)
 
-    override fun readRemainingAngerTime(raw: UmpaRawEntityMetadata) = raw.getValue(21, Int::class.java)
-    override fun writeRemainingAngerTime(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(21, value)
+    override fun readRemainingAngerTime(raw: UmpaRawEntityMetadata) = raw.readValue(21, Int::class.java)
+    override fun writeRemainingAngerTime(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(21, value, Int::class.java)
 }

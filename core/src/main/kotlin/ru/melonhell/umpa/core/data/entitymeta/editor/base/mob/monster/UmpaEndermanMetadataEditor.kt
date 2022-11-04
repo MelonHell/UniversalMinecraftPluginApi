@@ -3,13 +3,14 @@ package ru.melonhell.umpa.core.data.entitymeta.editor.base.mob.monster
 import ru.melonhell.umpa.core.data.entitymeta.editor.base.abstr.UmpaMonsterMetadataEditor
 import ru.melonhell.umpa.core.data.entitymeta.meta.UmpaEntityMetadata
 import ru.melonhell.umpa.core.data.entitymeta.meta.mob.monster.UmpaEndermanMetadata
+import ru.melonhell.umpa.core.wrappers.UmpaBlockData
 import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 import java.util.*
 
 interface UmpaEndermanMetadataEditor : UmpaMonsterMetadataEditor {
 
-    fun readBlockInHandsId(raw: UmpaRawEntityMetadata): OptionalInt?
-    fun writeBlockInHandsId(raw: UmpaRawEntityMetadata, value: OptionalInt?)
+    fun readBlockInHandsId(raw: UmpaRawEntityMetadata): Optional<UmpaBlockData>?
+    fun writeBlockInHandsId(raw: UmpaRawEntityMetadata, value: Optional<UmpaBlockData>?)
 
     fun readCreepy(raw: UmpaRawEntityMetadata): Boolean?
     fun writeCreepy(raw: UmpaRawEntityMetadata, value: Boolean?)

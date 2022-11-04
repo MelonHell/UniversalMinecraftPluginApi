@@ -11,7 +11,7 @@ bukkit {
     libraries = listOf(
         "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20",
         "net.kyori:adventure-api:4.11.0",
-        "net.kyori:adventure-platform-bukkit:4.1.2"
+        "net.kyori:adventure-platform-bukkit:4.1.2",
     )
 }
 

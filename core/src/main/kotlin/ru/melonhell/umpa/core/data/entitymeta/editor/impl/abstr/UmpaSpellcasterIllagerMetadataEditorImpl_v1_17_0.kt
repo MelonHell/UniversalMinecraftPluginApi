@@ -11,8 +11,8 @@ open class UmpaSpellcasterIllagerMetadataEditorImpl_v1_17_0 : UmpaSpellcasterIll
     var spells = UmpaSpellcasterIllagerMetadata.Spell.values()
 
     override fun readSpellCasting(raw: UmpaRawEntityMetadata) =
-        raw.getValue(17, Byte::class.java)?.let { spells[it.toInt()] }
+        raw.readValue(17, Byte::class.java)?.let { spells[it.toInt()] }
 
     override fun writeSpellCasting(raw: UmpaRawEntityMetadata, value: UmpaSpellcasterIllagerMetadata.Spell?) =
-        raw.setValue(17, value?.ordinal?.toByte())
+        raw.writeValue(17, value?.ordinal?.toByte(), Byte::class.java)
 }

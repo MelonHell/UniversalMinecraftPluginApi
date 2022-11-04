@@ -8,6 +8,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPhantomMetadataEditorImpl_v1_17_0 : UmpaPhantomMetadataEditor,
     UmpaFlyingMobMetadataEditorImpl_v1_17_0() {
-    override fun readSize(raw: UmpaRawEntityMetadata) = raw.getValue(16, Int::class.java)
-    override fun writeSize(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(16, value)
+    override fun readSize(raw: UmpaRawEntityMetadata) = raw.readValue(16, Int::class.java)
+    override fun writeSize(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(16, value, Int::class.java)
 }

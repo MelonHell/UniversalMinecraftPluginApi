@@ -7,6 +7,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaAbstractPiglinMetadataEditorImpl_v1_17_0 : UmpaAbstractPiglinMetadataEditor,
     UmpaMonsterMetadataEditorImpl_v1_17_0() {
-    override fun readImmuneToZombification(raw: UmpaRawEntityMetadata) = raw.getValue(16, Boolean::class.java)
-    override fun writeImmuneToZombification(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setValue(16, value)
+    override fun readImmuneToZombification(raw: UmpaRawEntityMetadata) = raw.readValue(16, Boolean::class.java)
+    override fun writeImmuneToZombification(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(16, value, Boolean::class.java)
 }

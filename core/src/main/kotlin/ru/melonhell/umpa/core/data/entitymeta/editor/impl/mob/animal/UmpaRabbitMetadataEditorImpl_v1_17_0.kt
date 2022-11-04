@@ -10,7 +10,7 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 open class UmpaRabbitMetadataEditorImpl_v1_17_0 : UmpaRabbitMetadataEditor, UmpaAnimalMetadataEditorImpl_v1_17_0() {
     private val types = UmpaRabbitMetadata.Type.values()
 
-    override fun readType(raw: UmpaRawEntityMetadata) = raw.getValue(17, Int::class.java)?.let { types[it] }
+    override fun readType(raw: UmpaRawEntityMetadata) = raw.readValue(17, Int::class.java)?.let { types[it] }
     override fun writeType(raw: UmpaRawEntityMetadata, value: UmpaRabbitMetadata.Type?) =
-        raw.setValue(17, value?.ordinal)
+        raw.writeValue(17, value?.ordinal, Int::class.java)
 }

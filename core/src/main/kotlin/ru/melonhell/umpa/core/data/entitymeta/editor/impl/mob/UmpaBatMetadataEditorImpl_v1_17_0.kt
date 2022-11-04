@@ -7,6 +7,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaBatMetadataEditorImpl_v1_17_0 : UmpaBatMetadataEditor, UmpaAmbientCreatureMetadataEditorImpl_v1_17_0() {
-    override fun readHanging(raw: UmpaRawEntityMetadata) = raw.getFlag(16, 0)
-    override fun writeHanging(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.setFlag(16, 0, value)
+    override fun readHanging(raw: UmpaRawEntityMetadata) = raw.readFlag(16, 0)
+    override fun writeHanging(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeFlag(16, 0, value)
 }

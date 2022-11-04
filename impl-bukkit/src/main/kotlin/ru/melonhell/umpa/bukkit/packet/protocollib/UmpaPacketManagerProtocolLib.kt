@@ -5,15 +5,15 @@ import com.comphenix.protocol.ProtocolLibrary
 import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketContainer
 import com.comphenix.protocol.events.PacketEvent
-import com.comphenix.protocol.utility.MinecraftVersion
-import com.github.matfax.klassindex.KlassIndex
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 import ru.melonhell.umpa.bukkit.event.UmpaPacketEventBukkit
 import ru.melonhell.umpa.bukkit.exceptions.UmpaConverterNotFoundException
 import ru.melonhell.umpa.bukkit.packet.protocollib.converter.PacketConverter
-import ru.melonhell.umpa.core.annotations.MinMaxMinecraftVersion
+import ru.melonhell.umpa.bukkit.utils.MinMaxVersionUtils.isCurrentVersionInRange
+import ru.melonhell.umpa.bukkit.utils.ScanUtils
 import ru.melonhell.umpa.bukkit.wrappers.UmpaPlayerBukkit
+import ru.melonhell.umpa.core.annotations.MinMaxMinecraftVersion
 import ru.melonhell.umpa.core.enums.UmpaPacketType
 import ru.melonhell.umpa.core.event.UmpaEventManager
 import ru.melonhell.umpa.core.managers.UmpaPacketManager
@@ -28,14 +28,12 @@ class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: Ump
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
 
     init {
-        val converterClasses = KlassIndex.getAnnotated(MinMaxMinecraftVersion::class)
+        val converterClasses = ScanUtils.scan("ru.melonhell.umpa.bukkit.packet.protocollib.converter")
         converterClasses.forEach { clazz ->
-            if (PacketConverter::class.java.isAssignableFrom(clazz.java)) {
-                val annotation = clazz.java.getAnnotation(MinMaxMinecraftVersion::class.java)
-                val minVersion = MinecraftVersion(annotation.minVersion)
-                val maxVersion = MinecraftVersion(annotation.maxVersion.replace("latest", "1.99"))
-                if (MinecraftVersion.getCurrentVersion() in minVersion..maxVersion) {
-                    val packetConverter = clazz.java.getConstructor().newInstance() as PacketConverter
+            if (PacketConverter::class.java.isAssignableFrom(clazz)) {
+                val annotation = clazz.getAnnotation(MinMaxMinecraftVersion::class.java)
+                if (annotation.isCurrentVersionInRange()) {
+                    val packetConverter = clazz.getConstructor().newInstance() as PacketConverter
                     converterMapByWrapper[packetConverter.packetType] = packetConverter
                     packetConverter.protocolLibTypes.forEach { type ->
                         converterMapByProtocolLibType[type] = packetConverter

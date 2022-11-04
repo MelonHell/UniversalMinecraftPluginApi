@@ -8,6 +8,6 @@ import ru.melonhell.umpa.core.wrappers.UmpaRawEntityMetadata
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaPufferfishMetadataEditorImpl_v1_17_0 : UmpaPufferfishMetadataEditor,
     UmpaAbstractFishMetadataEditorImpl_v1_17_0() {
-    override fun readPuffState(raw: UmpaRawEntityMetadata) = raw.getValue(17, Int::class.java)
-    override fun writePuffState(raw: UmpaRawEntityMetadata, value: Int?) = raw.setValue(17, value)
+    override fun readPuffState(raw: UmpaRawEntityMetadata) = raw.readValue(17, Int::class.java)
+    override fun writePuffState(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(17, value, Int::class.java)
 }

@@ -10,12 +10,12 @@ import java.util.*
 @MinMaxMinecraftVersion("1.17", "latest")
 open class UmpaArrowMetadataEditorImpl_v1_17_0 : UmpaArrowMetadataEditor,
     UmpaAbstractArrowMetadataEditorImpl_v1_17_0() {
-    override fun readEffectColor(raw: UmpaRawEntityMetadata) = raw.getValue(10, Int::class.java)?.let {
+    override fun readEffectColor(raw: UmpaRawEntityMetadata) = raw.readValue(10, Int::class.java)?.let {
         if (it == -1) Optional.empty() else Optional.of(
             UmpaColor(it)
         )
     }
 
     override fun writeEffectColor(raw: UmpaRawEntityMetadata, value: Optional<UmpaColor>?) =
-        raw.setValue(10, value?.map { it.intValue }?.orElse(-1))
+        raw.writeValue(10, value?.map { it.intValue }?.orElse(-1), Int::class.java)
 }
