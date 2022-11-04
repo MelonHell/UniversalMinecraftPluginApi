@@ -1,9 +1,10 @@
 package ru.melonhell.umpa.core.data.entitymeta.meta.projectile
 
 import ru.melonhell.umpa.core.data.entitymeta.meta.abstr.UmpaProjectileMetadata
+import java.util.OptionalInt
 
 open class UmpaFishingBobberMetadata(
-    var hookedEntityId: Int = 0,
+    var hookedEntityId: OptionalInt = OptionalInt.empty(),
     var biting: Boolean = false
 ) : UmpaProjectileMetadata() {
 
