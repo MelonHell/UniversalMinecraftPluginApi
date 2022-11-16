@@ -21,14 +21,19 @@ import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.wrappers.UmpaPlayer
 import java.util.*
 
-class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: UmpaEventManager) : UmpaPacketManager,
-    Listener {
+class UmpaPacketManagerProtocolLib(
+    plugin: Plugin,
+    private val eventManager: UmpaEventManager
+) : UmpaPacketManager, Listener {
 
     private val converterMapByWrapper: MutableMap<UmpaPacketType, PacketConverter> = EnumMap(UmpaPacketType::class.java)
     private val converterMapByProtocolLibType: MutableMap<PacketType, PacketConverter> = HashMap()
 
     init {
-        val converterClasses = ScanUtils.scan("ru.melonhell.umpa.bukkit.packet.protocollib.converter")
+        val converterClasses = ScanUtils.scanWithAnnotation(
+            "ru.melonhell.umpa.bukkit.packet.protocollib.converter",
+            MinMaxMinecraftVersion::class.java
+        )
         converterClasses.forEach { clazz ->
             if (PacketConverter::class.java.isAssignableFrom(clazz)) {
                 val annotation = clazz.getAnnotation(MinMaxMinecraftVersion::class.java)
@@ -44,11 +49,8 @@ class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: Ump
 
         ProtocolLibrary.getProtocolManager()
             .addPacketListener(object : PacketAdapter(plugin, PacketType.values().filter { it.isSupported }) {
-                override fun onPacketReceiving(event: PacketEvent) =
-                    onPacket(event)
-
-                override fun onPacketSending(event: PacketEvent) =
-                    onPacket(event)
+                override fun onPacketReceiving(event: PacketEvent) = onPacket(event)
+                override fun onPacketSending(event: PacketEvent) = onPacket(event)
             })
     }
 
@@ -76,7 +78,7 @@ class UmpaPacketManagerProtocolLib(plugin: Plugin, private val eventManager: Ump
     private fun onPacket(protocolLibEvent: PacketEvent) {
         val packetConverter = converterMapByProtocolLibType[protocolLibEvent.packetType] ?: return
         val packetEvent = UmpaPacketEventBukkit(
-            protocolLibEvent.player, { packetConverter.wrap(protocolLibEvent.packet) }, packetConverter.packetType
+            protocolLibEvent.player, lazy { packetConverter.wrap(protocolLibEvent.packet) }, packetConverter.packetType
         )
         eventManager.call(packetEvent)
         if (packetEvent.canceled) {

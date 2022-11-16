@@ -16,5 +16,4 @@ open class UmpaAbstractArrowMetadataEditorImpl_v1_17_0 : UmpaAbstractArrowMetada
 
     override fun readPierceLevel(raw: UmpaRawEntityMetadata) = raw.readValue(9, Int::class.java)
     override fun writePierceLevel(raw: UmpaRawEntityMetadata, value: Int?) = raw.writeValue(9, value, Int::class.java)
-
 }

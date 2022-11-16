@@ -23,6 +23,7 @@ enum class UmpaPacketType(private val packetClass: KClass<out UmpaPacket>, val d
     CB_PLAYER_ABILITIES(UmpaCbPlayerAbilitiesPacket::class, Direction.CLIENTBOUND),
     CB_PLAYER_COMBAT_KILL(UmpaCbPlayerCombatKillPacket::class, Direction.CLIENTBOUND),
     CB_SET_CAMERA(UmpaCbSetCameraPacket::class, Direction.CLIENTBOUND),
+    CB_SET_HEALTH(UmpaCbSetHealthPacket::class, Direction.CLIENTBOUND),
     CB_WORLD_BORDER(UmpaCbWorldBorderPacket::class, Direction.CLIENTBOUND),
     CB_WORLD_EVENT(UmpaCbWorldEventPacket::class, Direction.CLIENTBOUND),
 

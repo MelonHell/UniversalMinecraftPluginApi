@@ -10,5 +10,4 @@ open class UmpaAbstractChestedHorseMetadataEditorImpl_v1_17_0 : UmpaAbstractChes
 
     override fun readHasChest(raw: UmpaRawEntityMetadata) = raw.readValue(19, Boolean::class.java)
     override fun writeHasChest(raw: UmpaRawEntityMetadata, value: Boolean?) = raw.writeValue(19, value, Boolean::class.java)
-
 }

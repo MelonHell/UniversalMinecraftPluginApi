@@ -13,7 +13,10 @@ object UmpaEntityMetadataReaderManagerBukkit {
     private val editorMap: MutableMap<Class<out UmpaEntityMetadata>, UmpaEntityMetadataEditor> = HashMap()
 
     init {
-        val converterClasses = ScanUtils.scan("ru.melonhell.umpa.core.data.entitymeta.editor.impl")
+        val converterClasses = ScanUtils.scanWithAnnotation(
+            "ru.melonhell.umpa.core.data.entitymeta.editor.impl",
+            MinMaxMinecraftVersion::class.java
+        )
 //        val converterClasses = KlassIndex.getAnnotated(MinMaxMinecraftVersion::class)
         converterClasses.forEach { clazz ->
             if (UmpaEntityMetadataEditor::class.java.isAssignableFrom(clazz)) {
