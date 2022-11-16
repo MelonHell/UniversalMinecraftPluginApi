@@ -123,11 +123,14 @@ object ProtocolLibMetaWrapper {
 
         val newClass: Class<*> = when (clazz) {
             // 0
-            Byte::class.java -> clazz
+            Byte::class.javaObjectType -> clazz
+            Byte::class.javaPrimitiveType -> Byte::class.javaObjectType
             // 1
-            Int::class.java -> clazz
+            Int::class.javaObjectType -> clazz
+            Int::class.javaPrimitiveType -> Int::class.javaObjectType
             // 2
-            Float::class.java -> clazz
+            Float::class.javaObjectType -> clazz
+            Float::class.javaPrimitiveType -> Float::class.javaObjectType
             // 3
             String::class.java -> clazz
             // 4, 5 (Optional)
@@ -135,7 +138,8 @@ object ProtocolLibMetaWrapper {
             // 6
             UmpaItemStack::class.java -> MinecraftReflection.getItemStackClass()
             // 7
-            Boolean::class.java -> clazz
+            Boolean::class.javaObjectType -> clazz
+            Boolean::class.javaPrimitiveType -> Boolean::class.javaObjectType
             // 8
             UmpaEulerAngle::class.java -> Vector3F.getMinecraftClass()
             // 9, 10 (Optional)
