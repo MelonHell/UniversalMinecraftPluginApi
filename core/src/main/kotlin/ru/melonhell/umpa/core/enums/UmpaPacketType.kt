@@ -2,10 +2,7 @@ package ru.melonhell.umpa.core.enums
 
 import ru.melonhell.umpa.core.packet.containers.UmpaPacket
 import ru.melonhell.umpa.core.packet.containers.clientbound.*
-import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbInteractEntityPacket
-import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerActionPacket
-import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbPlayerMovePacket
-import ru.melonhell.umpa.core.packet.containers.serverbound.UmpaSbVehicleInputPacket
+import ru.melonhell.umpa.core.packet.containers.serverbound.*
 import kotlin.reflect.KClass
 
 enum class UmpaPacketType(private val packetClass: KClass<out UmpaPacket>, val direction: Direction) {
@@ -31,6 +28,7 @@ enum class UmpaPacketType(private val packetClass: KClass<out UmpaPacket>, val d
     SB_INTERACT_ENTITY(UmpaSbInteractEntityPacket::class, Direction.SERVERBOUND),
     SB_PLAYER_ACTION(UmpaSbPlayerActionPacket::class, Direction.SERVERBOUND),
     SB_PLAYER_MOVE(UmpaSbPlayerMovePacket::class, Direction.SERVERBOUND),
+    SB_SET_CREATIVE_SLOT(UmpaSbSetCreativeSlotPacket::class, Direction.SERVERBOUND),
     SB_VEHICLE_INPUT(UmpaSbVehicleInputPacket::class, Direction.SERVERBOUND);
 
     enum class Direction {
