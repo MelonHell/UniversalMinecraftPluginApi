@@ -1,4 +1,4 @@
-# Archived please use [this](https://github.com/MelonHell/UniversalMinecraftApi)!
+# Deprecated please use [this](https://github.com/MelonHell/UniversalMinecraftApi)!
 
 ## UniversalMinecraftPluginApi (WIP)
 
