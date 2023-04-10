@@ -1,3 +1,5 @@
+# Archived please use [this](https://github.com/MelonHell/UniversalMinecraftApi)!
+
 ## UniversalMinecraftPluginApi (WIP)
 
 **Русский** | [English](https://github.com/MelonHell/UniversalMinecraftPluginApi/blob/master/README_EN.md)
